@@ -3,7 +3,7 @@ self: super:
 with super.lib;
 
 let
-  prybars = self.callPackage ./pkgs/prybar {};
+  prybars = recurseIntoAttrs (self.callPackage ./pkgs/prybar {});
 in
 
 rec {
