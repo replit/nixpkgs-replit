@@ -13,7 +13,7 @@ rustPlatform.buildRustPackage rec {
 
   cargoSha256 = "028jlwdgbzkn1rc2kc1n3axpb419g5v04s7pc603h86jh9q1s6s1";
 
-  buildInputs = [ openssl libpulseaudio protobuf ];
-  nativeBuildInputs = [ pkg-config ];
+  buildInputs = [ openssl libpulseaudio ];
+  nativeBuildInputs = [ pkg-config protobuf ];
 }
 
