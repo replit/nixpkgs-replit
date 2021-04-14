@@ -1,4 +1,4 @@
-{ language, deps }:
+{ language, buildInputs ? [] }:
 
 { lib, buildGoModule, fetchFromGitHub, bash, pkg-config }:
 
@@ -13,7 +13,7 @@ buildGoModule rec {
         sha256 = "14l4bhdlssp22wdxx1ycz9wl64z7bf3qwpqqp3npcva969191c48";
     };
 
-    buildInputs = deps;
+    inherit buildInputs;
     nativeBuildInputs = [ pkg-config ];
 
     subPackages = [ "languages/${language}" ];
