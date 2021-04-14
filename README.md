@@ -3,7 +3,7 @@
 Installation:
 
 ```
-ln -s path/to/nixpkgs-replit/default.nix ~/.config/nixpkgs/overlays/replit.nix
+ln -s /path/to/nixpkgs-replit/default.nix ~/.config/nixpkgs/overlays/replit.nix
 ```
 
 Example usage:
