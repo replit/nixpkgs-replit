@@ -1,4 +1,16 @@
 self: super:
+
+with super.lib;
+
+let
+  prybars = self.callPackage ./pkgs/prybar {};
+in
+
 rec {
-    upm = self.callPackage ./pkgs/upm {};
+  inherit (prybars) prybar-python3 prybar-python2 prybar-lua prybar-clojure
+    prybar-elisp prybar-ocaml prybar-scala prybar-sqlite prybar-tcl;
+
+  upm = self.callPackage ./pkgs/upm {};
 }
+
+
