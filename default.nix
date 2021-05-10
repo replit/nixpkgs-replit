@@ -13,5 +13,7 @@ rec {
   upm = self.callPackage ./pkgs/upm {};
 
   rfbproxy = self.callPackage ./pkgs/rfbproxy {};
+  
+  swift = self.callPackage ./pkgs/swift {};
 }
 
