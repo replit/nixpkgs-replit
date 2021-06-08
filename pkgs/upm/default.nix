@@ -17,5 +17,7 @@ buildGoModule rec {
         ${statik}/bin/statik -src resources -dest internal -f
         go generate ./internal/backends/python
     '';
+
+    doCheck = false;
 }
 
