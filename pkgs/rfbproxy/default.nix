@@ -1,4 +1,4 @@
-{ lib, rustPlatform, fetchFromGitHub, openssl, stdenv, libpulseaudio, pkg-config, protobuf, lame }:
+{ lib, rustPlatform, fetchFromGitHub, openssl, stdenv, libpulseaudio, pkg-config, protobuf, lame, libopus }:
 
 rustPlatform.buildRustPackage rec {
   pname = "rfbproxy";
@@ -13,7 +13,7 @@ rustPlatform.buildRustPackage rec {
 
   cargoSha256 = "1djk818q08lqaz97qqp0wxfx34dvq91sjfnwkz3qq61191j1gp8w";
 
-  buildInputs = [ openssl libpulseaudio protobuf lame ];
+  buildInputs = [ openssl libpulseaudio protobuf lame libopus ];
   nativeBuildInputs = [ pkg-config ];
 
   # needed for internal protobuf c wrapper library
