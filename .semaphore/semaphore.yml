@@ -29,7 +29,7 @@ blocks:
         - name: Make sure files are nixfmt'ed
           commands:
             - nixfmt -c default.nix overlay.nix shell.nix
-            - find -name '*.nix' pkgs | xargs nixfmt -c
+            - find pkgs -name '*.nix' | xargs nixfmt -c
         - name: Lint all files
           commands:
             - nix-linter default.nix overlay.nix shell.nix
