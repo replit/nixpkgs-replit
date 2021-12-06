@@ -28,7 +28,7 @@ blocks:
       jobs:
         - name: Make sure files are nixfmt'ed
           commands:
-            - find -name *.nix | xargs nixfmt -c
+            - find -name '*.nix' | xargs nixfmt -c
         - name: Lint all files
           commands:
             - nix-linter -r
