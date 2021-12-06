@@ -28,10 +28,12 @@ blocks:
       jobs:
         - name: Make sure files are nixfmt'ed
           commands:
-            - find -name '*.nix' | xargs nixfmt -c
+            - nixfmt -c default.nix overlay.nix shell.nix
+            - find -name '*.nix' pkgs | xargs nixfmt -c
         - name: Lint all files
           commands:
-            - nix-linter -r
+            - nix-linter default.nix overlay.nix shell.nix
+            - nix-linter -r pkgs
 
   - name: Build overlay packages
     task:
