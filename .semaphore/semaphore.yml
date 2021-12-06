@@ -1,0 +1,48 @@
+version: v1.0
+name: test
+agent:
+  machine:
+    type: e1-standard-4
+    os_image: ubuntu2004
+fail_fast:
+  stop:
+    when: "true"
+auto_cancel:
+  running:
+    when: branch != 'master'
+blocks:
+  - name: Run linters
+    task:
+      prologue:
+        commands:
+          # Install nix
+          - curl -L https://nixos.org/nix/install | sh
+          - source /home/semaphore/.nix-profile/etc/profile.d/nix.sh
+
+          # Install required linters
+          - nix-env -iA nixpkgs.nixfmt
+          - nix-env -iA nixpkgs.nix-linter
+
+          # Clone the source code
+          - checkout
+      jobs:
+        - name: Make sure files are nixfmt'ed
+          commands:
+            - nixfmt -c default.nix overlay.nix shell.nix
+            - find pkgs -name '*.nix' | xargs nixfmt -c
+        - name: Lint all files
+          commands:
+            - nix-linter default.nix overlay.nix shell.nix
+            - nix-linter -r pkgs
+
+  - name: Build overlay packages
+    task:
+      prologue:
+        commands:
+          - curl -L https://nixos.org/nix/install | sh
+          - source /home/semaphore/.nix-profile/etc/profile.d/nix.sh
+          - checkout
+      jobs:
+        - name: Build packages
+          commands:
+            - nix-build shell.nix -A buildInputs
