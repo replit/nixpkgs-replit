@@ -16,6 +16,8 @@ blocks:
       prologue:
         commands:
           - curl -L https://nixos.org/nix/install | sh
+          - source /home/semaphore/.nix-profile/etc/profile.d/nix.sh
+          - checkout
       jobs:
         - name: build custom packages
           commands:
