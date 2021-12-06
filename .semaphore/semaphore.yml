@@ -45,4 +45,4 @@ blocks:
       jobs:
         - name: Build packages
           commands:
-            - nix-build shell.nix
+            - nix-build shell.nix -A buildInputs
