@@ -1,6 +1,2 @@
 { sources ? import nix/sources.nix }:
-import sources.nixpkgs {
-  overlays = [
-    (import ./overlay.nix)
-  ];
-}
+import sources.nixpkgs { overlays = [ (import ./overlay.nix) ]; }
