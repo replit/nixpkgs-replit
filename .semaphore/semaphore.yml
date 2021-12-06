@@ -11,7 +11,29 @@ auto_cancel:
   running:
     when: branch != 'master'
 blocks:
-  - name: build
+  - name: Run linters
+    task:
+      prologue:
+        commands:
+          # Install nix
+          - curl -L https://nixos.org/nix/install | sh
+          - source /home/semaphore/.nix-profile/etc/profile.d/nix.sh
+
+          # Install required linters
+          - nix-env -iA nixpkgs.nixfmt
+          - nix-env -iA nixpkgs.nix-linter
+
+          # Clone the source code
+          - checkout
+      jobs:
+        - name: Make sure files are nixfmt'ed
+          commands:
+            - find -name *.nix | xargs nixfmt -c
+        - name: Lint all files
+          commands:
+            - nix-linter -r
+
+  - name: Build overlay packages
     task:
       prologue:
         commands:
@@ -19,6 +41,6 @@ blocks:
           - source /home/semaphore/.nix-profile/etc/profile.d/nix.sh
           - checkout
       jobs:
-        - name: build custom packages
+        - name: Build packages
           commands:
             - nix-build shell.nix
