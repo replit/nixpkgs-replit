@@ -20,7 +20,7 @@ blocks:
           - source /home/semaphore/.nix-profile/etc/profile.d/nix.sh
 
           # Install required linters
-          - nix-env -iA nixpkgs.nixfmt
+          - nix-env -iA nixpkgs.nixpkgs-fmt
           - nix-env -iA nixpkgs.nix-linter
 
           # Clone the source code
@@ -28,8 +28,8 @@ blocks:
       jobs:
         - name: Make sure files are nixfmt'ed
           commands:
-            - nixfmt -c default.nix overlay.nix shell.nix
-            - find pkgs -name '*.nix' | xargs nixfmt -c
+            - nixpkgs-fmt default.nix overlay.nix shell.nix
+            - nixpkgs-fmt pkgs
         - name: Lint all files
           commands:
             - nix-linter default.nix overlay.nix shell.nix
