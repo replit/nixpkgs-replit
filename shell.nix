@@ -9,5 +9,6 @@ pkgs.mkShell {
       # swift
 
       replitPackages.jdt-language-server
+      replitPackages.replbox
     ];
 }
