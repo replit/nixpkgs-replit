@@ -3,9 +3,8 @@ self: super:
 with super.lib;
 
 let
-  override = rec {
+  override = {
     # These packages will hide packages in the top level nixpkgs
-    swift = self.callPackage ./pkgs/swift { };
   };
 in {
   replitPackages = rec {
