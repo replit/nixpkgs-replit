@@ -3,9 +3,12 @@ self: super:
 with super.lib;
 
 let
-  override = rec {
+  override = {
     # These packages will hide packages in the top level nixpkgs
-    swift = self.callPackage ./pkgs/swift { };
+
+    # TODO: Re-enabled once we have hydra.
+    # Swift is not included in the unstable overlay to reduce extra swift builds.
+    # swift = self.callPackage ./pkgs/swift { };
   };
 in {
   replitPackages = rec {
