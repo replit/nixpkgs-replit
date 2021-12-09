@@ -5,8 +5,6 @@ with super.lib;
 let
   override = rec {
     # These packages will hide packages in the top level nixpkgs
-    hello = self.callPackage ./pkgs/hello { };
-
     swift = self.callPackage ./pkgs/swift { };
   };
 in {
