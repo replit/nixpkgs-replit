@@ -4,4 +4,6 @@ let
 
   pkgs = import ./default.nix { };
 
-in pkgs.replitPackages
+in {
+  inherit (pkgs) replitPackages nodePackages;
+}
