@@ -16,6 +16,7 @@ in {
     replbox = self.callPackage ./pkgs/replbox { };
     jest = nodePackages."jest-cli-23.6.0";
     coffeescript = nodePackages.coffeescript;
+    rescript-language-server = self.callPackage ./pkgs/rescript-language-server { };
 
     # The override packages are injected into the replitPackages namespace as
     # well so they can all be built together
