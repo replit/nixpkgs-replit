@@ -54,4 +54,4 @@ blocks:
             - mkdir /tmp/$NIXPKGS_CHANNEL
             - sh build.sh $NIXPKGS_CHANNEL
             - tar -xvf $NIXPKGS_CHANNEL.tar.gz -C /tmp/$NIXPKGS_CHANNEL
-            - nix-build /tmp/$NIXPKGS_CHANNEL/shell.nix -A buildInputs
+            - nix-build /tmp/$NIXPKGS_CHANNEL/default.nix -A replitPackages
