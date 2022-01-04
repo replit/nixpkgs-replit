@@ -33,7 +33,7 @@ blocks:
         - name: Lint all files
           commands:
             - nix-linter default.nix overlay.nix shell.nix
-            - nix-linter -r pkgs
+            - find . -name "*.nix" -path "./pkgs/*" -not -path "./pkgs/node-packages/*" | xargs nix-linter
 
   - name: Build overlay packages
     task:
