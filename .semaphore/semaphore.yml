@@ -44,5 +44,14 @@ blocks:
           - checkout
       jobs:
         - name: Build packages
+          matrix:
+            - env_var: NIXPKGS_CHANNEL
+              values:
+                - nixpkgs-legacy
+                - nixpkgs-21.11
+                - nixpkgs-unstable
           commands:
-            - nix-build shell.nix -A buildInputs
+            - mkdir /tmp/$NIXPKGS_CHANNEL
+            - sh build.sh $NIXPKGS_CHANNEL
+            - tar -xvf $NIXPKGS_CHANNEL.tar.gz -C /tmp/$NIXPKGS_CHANNEL
+            - nix-build /tmp/$NIXPKGS_CHANNEL/shell.nix -A buildInputs

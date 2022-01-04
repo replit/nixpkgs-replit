@@ -1,0 +1,21 @@
+name: Build release tarballs
+on:
+  release:
+    types: [created]
+jobs:
+  release:
+    name: Upload release artifacts
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        nixpkgs: [nixpkgs-legacy, nixpkgs-21.11, nixpkgs-unstable]
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Build a release tarball
+      run: sh build.sh ${{ matrix.nixpkgs }}
+
+    - name: Upload release
+      uses: softprops/action-gh-release@v1
+      with:
+        files: ${{ matrix.nixpkgs }}.tar.gz
