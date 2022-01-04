@@ -5,8 +5,6 @@ with super.lib;
 let
   override = {
     # These packages will hide packages in the top level nixpkgs
-
-    swift = self.callPackage ./pkgs/swift { };
   };
 in
 {
