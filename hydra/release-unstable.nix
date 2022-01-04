@@ -1,9 +1,11 @@
 {}:
 
 let
-
-  pkgs = import ./default.nix { };
-
+  sources = import ../nix/sources.nix;
+  pkgs = import ../default.nix {
+    sources = sources;
+    channel = sources.nixpkgs-unstable;
+  };
 in
 {
   inherit (pkgs) replitPackages;
