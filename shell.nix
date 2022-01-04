@@ -5,7 +5,9 @@ pkgs.mkShell {
     [
       hello
 
+      replitPackages.coffeescript
       replitPackages.jdt-language-server
+      replitPackages.rescript-language-server
       replitPackages.replbox
     ];
 }
