@@ -1,0 +1,4 @@
+[
+  "coffeescript",
+  { "jest-cli": "23.6.0" }
+]
