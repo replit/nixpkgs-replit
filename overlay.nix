@@ -6,6 +6,9 @@ let
   override = rec {
     # These packages will hide packages in the top level nixpkgs
     swift = self.callPackage ./pkgs/swift { };
+
+    # Add our additional node packages
+    nodePackages = super.nodePackages // self.callPackage ./pkgs/node-packages { };
   };
 in {
   replitPackages = rec {
