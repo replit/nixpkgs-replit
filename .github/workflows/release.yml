@@ -1,0 +1,22 @@
+on: release
+name: Build release tarballs
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+		strategy:
+      matrix:
+        nixpkgs: [nixpkgs-legacy, nixpkgs-21.11, nixpkgs-unstable]
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Build a release tarball
+      run: sh build.sh ${{ matrix.nixpkgs }}
+
+    - name: Upload release
+      with:
+        repo_token: ${{ secrets.GITHUB_TOKEN }}
+				file: ${{ matrix.nixpkgs }}.tar.gz
+        asset_name: ${{ matrix.nixpkgs }}.tar.gz
+        tag: ${{ github.ref }}
