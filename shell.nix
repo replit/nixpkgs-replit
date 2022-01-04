@@ -4,8 +4,8 @@ pkgs.mkShell {
   buildInputs = with pkgs;
     [
       hello
-      nodePackages.coffeescript
 
+      replitPackages.coffeescript
       replitPackages.jdt-language-server
       replitPackages.replbox
     ];
