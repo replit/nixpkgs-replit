@@ -15,7 +15,7 @@ echo "Building tarball for $channel"
 sed -i s/\"$default\"/\"$channel\"/g default.nix
 
 # Build a tarball using the name of the channel
-tar -cvf $channel.tar.gz \
+tar -czvf $channel.tar.gz \
   --exclude='./.git' \
   --exclude='./.github' \
   --exclude='./.semaphore' \
