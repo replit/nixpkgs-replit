@@ -20,6 +20,7 @@ tar -czvf $channel.tar.gz \
   --exclude='./.github' \
   --exclude='./.semaphore' \
   --exclude='./.gitignore' \
+  --exclude='./build.sh' \
   $ignore \
   ./
 
