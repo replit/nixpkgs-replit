@@ -55,3 +55,7 @@ blocks:
             - sh build.sh $NIXPKGS_CHANNEL
             - tar -xvf $NIXPKGS_CHANNEL.tar.gz -C /tmp/$NIXPKGS_CHANNEL
             - nix-build /tmp/$NIXPKGS_CHANNEL/default.nix -A replitPackages
+
+promotions:
+  - name: Push overlays to GCS
+    pipeline_file: push.yml

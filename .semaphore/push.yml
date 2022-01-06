@@ -1,0 +1,29 @@
+version: v1.0
+name: deploy
+agent:
+  machine:
+    type: e1-standard-2
+    os_image: ubuntu2004
+auto_cancel:
+  running:
+    when: branch != 'master'
+blocks:
+  - name: Push overlay tarballs
+    task:
+      secrets:
+        - name: replit-nixpkgs-semaphore
+      prologue:
+        commands:
+          - gcloud auth activate-service-account --key-file=.secrets.gcp.json
+          - checkout
+      jobs:
+        - name: Make and upload tarballs
+          matrix:
+            - env_var: NIXPKGS_CHANNEL
+              values:
+                - nixpkgs-legacy
+                - nixpkgs-21.11
+                - nixpkgs-unstable
+          commands:
+            - sh build.sh $NIXPKGS_CHANNEL
+            - gsutil cp $NIXPKGS_CHANNEL.tar.gz gs://replit-nixpkgs/$NIXPKGS_CHANNEL.tar.gz
