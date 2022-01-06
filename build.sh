@@ -16,6 +16,7 @@ sed -i s/\"$default\"/\"$channel\"/g default.nix
 
 # Build a tarball using the name of the channel
 tar -czvf $channel.tar.gz \
+  --transform 's,^\.,nixpkgs,' \
   --exclude='./.git' \
   --exclude='./.github' \
   --exclude='./.semaphore' \
