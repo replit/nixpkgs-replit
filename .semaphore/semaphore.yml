@@ -59,3 +59,5 @@ blocks:
 promotions:
   - name: Push overlays to GCS
     pipeline_file: push.yml
+    auto_promote:
+      when: "result = 'passed' and branch = 'main'"
