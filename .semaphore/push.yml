@@ -27,3 +27,4 @@ blocks:
           commands:
             - sh build.sh $NIXPKGS_CHANNEL
             - gsutil cp $NIXPKGS_CHANNEL.tar.gz gs://replit-nixpkgs/$NIXPKGS_CHANNEL.tar.gz
+            - gsutil acl ch -u AllUsers:R gs://replit-nixpkgs/$NIXPKGS_CHANNEL.tar.gz
