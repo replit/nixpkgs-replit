@@ -1,4 +1,5 @@
 [
   { "coffeescript": "2.6.1" },
-  { "jest-cli": "23.6.0" }
+  { "jest-cli": "23.6.0" },
+  { "ts-node": "10.4.0" }
 ]
