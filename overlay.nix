@@ -24,6 +24,8 @@ in
 
     # The override packages are injected into the replitPackages namespace as
     # well so they can all be built together
-  } // override;
+  } // override // self.pkgs.lib.optionalAttrs (self.pkgs ? graalvm17-ce) {
+    java-language-server = self.callPackage ./pkgs/java-language-server { };
+  };
 } // override
 

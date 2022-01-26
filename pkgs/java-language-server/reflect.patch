@@ -1,0 +1,24 @@
+diff --git a/src/main/java/org/javacs/ReusableCompiler.java b/src/main/java/org/javacs/ReusableCompiler.java
+index 2d50f74c..dfaf6d2a 100644
+--- a/src/main/java/org/javacs/ReusableCompiler.java
++++ b/src/main/java/org/javacs/ReusableCompiler.java
+@@ -174,19 +174,6 @@ class ReusableCompiler {
+             drop(JavacTask.class);
+             drop(JavacTrees.class);
+             drop(JavacElements.class);
+-
+-            if (ht.get(Log.logKey) instanceof ReusableLog) {
+-                // log already inited - not first round
+-                ((ReusableLog) Log.instance(this)).clear();
+-                Enter.instance(this).newRound();
+-                ((ReusableJavaCompiler) ReusableJavaCompiler.instance(this)).clear();
+-                Types.instance(this).newRound();
+-                Check.instance(this).newRound();
+-                Modules.instance(this).newRound();
+-                Annotate.instance(this).newRound();
+-                CompileStates.instance(this).clear();
+-                MultiTaskListener.instance(this).clear();
+-            }
+         }
+ 
+         @Override
