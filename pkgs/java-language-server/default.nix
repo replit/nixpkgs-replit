@@ -4,10 +4,31 @@
 , fetchFromGitHub
 , graalvm17-ce
 }:
-let repository = callPackage ./repo.nix { };
+let
+  repository = callPackage ./repo.nix { };
+
+  jars = [
+    "$PWD/dist/classpath/gson-2.8.5.jar"
+    "$PWD/dist/classpath/protobuf-java-3.9.1.jar"
+    "$PWD/dist/classpath/java-language-server.jar"
+  ];
+
+  flags = [
+    "--add-exports=jdk.compiler/com.sun.tools.javac.api=ALL-UNNAMED"
+    "--add-exports=jdk.compiler/com.sun.tools.javac.code=ALL-UNNAMED"
+    "--add-exports=jdk.compiler/com.sun.tools.javac.comp=ALL-UNNAMED"
+    "--add-exports=jdk.compiler/com.sun.tools.javac.main=ALL-UNNAMED"
+    "--add-exports=jdk.compiler/com.sun.tools.javac.tree=ALL-UNNAMED"
+    "--add-exports=jdk.compiler/com.sun.tools.javac.model=ALL-UNNAMED"
+    "--add-exports=jdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED"
+    "--add-opens=jdk.compiler/com.sun.tools.javac.api=ALL-UNNAMED"
+    "--class-path ${builtins.concatStringsSep ":" jars}"
+    "--no-fallback"
+  ];
+
 in stdenv.mkDerivation rec {
   name = "java-language-server";
-  version = "0.0";
+  version = "0.2.38";
 
   src = fetchFromGitHub {
     owner = "georgewfraser";
@@ -23,20 +44,8 @@ in stdenv.mkDerivation rec {
     echo "Using repository ${repository}"
     mvn --offline -Dmaven.repo.local=${repository} -DskipTests package;
 
-    DIR=`pwd`/dist/classpath
-
-    native-image \
-    --add-exports=jdk.compiler/com.sun.tools.javac.api=ALL-UNNAMED \
-    --add-exports=jdk.compiler/com.sun.tools.javac.code=ALL-UNNAMED \
-    --add-exports=jdk.compiler/com.sun.tools.javac.comp=ALL-UNNAMED \
-    --add-exports=jdk.compiler/com.sun.tools.javac.main=ALL-UNNAMED \
-    --add-exports=jdk.compiler/com.sun.tools.javac.tree=ALL-UNNAMED \
-    --add-exports=jdk.compiler/com.sun.tools.javac.model=ALL-UNNAMED \
-    --add-exports=jdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED \
-    --add-opens=jdk.compiler/com.sun.tools.javac.api=ALL-UNNAMED \
-    --class-path $DIR/gson-2.8.5.jar:$DIR/protobuf-java-3.9.1.jar:$DIR/java-language-server.jar \
-    --no-fallback \
-    org.javacs.Main \
+    native-image ${builtins.concatStringsSep " " flags} org.javacs.Main
+    native-image ${builtins.concatStringsSep " " flags} org.javacs.debug.JavaDebugServer
   '';
   installPhase = ''
     mkdir -p $out/share/java
@@ -44,5 +53,6 @@ in stdenv.mkDerivation rec {
 
     mkdir -p $out/bin
     cp org.javacs.main $out/bin/java-language-server
+    cp org.javacs.debug.javadebugserver $out/bin/java-dap
   '';
 }
