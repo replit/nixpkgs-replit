@@ -17,6 +17,7 @@ in
     replbox = self.callPackage ./pkgs/replbox { };
 
     jdt-language-server = self.callPackage ./pkgs/jdt-language-server { };
+    java-language-server = self.callPackage ./pkgs/java-language-server { };
     rescript-language-server = self.callPackage ./pkgs/rescript-language-server { };
 
     jest = nodePackages."jest-cli-23.6.0";
