@@ -17,7 +17,9 @@ in
     replbox = self.callPackage ./pkgs/replbox { };
 
     jdt-language-server = self.callPackage ./pkgs/jdt-language-server { };
-    java-language-server = self.callPackage ./pkgs/java-language-server { };
+    java-language-server = if self.pkgs ? graalvm17-ce
+      then self.callPackage ./pkgs/java-language-server { }
+      else {};
     rescript-language-server = self.callPackage ./pkgs/rescript-language-server { };
 
     jest = nodePackages."jest-cli-23.6.0";

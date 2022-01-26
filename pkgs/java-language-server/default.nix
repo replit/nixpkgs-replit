@@ -34,7 +34,7 @@ in stdenv.mkDerivation rec {
     --add-exports=jdk.compiler/com.sun.tools.javac.model=ALL-UNNAMED \
     --add-exports=jdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED \
     --add-opens=jdk.compiler/com.sun.tools.javac.api=ALL-UNNAMED \
-    --classpath $DIR/gson-2.8.5.jar:$DIR/protobuf-java-3.9.1.jar:$DIR/java-language-server.jar \
+    --class-path $DIR/gson-2.8.5.jar:$DIR/protobuf-java-3.9.1.jar:$DIR/java-language-server.jar \
     --no-fallback \
     org.javacs.Main \
   '';
