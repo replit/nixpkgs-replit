@@ -1,0 +1,13 @@
+diff --git a/src/main/java/org/javacs/lsp/LSP.java b/src/main/java/org/javacs/lsp/LSP.java
+index 24731930..6e38d415 100644
+--- a/src/main/java/org/javacs/lsp/LSP.java
++++ b/src/main/java/org/javacs/lsp/LSP.java
+@@ -14,7 +14,7 @@ import java.util.logging.Level;
+ import java.util.logging.Logger;
+ 
+ public class LSP {
+-    private static final Gson gson = new Gson();
++    private static final Gson gson = GSONCodeGenBuilder.builder().create();
+ 
+     private static String readHeader(InputStream client) {
+         var line = new StringBuilder();

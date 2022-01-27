@@ -3,6 +3,8 @@
 , callPackage
 , fetchFromGitHub
 , graalvm17-ce
+, jdk
+, poetry2nix
 }:
 let
   repository = callPackage ./repo.nix { };
@@ -26,6 +28,10 @@ let
     "--no-fallback"
   ];
 
+  codegen = poetry2nix.mkPoetryApplication {
+    projectDir = ./codegen;
+  };
+
 in stdenv.mkDerivation rec {
   name = "java-language-server";
   version = "0.2.38";
@@ -37,10 +43,14 @@ in stdenv.mkDerivation rec {
     sha256 = "0vw3sn2pm95aqs0wjgvzdnrmaz79f5gv212l3xq58c30n8i1lj1m";
   };
 
-  buildInputs = [ maven graalvm17-ce ];
-  patches = [ ./reflect.patch ];
+  nativeBuildInputs = [ maven graalvm17-ce codegen ];
+  buildInputs = [ jdk ];
+  patches = [ ./patches/log-cycle.patch ./patches/static-gson.patch ];
   dontConfigure = true;
   buildPhase = ''
+    echo "Generating static type adapters for LSP"
+    codegen $PWD/src/main/java/org/javacs/lsp
+
     echo "Using repository ${repository}"
     mvn --offline -Dmaven.repo.local=${repository} -DskipTests package;
 
