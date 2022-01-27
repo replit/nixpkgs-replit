@@ -3,16 +3,16 @@
 , callPackage
 , fetchFromGitHub
 , graalvm17-ce
-, jdk
 , poetry2nix
+, makeWrapper
 }:
 let
   repository = callPackage ./repo.nix { };
 
   jars = [
-    "$PWD/dist/classpath/gson-2.8.5.jar"
-    "$PWD/dist/classpath/protobuf-java-3.9.1.jar"
-    "$PWD/dist/classpath/java-language-server.jar"
+    "$classpath/gson-2.8.5.jar"
+    "$classpath/protobuf-java-3.9.1.jar"
+    "$classpath/java-language-server.jar"
   ];
 
   flags = [
@@ -25,7 +25,6 @@ let
     "--add-exports=jdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED"
     "--add-opens=jdk.compiler/com.sun.tools.javac.api=ALL-UNNAMED"
     "--class-path ${builtins.concatStringsSep ":" jars}"
-    "--no-fallback"
   ];
 
   codegen = poetry2nix.mkPoetryApplication {
@@ -43,26 +42,36 @@ in stdenv.mkDerivation rec {
     sha256 = "0vw3sn2pm95aqs0wjgvzdnrmaz79f5gv212l3xq58c30n8i1lj1m";
   };
 
-  nativeBuildInputs = [ maven graalvm17-ce codegen ];
-  buildInputs = [ jdk ];
+  nativeBuildInputs = [ maven graalvm17-ce codegen makeWrapper ];
+  buildInputs = [ graalvm17-ce ];
   patches = [ ./patches/log-cycle.patch ./patches/static-gson.patch ];
   dontConfigure = true;
   buildPhase = ''
     echo "Generating static type adapters for LSP"
-    codegen $PWD/src/main/java/org/javacs/lsp
+    codegen src/main/java/org/javacs/lsp
 
     echo "Using repository ${repository}"
     mvn --offline -Dmaven.repo.local=${repository} -DskipTests package;
 
-    native-image ${builtins.concatStringsSep " " flags} org.javacs.Main
-    native-image ${builtins.concatStringsSep " " flags} org.javacs.debug.JavaDebugServer
+    classpath=dist/classpath
+    native-image ${builtins.concatStringsSep " " flags} --no-fallback org.javacs.Main
+    native-image ${builtins.concatStringsSep " " flags} --no-fallback org.javacs.debug.JavaDebugServer
   '';
   installPhase = ''
-    mkdir -p $out/share/java
-    cp -a dist/classpath/* $out/share/java
+    classpath=$out/share/java
+    mkdir -p $classpath
+    cp -a dist/classpath/* $classpath
 
     mkdir -p $out/bin
-    cp org.javacs.main $out/bin/java-language-server
-    cp org.javacs.debug.javadebugserver $out/bin/java-dap
+    cp org.javacs.main $out/bin/native-java-language-server
+    cp org.javacs.debug.javadebugserver $out/bin/native-java-dap
+
+    makeWrapper ${graalvm17-ce}/bin/java $out/bin/java-langauge-server \
+      --add-flags "${builtins.concatStringsSep " " flags}" \
+      --add-flags "org.javacs.Main"
+
+    makeWrapper ${graalvm17-ce}/bin/java $out/bin/java-dap \
+      --add-flags "${builtins.concatStringsSep " " flags}" \
+      --add-flags "org.javacs.debug.JavaDebugServer"
   '';
 }
