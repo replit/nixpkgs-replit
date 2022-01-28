@@ -14,6 +14,10 @@ echo "Building tarball for $channel"
 # Update default.nix to use the specified nix package
 sed -i s/\"$default\"/\"$channel\"/g default.nix
 
+# Update default.nix to use the specified nix package
+sha=`git rev-parse --verify HEAD`
+sed -i s/\"GIT_SHA_HERE\"/\"$sha\"/g overlay.nix
+
 # Build a tarball using the name of the channel
 tar -czvf $channel.tar.gz \
   --transform 's,^\.,nixpkgs,' \
@@ -27,3 +31,4 @@ tar -czvf $channel.tar.gz \
 
 # Revert the update
 sed -i s/\"$channel\"/\"$default\"/g default.nix
+sed -i s/\"$sha\"/\"GIT_SHA_HERE\"/g overlay.nix
