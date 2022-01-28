@@ -13,6 +13,9 @@ let
 in
 {
   replitPackages = rec {
+    # Version string set when building overlay
+    version = "GIT_SHA_HERE";
+
     # Any other packages should go in the replitPackages namespace
     replbox = self.callPackage ./pkgs/replbox { };
 
