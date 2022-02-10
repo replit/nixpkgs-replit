@@ -1,7 +1,4 @@
 { stdenv
-, ant
-, maven
-, fetchFromGitHub
 , graalvm11-ce
 , makeWrapper
 , callPackage
