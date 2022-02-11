@@ -21,6 +21,7 @@ in
 
     jdt-language-server = self.callPackage ./pkgs/jdt-language-server { };
     rescript-language-server = self.callPackage ./pkgs/rescript-language-server { };
+    nbcode = self.callPackage ./pkgs/nbcode { };
 
     jest = nodePackages."jest-cli-23.6.0";
     coffeescript = nodePackages."coffeescript-2.6.1";
