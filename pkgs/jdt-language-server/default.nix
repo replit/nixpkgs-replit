@@ -2,10 +2,13 @@
 , stdenv
 , fetchurl
 , makeWrapper
-, jdk
+, pkgs
 }:
 
-stdenv.mkDerivation rec {
+let
+  jdk = if pkgs ? graalvm17-ce then pkgs.graalvm17-ce else pkgs.jdk;
+
+in stdenv.mkDerivation rec {
   pname = "jdt-language-server";
   version = "1.6.0";
   timestamp = "202111261512";
