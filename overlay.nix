@@ -20,6 +20,10 @@ in
     replbox = self.callPackage ./pkgs/replbox { };
 
     jdt-language-server = self.callPackage ./pkgs/jdt-language-server { };
+    java-debug = self.callPackage ./pkgs/java-debug {
+      inherit jdt-language-server;
+    };
+
     rescript-language-server = self.callPackage ./pkgs/rescript-language-server { };
     nbcode = self.callPackage ./pkgs/nbcode { };
 
