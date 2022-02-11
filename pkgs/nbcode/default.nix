@@ -4,22 +4,22 @@
 , callPackage
 }:
 let
-  nbcode = callPackage ./ant.nix { };
+  nbcode-vsix = callPackage ./vsix.nix { };
 
 in stdenv.mkDerivation {
-  name = "java-lsp";
+  name = "nbcode";
 
-  nativeBuildInputs = [ nbcode graalvm11-ce makeWrapper ];
+  nativeBuildInputs = [ nbcode-vsix graalvm11-ce makeWrapper ];
 
   unpackPhase = "true";
   dontBuild = true;
 
   installPhase = ''
-    makeWrapper ${nbcode}/bin/nbcode $out/bin/java-lsp \
+    makeWrapper ${nbcode-vsix}/bin/nbcode $out/bin/java-lsp \
       --add-flags "--jdkhome ${graalvm11-ce}" \
       --add-flags "--start-java-language-server=stdio"
 
-    makeWrapper ${nbcode}/bin/nbcode $out/bin/java-dap \
+    makeWrapper ${nbcode-vsix}/bin/nbcode $out/bin/java-dap \
       --add-flags "--jdkhome ${graalvm11-ce}" \
       --add-flags "--start-java-debug-adapter-server=stdio"
   '';
