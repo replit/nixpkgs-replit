@@ -20,6 +20,7 @@ in stdenv.mkDerivation {
     sha256 = "1syrzp8syisnd8fkj3lis5rv83chzj4gwm63ygib41c428yyw20a";
   };
 
+  patches = [ ./bind-address.patch ];
   buildInputs = [ maven graalvm11-ce ];
   buildPhase = ''
     # Maven tries to grab lockfiles in the repository, so it has to be writeable
