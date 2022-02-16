@@ -59,10 +59,15 @@ def _receive_lsp_message(lsp: IO[bytes]) -> Optional[Dict[str, Any]]:
 def _run(use_ephemeral_port: bool, language_server: str, debug_plugin: str) -> bool:
     """Attempts to start the DAP. Returns whether the caller should retry."""
     args = [language_server]
-    if use_ephemeral_port:
-        args.append('-Dcom.microsoft.java.debug.serverAddress=localhost:0')
-    else:
-        args.append('-Dcom.microsoft.java.debug.serverAddress=localhost:41010')
+
+    java_opts = '-Dcom.microsoft.java.debug.serverAddress=localhost:0'
+    if not use_ephemeral_port:
+        java_opts = '-Dcom.microsoft.java.debug.serverAddress=localhost:41010'
+
+    try:
+        os.environ["JAVA_OPTS"] += ' ' + java_opts
+    except KeyError:
+        os.environ["JAVA_OPTS"] = java_opts
 
     with subprocess.Popen(args,
                           stdout=subprocess.PIPE,
