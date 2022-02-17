@@ -5,12 +5,12 @@
 }:
 stdenv.mkDerivation {
  name = "java-debug-repo";
-src = fetchFromGitHub {
-  owner = "microsoft";
-  repo = "java-debug";
-  rev = "e6655ead412ceed5afa37b3781ed84e0b8ba425a";
-  sha256 = "1syrzp8syisnd8fkj3lis5rv83chzj4gwm63ygib41c428yyw20a";
-};
+  src = fetchFromGitHub {
+    owner = "replit";
+    repo = "java-debug";
+    rev = "2a556e52ce2aeb4857baf594829f5c57caf2e431";
+    sha256 = "14ada9chynzycnfqc4w9c1w24gyx37by81fyb9y42izdrn46dj2z";
+  };
 
  dontConfigure = true;
  buildInputs = [ maven graalvm11-ce ];
@@ -29,5 +29,5 @@ src = fetchFromGitHub {
  dontFixup = true;
  outputHashAlgo = "sha256";
  outputHashMode = "recursive";
- outputHash = "0lgqka9qlf9v685xrmb85rgrvwpi0sfqsx2z4zalgkqcsfhz8gb1";
+ outputHash = "0wvlzmgmn29gd0ix69cgvw6w375arqn6jjk38pwilia8cag1r498";
 }
