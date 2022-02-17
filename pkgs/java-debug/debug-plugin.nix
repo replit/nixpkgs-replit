@@ -7,20 +7,19 @@
 let
   repository = callPackage ./repo.nix { };
 
-  version = "0.35.0";
+  version = "0.32.0";
 
 in stdenv.mkDerivation {
   inherit version;
   name = "java-debug-plugin";
 
   src = fetchFromGitHub {
-    owner = "microsoft";
+    owner = "replit";
     repo = "java-debug";
-    rev = "e6655ead412ceed5afa37b3781ed84e0b8ba425a";
-    sha256 = "1syrzp8syisnd8fkj3lis5rv83chzj4gwm63ygib41c428yyw20a";
+    rev = "2a556e52ce2aeb4857baf594829f5c57caf2e431";
+    sha256 = "14ada9chynzycnfqc4w9c1w24gyx37by81fyb9y42izdrn46dj2z";
   };
 
-  patches = [ ./bind-address.patch ];
   buildInputs = [ maven graalvm11-ce ];
   buildPhase = ''
     # Maven tries to grab lockfiles in the repository, so it has to be writeable
