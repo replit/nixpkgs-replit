@@ -29,5 +29,5 @@ stdenv.mkDerivation {
  dontFixup = true;
  outputHashAlgo = "sha256";
  outputHashMode = "recursive";
- outputHash = "0wvlzmgmn29gd0ix69cgvw6w375arqn6jjk38pwilia8cag1r498";
+ outputHash = "1mnmcbvvf8w5hvxrdlyha0gs6aipjcdazmhzxhxcsdmj61hnb2nh";
 }
