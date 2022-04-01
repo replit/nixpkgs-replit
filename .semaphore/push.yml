@@ -28,3 +28,4 @@ blocks:
             - sh build.sh $NIXPKGS_CHANNEL
             - gsutil cp $NIXPKGS_CHANNEL.tar.gz gs://replit-nixpkgs/$NIXPKGS_CHANNEL.tar.gz
             - gsutil acl ch -u AllUsers:R gs://replit-nixpkgs/$NIXPKGS_CHANNEL.tar.gz
+            - curl --fail -X POST -H "$WEBHOOK_AUTH" -H "content-type: application/json" -d @~/webhook.json $WEBHOOK_URL
