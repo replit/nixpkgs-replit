@@ -30,6 +30,8 @@ in
     jest = nodePackages."jest-cli-23.6.0";
     coffeescript = nodePackages."coffeescript-2.6.1";
 
+    basil = self.callPackage ./pkgs/basil { };
+
     # The override packages are injected into the replitPackages namespace as
     # well so they can all be built together
   } // override // self.pkgs.lib.optionalAttrs (self.pkgs ? graalvm17-ce) {
