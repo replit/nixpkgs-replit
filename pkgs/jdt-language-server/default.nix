@@ -10,12 +10,12 @@ let
 
 in stdenv.mkDerivation rec {
   pname = "jdt-language-server";
-  version = "1.6.0";
-  timestamp = "202111261512";
+  version = "1.9.0";
+  timestamp = "202203031534";
 
   src = fetchurl {
     url = "https://download.eclipse.org/jdtls/milestones/${version}/jdt-language-server-${version}-${timestamp}.tar.gz";
-    sha256 = "166nbjwkgi4j9fkfsgggl92cgdw3mjf8zphm32bs07i5mpq20db8";
+    sha256 = "1irg8fzrw016js9zbcnq35lagb66zdgs800y0v8pz09vrcjikbxq";
   };
 
   sourceRoot = ".";
