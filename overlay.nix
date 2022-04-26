@@ -7,8 +7,23 @@ let
     nodejs = super."nodejs-14_x";
   };
 
+  # We have our own version of typescript-language-server here because the version in upstream nixpkgs
+  # has a bug which is causing issues for code intelligence in node repls.
+  # Copied from nixpkgs:
+  # https://cs.github.com/NixOS/nixpkgs/blob/529ce4161a07f0b5a4a6d6cc4339d50f7cec77b5/pkgs/development/node-packages/default.nix#L474-L480
+  typescript-language-server = nodePackages."typescript-language-server-0.9.6".override {
+      nativeBuildInputs = [ self.makeWrapper ];
+      postInstall = ''
+        wrapProgram "$out/bin/typescript-language-server" \
+          --suffix PATH : ${self.lib.makeBinPath [ self.nodePackages.typescript ]}
+      '';
+    };
+
   override = {
     # These packages will hide packages in the top level nixpkgs
+    nodePackages = super.nodePackages // {
+      inherit typescript-language-server;
+    };
   };
 in
 {
@@ -31,6 +46,9 @@ in
     coffeescript = nodePackages."coffeescript-2.6.1";
 
     basil = self.callPackage ./pkgs/basil { };
+
+    # Also included typescript-language-server so hydra will build it for us.
+    inherit typescript-language-server;
 
     # The override packages are injected into the replitPackages namespace as
     # well so they can all be built together

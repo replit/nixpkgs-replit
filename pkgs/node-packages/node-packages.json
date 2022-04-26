@@ -1,5 +1,6 @@
 [
   { "coffeescript": "2.6.1" },
   { "jest-cli": "23.6.0" },
-  { "ts-node": "10.4.0" }
+  { "ts-node": "10.4.0" },
+  { "typescript-language-server": "0.9.6" }
 ]
