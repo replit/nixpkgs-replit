@@ -18,15 +18,12 @@ let
           --suffix PATH : ${self.lib.makeBinPath [ self.nodePackages.typescript ]}
       '';
     };
-
-  override = {
-    # These packages will hide packages in the top level nixpkgs
-    nodePackages = super.nodePackages // {
-      inherit typescript-language-server;
-    };
-  };
 in
 {
+  nodePackages = super.nodePackages // {
+    inherit typescript-language-server;
+  };
+
   replitPackages = rec {
     # Version string set when building overlay
     version = "GIT_SHA_HERE";
@@ -52,8 +49,8 @@ in
 
     # The override packages are injected into the replitPackages namespace as
     # well so they can all be built together
-  } // override // self.pkgs.lib.optionalAttrs (self.pkgs ? graalvm17-ce) {
+  } // self.pkgs.lib.optionalAttrs (self.pkgs ? graalvm17-ce) {
     java-language-server = self.callPackage ./pkgs/java-language-server { };
   };
-} // override
+}
 
