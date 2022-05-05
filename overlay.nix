@@ -15,7 +15,8 @@ let
       nativeBuildInputs = [ self.makeWrapper ];
       postInstall = ''
         wrapProgram "$out/bin/typescript-language-server" \
-          --suffix PATH : ${self.lib.makeBinPath [ self.nodePackages.typescript ]}
+          --suffix PATH : ${self.lib.makeBinPath [ self.nodePackages.typescript ]} \
+          --add-flags "--tsserver-path ${self.nodePackages.typescript}/lib/node_modules/typescript/lib/"
       '';
     };
 in
