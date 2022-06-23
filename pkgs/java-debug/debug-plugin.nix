@@ -1,26 +1,31 @@
 { stdenv
 , maven
 , fetchFromGitHub
-, graalvm11-ce
+, jdk
 , callPackage
 }:
 let
-  repository = callPackage ./repo.nix { };
-
   version = "0.32.0";
-
-in stdenv.mkDerivation {
-  inherit version;
-  name = "java-debug-plugin";
 
   src = fetchFromGitHub {
     owner = "replit";
     repo = "java-debug";
-    rev = "2a556e52ce2aeb4857baf594829f5c57caf2e431";
+    rev = "debug-interface";
     sha256 = "14ada9chynzycnfqc4w9c1w24gyx37by81fyb9y42izdrn46dj2z";
   };
+  repository = callPackage ./repo.nix {
+    inherit src jdk patches;
+  };
 
-  buildInputs = [ maven graalvm11-ce ];
+  patches = [
+    ./patches/repo.diff
+  ];
+
+in stdenv.mkDerivation {
+  inherit version src patches;
+  name = "java-debug-plugin";
+
+  buildInputs = [ maven jdk ];
   buildPhase = ''
     # Maven tries to grab lockfiles in the repository, so it has to be writeable
     cp -a ${repository} ./repository
