@@ -42,6 +42,9 @@ blocks:
           - curl -L https://nixos.org/nix/install | sh
           - source /home/semaphore/.nix-profile/etc/profile.d/nix.sh
           - checkout
+      env_vars:
+        - name: NIXPKGS_ALLOW_INSECURE
+          value: "1"
       jobs:
         - name: Build packages
           matrix:

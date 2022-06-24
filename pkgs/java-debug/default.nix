@@ -3,9 +3,12 @@
 , makeWrapper
 , jdt-language-server
 , python3
+, jdk
 }:
 let
-  debug-plugin = callPackage ./debug-plugin.nix { };
+  debug-plugin = callPackage ./debug-plugin.nix {
+    inherit jdk;
+  };
 
 in stdenv.mkDerivation {
   name = "java-debug";
