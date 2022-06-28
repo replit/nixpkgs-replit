@@ -33,3 +33,7 @@ You can update the pinned base channels by running `./update.sh`. The update
 script will use niv to update the pinned channels to the latest revisions
 according to nixpkgs.
 
+## Adding a new base channel
+You can add additional channels by running `./add.sh <channel>`. For example
+`./add.sh 22.05` to add the `release-22.05` branch.
+
