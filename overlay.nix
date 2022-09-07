@@ -19,10 +19,29 @@ let
           --add-flags "--tsserver-path ${self.nodePackages.typescript}/lib/node_modules/typescript/lib/"
       '';
     };
+
+  debugpy38 = super.python38Packages.debugpy;
+  debugpy310 = super.python310Packages.debugpy;
 in
 {
   nodePackages = super.nodePackages // {
     inherit typescript-language-server;
+  };
+
+  # The channel does not have python310Full published
+  python310Full = super.python310.override {
+    self = python310Full;
+    pythonAttr = "python310Full";
+    bluezSupport = true;
+    x11Support = true;
+  };
+
+  python38Packages = super.python38Packages // {
+    debugpy = debugpy38;
+  };
+
+  python310Packages = super.python310Packages // {
+    debugpy = debugpy310;
   };
 
   replitPackages = rec {
@@ -48,6 +67,36 @@ in
 
     # Also included typescript-language-server so hydra will build it for us.
     inherit typescript-language-server;
+
+    python-lsp-server38 = super.python38Packages.python-lsp-server.override {
+      withAutopep8 = false;
+      withFlake8 = false;
+      withMccabe = false;
+      withPycodestyle = false;
+      withPydocstyle = false;
+      withPyflakes = true;
+      withPylint = false;
+      withRope = true;
+      withYapf = true;
+    };
+
+    python-lsp-server310 = super.python310Packages.python-lsp-server.override {
+      withAutopep8 = false;
+      withFlake8 = false;
+      withMccabe = false;
+      withPycodestyle = false;
+      withPydocstyle = false;
+      withPyflakes = true;
+      withPylint = false;
+      withRope = true;
+      withYapf = true;
+    };
+
+    python310Full = self.python310Full;
+
+    inherit debugpy38;
+
+    inherit debugpy310;
 
     # The override packages are injected into the replitPackages namespace as
     # well so they can all be built together
