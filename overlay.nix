@@ -30,6 +30,8 @@ let
 
   stderred = super.callPackage ./pkgs/stderred { };
 
+  dapPython = super.callPackage ./pkgs/dapPython { };
+
 in
 {
   nodePackages = super.nodePackages // {
@@ -67,6 +69,8 @@ in
     inherit (prybar) prybar-R prybar-clojure prybar-elisp prybar-julia prybar-lua prybar-nodejs prybar-ocaml prybar-python2 prybar-python3 prybar-ruby prybar-scala prybar-sqlite prybar-tcl;
 
     inherit stderred;
+
+    inherit dapPython;
 
     # The override packages are injected into the replitPackages namespace as
     # well so they can all be built together
