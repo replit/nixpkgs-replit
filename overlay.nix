@@ -1,7 +1,6 @@
+{ sources }:
 self: super:
-
 with super.lib;
-
 let
   nodePackages = self.callPackage ./pkgs/node-packages {
     nodejs = super."nodejs-14_x";
@@ -19,11 +18,25 @@ let
           --add-flags "--tsserver-path ${self.nodePackages.typescript}/lib/node_modules/typescript/lib/"
       '';
     };
+
+  prybar = import sources.prybar {};
+
+  python310Full = super.python310.override {
+    self = python310Full;
+    pythonAttr = "python310Full";
+    bluezSupport = true;
+    x11Support = true;
+  };
+
+  stderred = super.callPackage ./pkgs/stderred { };
+
 in
 {
   nodePackages = super.nodePackages // {
     inherit typescript-language-server;
   };
+
+  inherit python310Full;
 
   replitPackages = rec {
     # Version string set when building overlay
@@ -48,6 +61,12 @@ in
 
     # Also included typescript-language-server so hydra will build it for us.
     inherit typescript-language-server;
+
+    inherit python310Full;
+
+    inherit (prybar) prybar-R prybar-clojure prybar-elisp prybar-julia prybar-lua prybar-nodejs prybar-ocaml prybar-python2 prybar-python3 prybar-ruby prybar-scala prybar-sqlite prybar-tcl;
+
+    inherit stderred;
 
     # The override packages are injected into the replitPackages namespace as
     # well so they can all be built together
