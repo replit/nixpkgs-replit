@@ -1,4 +1,4 @@
-{ lib, rustPlatform, stderred, makeWrapper }:
+{ rustPlatform, stderred, makeWrapper }:
 
 rustPlatform.buildRustPackage {
   pname = "stderred";
