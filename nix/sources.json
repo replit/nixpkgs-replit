@@ -64,10 +64,10 @@
         "homepage": "",
         "owner": "replit",
         "repo": "prybar",
-        "rev": "a01bbc801d519ba467b4a5acfe0c715c56a99ed4",
-        "sha256": "12wz3vwyva134nfmn7dsdh10na7hb72hqbibgr94wb3z3ym2m1l9",
+        "rev": "49e624c8eb613f77c922227c5a4bc4916ee1a782",
+        "sha256": "0wqab3kqdcfhcsnkly176fb0ix5wccn2lqxlb02i8sk4dazgkg8j",
         "type": "tarball",
-        "url": "https://github.com/replit/prybar/archive/a01bbc801d519ba467b4a5acfe0c715c56a99ed4.tar.gz",
+        "url": "https://github.com/replit/prybar/archive/49e624c8eb613f77c922227c5a4bc4916ee1a782.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     }
 }
