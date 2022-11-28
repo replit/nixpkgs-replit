@@ -21,24 +21,18 @@ let
 
   prybar = import sources.prybar {};
 
+in
+rec {
+  nodePackages = super.nodePackages // {
+    inherit typescript-language-server;
+  };
+
   python310Full = super.python310.override {
     self = python310Full;
     pythonAttr = "python310Full";
     bluezSupport = true;
     x11Support = true;
   };
-
-  stderred = super.callPackage ./pkgs/stderred { };
-
-  dapPython = super.callPackage ./pkgs/dapPython { };
-
-in
-{
-  nodePackages = super.nodePackages // {
-    inherit typescript-language-server;
-  };
-
-  inherit python310Full;
 
   replitPackages = rec {
     # Version string set when building overlay
@@ -69,9 +63,9 @@ in
     inherit (prybar) prybar-R prybar-clojure prybar-elisp prybar-julia prybar-lua prybar-nodejs
       prybar-ocaml prybar-python2 prybar-python3 prybar-python310 prybar-ruby prybar-scala prybar-sqlite prybar-tcl;
 
-    inherit stderred;
+    stderred = super.callPackage ./pkgs/stderred { };
 
-    inherit dapPython;
+    dapPython = super.callPackage ./pkgs/dapPython { };
 
     # The override packages are injected into the replitPackages namespace as
     # well so they can all be built together

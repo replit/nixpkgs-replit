@@ -2,7 +2,7 @@
 , channel ? sources."nixpkgs-unstable"
 }:
 let overlay = (import ./overlay.nix) {
-  sources = sources;
+  inherit sources;
 };
 in
 import channel {overlays = [overlay];}
