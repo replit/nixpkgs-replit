@@ -2,7 +2,7 @@
 self: super:
 with super.lib;
 let
-  nodePackages = self.callPackage ./pkgs/node-packages {
+  privateNodePackages = self.callPackage ./pkgs/node-packages {
     nodejs = super."nodejs-14_x";
   };
 
@@ -50,8 +50,8 @@ rec {
     rescript-language-server = self.callPackage ./pkgs/rescript-language-server { };
     nbcode = self.callPackage ./pkgs/nbcode { };
 
-    jest = nodePackages."jest-cli-23.6.0";
-    coffeescript = nodePackages."coffeescript-2.6.1";
+    jest = privateNodePackages."jest-cli-23.6.0";
+    coffeescript = privateNodePackages."coffeescript-2.6.1";
 
     basil = self.callPackage ./pkgs/basil { };
 
