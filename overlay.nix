@@ -63,7 +63,9 @@ rec {
     inherit (prybar) prybar-R prybar-clojure prybar-elisp prybar-julia prybar-lua prybar-nodejs
       prybar-ocaml prybar-python2 prybar-python3 prybar-python310 prybar-ruby prybar-scala prybar-sqlite prybar-tcl;
 
-    stderred = super.callPackage ./pkgs/stderred { };
+    stderred = if builtins.hasAttr "stderred" super
+      then super.callPackage ./pkgs/stderred { }
+      else {};
 
     dapPython = super.callPackage ./pkgs/dapPython { };
 
