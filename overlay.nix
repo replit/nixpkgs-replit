@@ -34,7 +34,7 @@ rec {
     x11Support = true;
   };
 
-  replitPackages = rec {
+  replitPackages = {
     # Version string set when building overlay
     version = "GIT_SHA_HERE";
 
@@ -58,7 +58,7 @@ rec {
     # Also included typescript-language-server so hydra will build it for us.
     inherit typescript-language-server;
 
-    inherit python310Full;
+    inherit (self) python310Full;
 
     inherit (prybar) prybar-R prybar-clojure prybar-elisp prybar-julia prybar-lua prybar-nodejs
       prybar-ocaml prybar-python2 prybar-python3 prybar-python310 prybar-ruby prybar-scala prybar-sqlite prybar-tcl;
