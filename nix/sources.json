@@ -57,5 +57,17 @@
         "type": "tarball",
         "url": "https://github.com/nixos/nixpkgs/archive/a72d7811be1162dd6804c4e36e5402d76fb6e921.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+    },
+    "prybar": {
+        "branch": "master",
+        "description": "Pry open those interpreters. ",
+        "homepage": "",
+        "owner": "replit",
+        "repo": "prybar",
+        "rev": "49e624c8eb613f77c922227c5a4bc4916ee1a782",
+        "sha256": "0wqab3kqdcfhcsnkly176fb0ix5wccn2lqxlb02i8sk4dazgkg8j",
+        "type": "tarball",
+        "url": "https://github.com/replit/prybar/archive/49e624c8eb613f77c922227c5a4bc4916ee1a782.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     }
 }
