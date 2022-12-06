@@ -72,10 +72,6 @@ rec {
 
     dapPython = super.callPackage ./pkgs/dapPython { };
 
-    # The override packages are injected into the replitPackages namespace as
-    # well so they can all be built together
-  } // self.pkgs.lib.optionalAttrs (self.pkgs ? graalvm17-ce) {
-    java-language-server = self.callPackage ./pkgs/java-language-server { };
   };
 }
 

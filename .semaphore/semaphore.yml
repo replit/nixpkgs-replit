@@ -45,6 +45,8 @@ blocks:
       env_vars:
         - name: NIXPKGS_ALLOW_INSECURE
           value: "1"
+        - name: NIXPKGS_ALLOW_UNFREE
+          value: "1"
       jobs:
         - name: Build packages
           matrix:
