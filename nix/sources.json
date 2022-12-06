@@ -35,6 +35,18 @@
         "url": "https://github.com/nixos/nixpkgs/archive/e09913998d89659044c29ef5df4a86542e78a2ef.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
+    "nixpkgs-22.11": {
+        "branch": "nixos-22.11",
+        "description": "Nix Packages collection",
+        "homepage": "",
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "52e3e80afff4b16ccb7c52e9f0f5220552f03d04",
+        "sha256": "0x0pc4qm0adsdbr8n20ghl7byq9n0bvj9fjiiqzp9839cippp9hn",
+        "type": "tarball",
+        "url": "https://github.com/nixos/nixpkgs/archive/52e3e80afff4b16ccb7c52e9f0f5220552f03d04.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+    },
     "nixpkgs-legacy": {
         "description": "Nix Packages collection",
         "homepage": "",
