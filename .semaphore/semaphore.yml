@@ -55,6 +55,7 @@ blocks:
                 - nixpkgs-legacy
                 - nixpkgs-21.11
                 - nixpkgs-22.05
+                - nixpkgs-22.11
                 - nixpkgs-unstable
           commands:
             - mkdir /tmp/$NIXPKGS_CHANNEL
