@@ -13,11 +13,11 @@ stdenv.mkDerivation rec {
   };
 
   buildPhase = ''
-	  ${python3}/bin/python3 build.py basil-release
+    ${python3}/bin/python3 build.py basil-release
   '';
 
   installPhase = ''
-		mkdir -p $out
-		cp -r bin $out
+    mkdir -p $out
+    cp -r bin $out
   '';
 }

@@ -33,5 +33,5 @@ stdenv.mkDerivation rec {
       --run "cd $out/share" \
       --add-flags "./server/out/server.js" \
       --add-flags "--stdio"
-    '';
+  '';
 }

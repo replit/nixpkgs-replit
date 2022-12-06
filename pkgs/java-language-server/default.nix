@@ -31,7 +31,8 @@ let
     projectDir = ./codegen;
   };
 
-in stdenv.mkDerivation rec {
+in
+stdenv.mkDerivation rec {
   name = "java-language-server";
   version = "0.2.38";
 

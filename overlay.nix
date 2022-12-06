@@ -11,15 +11,15 @@ let
   # Copied from nixpkgs:
   # https://cs.github.com/NixOS/nixpkgs/blob/529ce4161a07f0b5a4a6d6cc4339d50f7cec77b5/pkgs/development/node-packages/default.nix#L474-L480
   typescript-language-server = privateNodePackages."typescript-language-server-0.9.6".override {
-      nativeBuildInputs = [ self.makeWrapper ];
-      postInstall = ''
-        wrapProgram "$out/bin/typescript-language-server" \
-          --suffix PATH : ${self.lib.makeBinPath [ self.nodePackages.typescript ]} \
-          --add-flags "--tsserver-path ${self.nodePackages.typescript}/lib/node_modules/typescript/lib/"
-      '';
-    };
+    nativeBuildInputs = [ self.makeWrapper ];
+    postInstall = ''
+      wrapProgram "$out/bin/typescript-language-server" \
+        --suffix PATH : ${self.lib.makeBinPath [ self.nodePackages.typescript ]} \
+        --add-flags "--tsserver-path ${self.nodePackages.typescript}/lib/node_modules/typescript/lib/"
+    '';
+  };
 
-  prybar = import sources.prybar {};
+  prybar = import sources.prybar { };
 
 in
 rec {
@@ -44,7 +44,7 @@ rec {
     replbox = self.callPackage ./pkgs/replbox { };
 
     inherit (self) jdt-language-server;
-    
+
     java-debug = self.callPackage ./pkgs/java-debug {
       inherit jdt-language-server;
       jdk = self.graalvm11-ce;
@@ -66,9 +66,10 @@ rec {
     inherit (prybar) prybar-R prybar-clojure prybar-elisp prybar-julia prybar-lua prybar-nodejs
       prybar-ocaml prybar-python2 prybar-python3 prybar-python310 prybar-ruby prybar-scala prybar-sqlite prybar-tcl;
 
-    stderred = if builtins.hasAttr "stderred" super
+    stderred =
+      if builtins.hasAttr "stderred" super
       then super.callPackage ./pkgs/stderred { }
-      else {};
+      else { };
 
     dapPython = super.callPackage ./pkgs/dapPython { };
 

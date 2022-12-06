@@ -6,7 +6,8 @@
 let
   nbcode-vsix = callPackage ./vsix.nix { };
 
-in stdenv.mkDerivation {
+in
+stdenv.mkDerivation {
   name = "nbcode";
 
   nativeBuildInputs = [ nbcode-vsix graalvm11-ce makeWrapper ];
