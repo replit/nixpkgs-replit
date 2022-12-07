@@ -21,7 +21,8 @@ let
     ./patches/repo.diff
   ];
 
-in stdenv.mkDerivation {
+in
+stdenv.mkDerivation {
   inherit version src patches;
   name = "java-debug-plugin";
 

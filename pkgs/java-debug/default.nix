@@ -10,7 +10,8 @@ let
     inherit jdk;
   };
 
-in stdenv.mkDerivation {
+in
+stdenv.mkDerivation {
   name = "java-debug";
 
   unpackPhase = "true";

@@ -8,7 +8,8 @@
 let
   jdk = if pkgs ? graalvm17-ce then pkgs.graalvm17-ce else pkgs.jdk;
 
-in stdenv.mkDerivation rec {
+in
+stdenv.mkDerivation rec {
   pname = "jdt-language-server";
   version = "1.9.0";
   timestamp = "202203031534";

@@ -28,8 +28,7 @@ blocks:
       jobs:
         - name: Make sure files are nixfmt'ed
           commands:
-            - nixpkgs-fmt default.nix overlay.nix hydra
-            - nixpkgs-fmt pkgs
+            - nixpkgs-fmt --check default.nix overlay.nix hydra pkgs
         - name: Lint all files
           commands:
             - nix-linter default.nix overlay.nix
