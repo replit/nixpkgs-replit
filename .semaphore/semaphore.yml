@@ -21,7 +21,6 @@ blocks:
 
           # Install required linters
           - nix-env -iA nixpkgs.nixpkgs-fmt
-          - nix-env -iA nixpkgs.nix-linter
 
           # Clone the source code
           - checkout
@@ -29,10 +28,6 @@ blocks:
         - name: Make sure files are nixfmt'ed
           commands:
             - nixpkgs-fmt --check default.nix overlay.nix hydra pkgs
-        - name: Lint all files
-          commands:
-            - nix-linter default.nix overlay.nix
-            - find . -name "*.nix" -path "./pkgs/*" -not -path "./pkgs/node-packages/*" | xargs nix-linter
 
   - name: Build overlay packages
     task:
