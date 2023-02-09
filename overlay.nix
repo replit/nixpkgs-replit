@@ -10,7 +10,7 @@ let
   # has a bug which is causing issues for code intelligence in node repls.
   # Copied from nixpkgs:
   # https://cs.github.com/NixOS/nixpkgs/blob/529ce4161a07f0b5a4a6d6cc4339d50f7cec77b5/pkgs/development/node-packages/default.nix#L474-L480
-  typescript-language-server = privateNodePackages."typescript-language-server-0.9.6".override {
+  typescript-language-server = privateNodePackages."typescript-language-server-3.1.0".override {
     nativeBuildInputs = [ self.makeWrapper ];
     postInstall = ''
       wrapProgram "$out/bin/typescript-language-server" \
