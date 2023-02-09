@@ -1,5 +1,6 @@
 { sources ? import nix/sources.nix
-, channel ? sources."nixpkgs-unstable"
+, channelName ? "nixpkgs-unstable"
+, channel ? sources.${channelName}
 }:
 let
   overlay = (import ./overlay.nix) {
