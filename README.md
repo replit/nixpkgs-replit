@@ -28,6 +28,14 @@ You can also fork [this repl](https://replit.com/@ZachAtReplit/overlay), which
 contains the overlay repository, and allows testing packages from the overlay
 directly in `replit.nix`.
 
+## Building the overlay for a particular channel
+
+You can build a package for a particular channel like this:
+
+```
+nix-build --argstr channelName nixpkgs-22.11 -A nodePackages.typescript-language-server
+```
+
 ## Updating the overlay base
 You can update the pinned base channels by running `./update.sh`. The update
 script will use niv to update the pinned channels to the latest revisions
