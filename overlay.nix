@@ -73,6 +73,13 @@ rec {
 
     dapPython = super.callPackage ./pkgs/dapPython { };
 
+    modules = {
+      dapPython = super.callPackage ./pkgs/dapPython { };
+      basil = self.callPackage ./pkgs/basil { };
+      inherit (prybar) prybar-R prybar-clojure prybar-elisp prybar-julia prybar-lua prybar-nodejs
+      prybar-ocaml prybar-python2 prybar-python3 prybar-python310 prybar-ruby prybar-scala prybar-sqlite prybar-tcl;
+    };
+
   };
 }
 
