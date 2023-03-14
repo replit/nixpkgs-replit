@@ -76,7 +76,7 @@ rec {
     modules = {
       dapPython = super.callPackage ./pkgs/dapPython { };
       basil = self.callPackage ./pkgs/basil { };
-      inherit (prybar) prybar-python310;
+      inherit (prybar) prybar-python310 prybar-ruby;
     };
 
   };
