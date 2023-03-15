@@ -1,5 +1,5 @@
 { sources ? import nix/sources.nix
-, channelName ? "nixpkgs-unstable"
+, channelName ? "nixpkgs-22.11"
 , channel ? sources.${channelName}
 }:
 let
