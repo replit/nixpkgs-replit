@@ -5,7 +5,7 @@
 (pkgs.lib.evalModules {
   modules = [
     configPath
-    (import ./repl-environment.nix)
+    (import ./module-definition.nix)
   ];
   specialArgs = {
     inherit pkgs;

@@ -73,9 +73,11 @@ rec {
 
     dapPython = super.callPackage ./pkgs/dapPython { };
 
+    moduleit = super.callPackage ./pkgs/moduleit { };
+
     modules =
       let
-        mkModule = path: super.callPackage ./moduleit/entrypoint.nix {
+        mkModule = path: super.callPackage ./pkgs/moduleit/entrypoint.nix {
           configPath = path;
         };
       in
