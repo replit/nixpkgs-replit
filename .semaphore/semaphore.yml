@@ -61,7 +61,8 @@ blocks:
             - env_var: NIXPKGS_CHANNEL
               values:
                 - nixpkgs-22.11
-          - nix-build /tmp/$NIXPKGS_CHANNEL/nixpkgs/default.nix -A replitPackages.modules
+          commands:
+            - nix-build /tmp/$NIXPKGS_CHANNEL/nixpkgs/default.nix -A replitPackages.modules
 
 promotions:
   - name: Push overlays to GCS
