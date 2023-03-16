@@ -501,6 +501,14 @@ in
           A set language servers provided by the module.
         '';
       };
+
+      env = mkOption {
+        type = types.attrsOf types.str;
+        default = { };
+        description = lib.mdDoc ''
+          A set of environment variables to export.
+        '';
+      };
     };
 
     replit.builtPackages = mkOption {
@@ -532,7 +540,7 @@ in
           version = config.version;
           env = {
             PATH = lib.makeBinPath config.packages;
-          };
+          } // config.replit.env;
           initializers = config.replit.initializers;
           runners = config.replit.runners;
           packagers = config.replit.packagers;
