@@ -13,7 +13,7 @@ let
           a project by creating some files and/or directories.
         '';
       };
-      
+
       start = mkOption {
         type = commandType;
         description = lib.mdDoc ''
