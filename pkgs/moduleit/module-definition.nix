@@ -4,6 +4,33 @@ with lib;
 
 let
 
+  initializerModule = { name, config, ... }: {
+    options = {
+      name = mkOption {
+        type = types.str;
+        description = lib.mdDoc ''
+          The name of the initializer. An initializer is usually used to scaffold
+          a project by creating some files and/or directories.
+        '';
+      };
+      
+      start = mkOption {
+        type = commandType;
+        description = lib.mdDoc ''
+          The command to run the initializer.
+        '';
+      };
+
+      runOnce = mkOption {
+        type = types.bool;
+        default = true;
+        description = lib.mdDoc ''
+          If runOnce is true, the initializer will only be run once.
+        '';
+      };
+    };
+  };
+
   commandModule = { name, config, ... }: {
     options = {
       args = mkOption {
@@ -427,6 +454,14 @@ in
         description = "version of the nix module builder";
       };
 
+      initializers = mkOption {
+        type = types.attrsOf (types.submodule initializerModule);
+        default = { };
+        description = lib.mdDoc ''
+          A set of initializers provided by the module.
+        '';
+      };
+
       runners = mkOption {
         type = types.attrsOf (types.submodule runnerModule);
         default = { };
@@ -498,6 +533,7 @@ in
           env = {
             PATH = lib.makeBinPath config.packages;
           };
+          initializers = config.replit.initializers;
           runners = config.replit.runners;
           packagers = config.replit.packagers;
           debuggers = config.replit.debuggers;
