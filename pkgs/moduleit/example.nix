@@ -23,6 +23,12 @@ in
 
   replit = {
 
+    initializers.npmInit = {
+      name = "npm init";
+      start = "npm init -y";
+      runOnce = true;
+    };
+
     runners.nodeJS = {
       name = "Node.js";
       language = "javascript";
