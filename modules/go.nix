@@ -8,23 +8,12 @@
     gopls
   ];
 
-  replit.runners.go-build = rec {
-    name = "go build";
-    language = "go";
-    extensions = [".go"];
-    
-    start = "./main";
-    compile = "${pkgs.go}/bin/go build -o ${start}";
-    fileParam = false;
-  };
-
   replit.runners.go-run = {
     name = "go run";
     language = "go";
-    extensions = [".go"];
 
-    start = "${pkgs.go}/bin/go run .";
-    fileParam = false;
+    start = "${pkgs.go}/bin/go run $file";
+    fileParam = true;
   };
 
   replit.formatters.go-fmt = {
@@ -38,7 +27,6 @@
   replit.languageServers.gopls = {
     name = "gopls";
     language = "go";
-    extensions = [".go"];
     
     start = "${pkgs.gopls}/bin/gopls";
   };
