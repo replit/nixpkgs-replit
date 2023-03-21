@@ -1,6 +1,6 @@
 #!/bin/sh
 
-default=nixpkgs-unstable
+default=nixpkgs-22.11
 channel=$default
 
 ignore=`cat .gitignore | xargs printf -- '--exclude=%s\n'`
