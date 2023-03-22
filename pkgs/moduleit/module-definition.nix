@@ -80,99 +80,100 @@ let
     };
   };
 
-  runnerModule = { name, config, ... }: 
-    let runnerProductionOverrides = { name, config, ... }:
-      {
-        options = {
-          start = mkOption {
-            type = commandType;
-            description = lib.mdDoc ''
-              The command to run a file in production. Use $file to substitute in the file path.
-            '';
-          };
+  runnerModule = { name, config, ... }:
+    let
+      runnerProductionOverrides = { name, config, ... }:
+        {
+          options = {
+            start = mkOption {
+              type = commandType;
+              description = lib.mdDoc ''
+                The command to run a file in production. Use $file to substitute in the file path.
+              '';
+            };
 
-          compile = mkOption {
-            type = types.nullOr commandType;
-            default = null;
-            description = lib.mdDoc ''
-              The command to compile a source file in production. Use $file to substitute in the file path.
-            '';
-          };
+            compile = mkOption {
+              type = types.nullOr commandType;
+              default = null;
+              description = lib.mdDoc ''
+                The command to compile a source file in production. Use $file to substitute in the file path.
+              '';
+            };
 
-          fileParam = mkOption {
-            type = types.bool;
-            description = lib.mdDoc ''
-              Whether this runner accepts a $file paramater in production.
-            '';
+            fileParam = mkOption {
+              type = types.bool;
+              description = lib.mdDoc ''
+                Whether this runner accepts a $file paramater in production.
+              '';
+            };
           };
         };
-      };
     in
     {
-    options = {
-      name = mkOption {
-        type = types.str;
-        description = lib.mdDoc ''
-          The name of the runner.
-        '';
-      };
+      options = {
+        name = mkOption {
+          type = types.str;
+          description = lib.mdDoc ''
+            The name of the runner.
+          '';
+        };
 
-      language = mkOption {
-        type = types.str;
-        description = lib.mdDoc ''
-          The language this runner supports.
-        '';
-      };
+        language = mkOption {
+          type = types.str;
+          description = lib.mdDoc ''
+            The language this runner supports.
+          '';
+        };
 
-      start = mkOption {
-        type = commandType;
-        description = lib.mdDoc ''
-          The command to run a file. Use $file to substitute in the file path.
-        '';
-      };
+        start = mkOption {
+          type = commandType;
+          description = lib.mdDoc ''
+            The command to run a file. Use $file to substitute in the file path.
+          '';
+        };
 
-      fileParam = mkOption {
-        type = types.bool;
-        description = lib.mdDoc ''
-          Whether this runner accepts a $file paramater.
-        '';
-      };
+        fileParam = mkOption {
+          type = types.bool;
+          description = lib.mdDoc ''
+            Whether this runner accepts a $file paramater.
+          '';
+        };
 
-      interpreter = mkOption {
-        type = types.bool;
-        default = false;
-        description = lib.mdDoc ''
-          Whether this runner starts an interpreter. Default: false.
-        '';
-      };
+        interpreter = mkOption {
+          type = types.bool;
+          default = false;
+          description = lib.mdDoc ''
+            Whether this runner starts an interpreter. Default: false.
+          '';
+        };
 
-      prompt = mkOption {
-        type = types.str;
-        default = "";
-        description = lib.mdDoc ''
-          If interpreter is true, this prompt is displayed.
-        '';
-      };
+        prompt = mkOption {
+          type = types.str;
+          default = "";
+          description = lib.mdDoc ''
+            If interpreter is true, this prompt is displayed.
+          '';
+        };
 
-      compile = mkOption {
-        type = types.nullOr commandType;
-        default = null;
-        description = lib.mdDoc ''
-          The command to compile a source file. Use $file to substitute in the file path.
-        '';
-      };
+        compile = mkOption {
+          type = types.nullOr commandType;
+          default = null;
+          description = lib.mdDoc ''
+            The command to compile a source file. Use $file to substitute in the file path.
+          '';
+        };
 
-      productionOverride = mkOption {
-        type = types.nullOr (types.submodule runnerProductionOverrides);
-        default = null;
-        description = lib.mdDoc ''
-          The command configurations to use in production overriding the normal commands
-          that are used in development.
-        '';
-      };
+        productionOverride = mkOption {
+          type = types.nullOr (types.submodule runnerProductionOverrides);
+          default = null;
+          description = lib.mdDoc ''
+            The command configurations to use in production overriding the normal commands
+            that are used in development.
+          '';
+        };
 
-    } // fileTypeAttrs;
-  };
+      } // fileTypeAttrs;
+    };
 
   languageServerModule = { name, config, ... }: {
     options = {
