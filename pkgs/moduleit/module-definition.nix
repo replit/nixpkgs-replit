@@ -80,7 +80,35 @@ let
     };
   };
 
-  runnerModule = { name, config, ... }: {
+  runnerModule = { name, config, ... }: 
+    let runnerProductionOverrides = { name, config, ... }:
+      {
+        options = {
+          start = mkOption {
+            type = commandType;
+            description = lib.mdDoc ''
+              The command to run a file in production. Use $file to substitute in the file path.
+            '';
+          };
+
+          compile = mkOption {
+            type = types.nullOr commandType;
+            default = null;
+            description = lib.mdDoc ''
+              The command to compile a source file in production. Use $file to substitute in the file path.
+            '';
+          };
+
+          fileParam = mkOption {
+            type = types.bool;
+            description = lib.mdDoc ''
+              Whether this runner accepts a $file paramater in production.
+            '';
+          };
+        };
+      };
+    in
+    {
     options = {
       name = mkOption {
         type = types.str;
@@ -131,6 +159,15 @@ let
         default = null;
         description = lib.mdDoc ''
           The command to compile a source file. Use $file to substitute in the file path.
+        '';
+      };
+
+      productionOverride = mkOption {
+        type = types.nullOr (types.submodule runnerProductionOverrides);
+        default = null;
+        description = lib.mdDoc ''
+          The command configurations to use in production overriding the normal commands
+          that are used in development.
         '';
       };
 
