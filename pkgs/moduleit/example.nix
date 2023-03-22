@@ -41,6 +41,12 @@ in
         };
       };
       fileParam = true;
+      productionOverride = {
+        # only the options below
+        start = "pm2 start server.js";
+        compile = "yarn build";
+        fileParam = false;
+      };
     };
 
     debuggers.nodeDAP = {
