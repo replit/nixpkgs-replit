@@ -102,6 +102,7 @@ let
 
             fileParam = mkOption {
               type = types.bool;
+              default = false;
               description = lib.mdDoc ''
                 Whether this runner accepts a $file paramater in production.
               '';
@@ -134,6 +135,7 @@ let
 
         fileParam = mkOption {
           type = types.bool;
+          default = false;
           description = lib.mdDoc ''
             Whether this runner accepts a $file paramater.
           '';
@@ -300,6 +302,7 @@ let
 
       fileParam = mkOption {
         type = types.bool;
+        default = false;
         description = lib.mdDoc ''
           Whether this debugger accepts a $file paramater.
         '';
