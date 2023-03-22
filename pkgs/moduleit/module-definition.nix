@@ -128,7 +128,7 @@ let
 
       compile = mkOption {
         type = types.nullOr commandType;
-        default = "";
+        default = null;
         description = lib.mdDoc ''
           The command to compile a source file. Use $file to substitute in the file path.
         '';
@@ -255,7 +255,6 @@ let
 
       start = mkOption {
         type = commandType;
-        default = "";
         description = lib.mdDoc ''
           The command to start the debug (dap) server.
         '';
