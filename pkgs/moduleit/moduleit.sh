@@ -14,6 +14,10 @@ args=("$ENTRYPOINT_PATH" --argstr configPath "$MODULE_FILE_ABSOLUTE_PATH")
 
 if [ ! -z "${OUT_LINK}" ]; then
   args+=(--out-link "${OUT_LINK}")
+
+  if [[ -f "${OUT_LINK}" ]]; then
+    rm -f "${OUT_LINK}"
+  fi
 fi
 
 echo "nix-build ${args[@]}"
