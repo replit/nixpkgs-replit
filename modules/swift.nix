@@ -19,6 +19,7 @@ in
 
   packages = with pkgs; [
     swiftc-wrapper
+    swift
   ];
 
   replit.runners.swift = {
