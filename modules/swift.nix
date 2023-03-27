@@ -1,15 +1,14 @@
 { pkgs, ... }:
 let swiftc-wrapper = pkgs.stdenv.mkDerivation {
   name = "swiftc-wrapper";
-  buildInputs = [pkgs.makeWrapper pkgs.swift];
+  buildInputs = [pkgs.makeWrapper];
   src = ./.;
 
+  
   installPhase = ''
     mkdir -p $out/bin
     makeWrapper ${pkgs.swift}/bin/swiftc $out/bin/swiftc \
-      --set PATH ${pkgs.lib.makeBinPath [
-        pkgs.swift
-      ]}
+      --set PATH ""
   '';
 };
 in
