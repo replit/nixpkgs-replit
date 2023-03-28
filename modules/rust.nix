@@ -50,4 +50,14 @@ in
     start = "${pkgs.rustfmt}/bin/rustfmt $file";
     stdin = false;
   };
+
+  replit.packagers.rust = {
+    name = "Rust";
+    language = "rust";
+    features = {
+      packageSearch = true;
+      guessImports = false;
+      enabledForHosting = false;
+    };
+  };
 }
