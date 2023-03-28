@@ -56,6 +56,8 @@ in
     language = "rust";
     features = {
       packageSearch = true;
+      guessImports = false;
+      enabledForHosting = false;
     };
   };
 }
