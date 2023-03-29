@@ -243,7 +243,6 @@ myPoetry = pkgs.python310Packages.buildPythonPackage rec {
     homepage = "https://github.com/replit/poetry";
     description = "Python dependency management and packaging made easy";
     license = licenses.mit;
-    maintainers = with maintainers; [ jakewaksbaum ];
   };
 };
 in

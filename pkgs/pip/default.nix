@@ -24,7 +24,6 @@ pkgs.python310Packages.buildPythonPackage rec {
   meta = {
     description = "The PyPA recommended tool for installing Python packages";
     license = with pkgs.lib.licenses; [ mit ];
-    homepage = "https://pip.pypa.io/";
-    priority = 10;
+    homepage = "https://github.com/replit/pip";
   };
 }

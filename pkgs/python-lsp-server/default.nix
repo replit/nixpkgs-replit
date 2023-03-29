@@ -67,7 +67,6 @@ pypkgs.buildPythonPackage rec {
   meta = with pkgs.lib; {
     description = "Python implementation of the Language Server Protocol";
     homepage = "https://github.com/replit/python-lsp-server";
-    changelog = "https://github.com/replit/python-lsp-server/blob/v${version}/CHANGELOG.md";
     license = licenses.mit;
   };
 }
