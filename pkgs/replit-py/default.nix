@@ -1,30 +1,31 @@
 { pkgs }:
 
-let python = pkgs.python310Full;
+let
+  python = pkgs.python310Full;
 
-pypkgs = pkgs.python310Packages;
+  pypkgs = pkgs.python310Packages;
 
-poetry = pkgs.callPackage ../poetry { };
+  poetry = pkgs.callPackage ../poetry { };
 
-pyseto = pypkgs.buildPythonPackage rec {
-  pname = "pyseto";
-  version = "1.7.1";
+  pyseto = pypkgs.buildPythonPackage rec {
+    pname = "pyseto";
+    version = "1.7.1";
 
-  src = pypkgs.fetchPypi {
-    inherit pname version;
-    hash = "sha256-pbbVjtzzmQ/aJnMWcjhcZMLn4Lxxj5ADjQ6wUoF4Fpo=";
+    src = pypkgs.fetchPypi {
+      inherit pname version;
+      hash = "sha256-pbbVjtzzmQ/aJnMWcjhcZMLn4Lxxj5ADjQ6wUoF4Fpo=";
+    };
+
+    propagatedBuildInputs = with pypkgs; [
+      iso8601
+      pycryptodomex
+      passlib
+      cryptography
+      argon2-cffi
+    ];
+
+    doCheck = false;
   };
-
-  propagatedBuildInputs = with pypkgs; [
-    iso8601
-    pycryptodomex
-    passlib
-    cryptography
-    argon2-cffi
-  ];
-
-  doCheck = false;
-};
 
 in
 pypkgs.buildPythonPackage rec {
