@@ -81,7 +81,7 @@ in {
   ];
 
   replit.runners.python = {
-    name = "Python";
+    name = "Python 3.10";
     fileParam = true;
     language = "python3";
     start = "${python3-wrapper}/bin/python3 $file";
