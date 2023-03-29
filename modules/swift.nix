@@ -4,7 +4,6 @@ let swiftc-wrapper = pkgs.stdenv.mkDerivation {
   buildInputs = [pkgs.makeWrapper];
   src = ./.;
 
-  
   installPhase = ''
     mkdir -p $out/bin
     makeWrapper ${pkgs.swift}/bin/swiftc $out/bin/swiftc \

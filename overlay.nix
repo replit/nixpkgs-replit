@@ -20,7 +20,6 @@ let
   };
 
   prybar = import sources.prybar { };
-
 in
 rec {
   nodePackages = super.nodePackages // {
@@ -73,11 +72,19 @@ rec {
 
     dapPython = super.callPackage ./pkgs/dapPython { };
 
+    python-lsp-server = super.callPackage ./pkgs/python-lsp-server { };
+
+    replit-py = self.callPackage ./pkgs/replit-py { };
+
     moduleit = super.callPackage ./pkgs/moduleit { };
+
+    pip = super.callPackage ./pkgs/pip { };
+
+    poetry = super.callPackage ./pkgs/poetry { };
 
     modules =
       let
-        mkModule = path: super.callPackage ./pkgs/moduleit/entrypoint.nix {
+        mkModule = path: self.callPackage ./pkgs/moduleit/entrypoint.nix {
           configPath = path;
         };
       in
@@ -85,6 +92,7 @@ rec {
         rust = mkModule ./modules/rust.nix;
         go = mkModule ./modules/go.nix;
         swift = mkModule ./modules/swift.nix;
+        python = mkModule ./modules/python.nix;
       };
 
   };
