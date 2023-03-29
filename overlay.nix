@@ -72,15 +72,7 @@ rec {
 
     dapPython = super.callPackage ./pkgs/dapPython { };
 
-    python-lsp-server = super.callPackage ./pkgs/python-lsp-server { };
-
-    replit-py = self.callPackage ./pkgs/replit-py { };
-
     moduleit = super.callPackage ./pkgs/moduleit { };
-
-    pip = super.callPackage ./pkgs/pip { };
-
-    poetry = super.callPackage ./pkgs/poetry { };
 
     modules =
       let

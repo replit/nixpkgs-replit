@@ -4,6 +4,8 @@ let python = pkgs.python310Full;
 
 pypkgs = pkgs.python310Packages;
 
+poetry = pkgs.callPackage ../poetry { };
+
 pyseto = pypkgs.buildPythonPackage rec {
   pname = "pyseto";
   version = "1.7.1";
@@ -43,7 +45,7 @@ pypkgs.buildPythonPackage rec {
   '';
 
   nativeBuildInputs = [
-    pkgs.replitPackages.poetry
+    poetry
   ];
 
   propagatedBuildInputs = with pypkgs; [

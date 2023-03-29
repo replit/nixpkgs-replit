@@ -1,7 +1,7 @@
 { pkgs, ... }:
-let pip = pkgs.replitPackages.pip;
+let pip = pkgs.callPackage ../pkgs/pip { };
 
-poetry = pkgs.replitPackages.poetry;
+poetry = pkgs.callPackage ../pkgs/poetry { };
 
 python = pkgs.python310Full;
 
@@ -9,15 +9,15 @@ stderred = pkgs.replitPackages.stderred;
 
 prybar = pkgs.replitPackages.prybar-python310;
 
-pypkg = pkgs.python310Packages;
+pypkgs = pkgs.python310Packages;
 
-debugpy = pypkg.debugpy;
+debugpy = pypkgs.debugpy;
 
 dapPython = pkgs.replitPackages.dapPython;
 
-python-lsp-server = pkgs.replitPackages.python-lsp-server;
+python-lsp-server = pkgs.callPackage ../pkgs/python-lsp-server { };
 
-replit-py = pkgs.replitPackages.replit-py;
+replit-py = pkgs.callPackage ../pkgs/replit-py { };
 
 pyLibPath = (pypkg: "${pypkg.outPath}/${python.sitePackages}");
 
@@ -50,6 +50,9 @@ python3-wrapper = pkgs.stdenv.mkDerivation {
     mkdir -p $out/bin
     makeWrapper ${python}/bin/python3 $out/bin/python3 \
       --set LD_LIBRARY_PATH "${python-ld-library-path}"
+    
+    ln -s $out/bin/python3 $out/bin/python
+    ln -s $out/bin/python3 $out/bin/python3.10
   '';
 };
 
@@ -73,7 +76,7 @@ in {
     python3-wrapper
     pip
     poetry
-    prybar
+    prybar-wrapper
     python-lsp-server
   ];
 
