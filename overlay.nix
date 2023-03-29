@@ -20,7 +20,7 @@ let
   };
 
   prybar = import sources.prybar { };
-  
+
 in
 rec {
   nodePackages = super.nodePackages // {
