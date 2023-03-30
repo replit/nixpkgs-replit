@@ -87,6 +87,7 @@ rec {
         swift = mkModule ./modules/swift.nix;
       };
 
+    bun-0_5 = self.callPackage ./pkgs/bun {};
   };
 }
 
