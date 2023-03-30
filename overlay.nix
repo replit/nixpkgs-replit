@@ -36,6 +36,8 @@ rec {
 
   jdt-language-server = self.callPackage ./pkgs/jdt-language-server { };
 
+  bun = self.callPackage ./pkgs/bun {};
+
   replitPackages = {
     # Version string set when building overlay
     version = "GIT_SHA_HERE";
@@ -86,8 +88,6 @@ rec {
         go = mkModule ./modules/go.nix;
         swift = mkModule ./modules/swift.nix;
       };
-
-    bun-0_5 = self.callPackage ./pkgs/bun {};
   };
 }
 
