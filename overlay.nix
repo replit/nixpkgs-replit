@@ -36,7 +36,7 @@ rec {
 
   jdt-language-server = self.callPackage ./pkgs/jdt-language-server { };
 
-  bun = self.callPackage ./pkgs/bun {};
+  bun = self.callPackage ./pkgs/bun { };
 
   replitPackages = {
     # Version string set when building overlay
