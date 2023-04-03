@@ -1,6 +1,5 @@
-{ sources }:
+{ channelName, sources }:
 self: super:
-with super.lib;
 let
   privateNodePackages = self.callPackage ./pkgs/node-packages {
     nodejs = super."nodejs-14_x";
@@ -87,7 +86,7 @@ rec {
         swift = mkModule ./modules/swift.nix;
       };
 
-    bun = self.callPackage ./pkgs/bun { };
+    bun = self.lib.mkIf (channelName != "nixpkgs-legacy") (self.callPackage ./pkgs/bun { });
   };
 }
 
