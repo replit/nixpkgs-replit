@@ -19,18 +19,6 @@ python-lsp-server = pkgs.callPackage ../pkgs/python-lsp-server { };
 
 replit-py = pkgs.callPackage ../pkgs/replit-py { };
 
-pyLibPath = (pypkg: "${pypkg.outPath}/${python.sitePackages}");
-
-getPythonPaths = (pkglist: pkgs.lib.lists.foldr (
-  pkg: list: (list ++ [(pyLibPath pkg)] ++ (getPythonPaths 
-    (builtins.filter (i: i != null) pkg.propagatedBuildInputs)
-  ))
-) [] pkglist);
-
-makePythonPath = (pkglist: pkgs.lib.strings.concatStringsSep ":" (
-  pkgs.lib.lists.unique (getPythonPaths pkglist)
-));
-
 python-ld-library-path = pkgs.lib.makeLibraryPath [
   # Needed for pandas / numpy
   pkgs.stdenv.cc.cc.lib
