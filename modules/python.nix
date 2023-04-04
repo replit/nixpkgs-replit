@@ -148,9 +148,11 @@ in {
     };
   };
 
-  replit.env = {
-    PYTHONPATH = "${python}/${python.sitePackages}:$HOME/$REPL_SLUG/.pythonlibs/${python.sitePackages}:${makePythonPath [pip poetry debugpy python-lsp-server replit-py]}";
-    PIP_USER = "true";
-    PYTHONUSERBASE = "$HOME/$REPL_SLUG/.pythonlibs";
+  replit.env = 
+  let userbase = "$HOME/$REPL_SLUG/.pythonlibs";
+  in {
+    PYTHONPATH = "${userbase}/${python.sitePackages}";
+    PIP_USER = "1";
+    PYTHONUSERBASE = userbase;
   };
 }
