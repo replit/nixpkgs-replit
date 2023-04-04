@@ -153,6 +153,7 @@ in {
   in {
     PYTHONPATH = "${userbase}/${python.sitePackages}";
     PIP_USER = "1";
+    POETRY_VIRTUALENVS_CREATE = "0";
     PYTHONUSERBASE = userbase;
   };
 }

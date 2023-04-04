@@ -1,14 +1,14 @@
 { pkgs }:
 pkgs.python310Packages.buildPythonPackage rec {
   pname = "pip";
-  version = "th-not-venv";
+  version = "21.2.dev0";
   format = "other";
 
   src = pkgs.fetchFromGitHub {
     owner = "replit";
     repo = pname;
-    rev = "th-not-venv";
-    sha256 = "sha256-tHyQREQ6gVi2N1JnJe/rEnaemYuhf1Wpf2gO1lwzYbo=";
+    rev = "main";
+    sha256 = "sha256-k4RnK9TnvfJlxpihdHFg3JmYtNDC4KY+f41VwJ+e+1A=";
     name = "${pname}-${version}-source";
   };
 

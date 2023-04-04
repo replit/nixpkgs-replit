@@ -37,13 +37,17 @@ we need to install it inside its own virtual environment the way their [official
     a. create a virtual environment
     b. install our version of poetry from the tarball into it
     c. make a symlink to the poetry within that environment for easy access
-3. Inside a repl, the custom pip and poetry will be made available to the user via the `PATH` variable.
-pip will be instructed to install packages via 
-[user install mode](https://pip.pypa.io/en/stable/user_guide/#user-installs) via the `PIP_USER` variable.
-This is commonly used for shared Linux systems where the user does not have write access
-to the system Python's site-packages directory. The `PYTHONUSERBASE` variable will tell pip where to install packages
-in user mode, and we'll point it to a directory in replspace `$HOME/$REPL_SLUG/.pythonlibs`. The site package directory
-within this directory (`$HOME/$REPL_SLUG/.pythonlibs/lib/python3.10/site-packages`) is added to the `PYTHONPATH`
+3. Inside a repl
+  a. the custom pip and poetry will be made available to the user via the `PATH` variable.
+  b. pip will be instructed to install packages via 
+[user install mode](https://pip.pypa.io/en/stable/user_guide/#user-installs) via the `PIP_USER` variable. This is commonly used for shared Linux systems where the user does not have write access
+to the system Python's site-packages directory.
+  c. The `PYTHONUSERBASE` variable will tell pip where to install packages
+in user mode, and we'll point it to a directory in replspace `$HOME/$REPL_SLUG/.pythonlibs`.
+  d. The site package directory
+within `PYTHONUSERBASE`: `$HOME/$REPL_SLUG/.pythonlibs/lib/python3.10/site-packages` is added to the `PYTHONPATH`
 variable so it gets into python's module search path. Using user install mode means we avoid the downsides of using
 virtual env.
+  e. The `POETRY_VIRTUALENVS_CREATE` is set to false to instruct poetry not to create a virtual environment
+
 
