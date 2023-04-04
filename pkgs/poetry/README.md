@@ -50,4 +50,13 @@ variable so it gets into python's module search path. Using user install mode me
 virtual env.
   e. The `POETRY_VIRTUALENVS_CREATE` is set to false to instruct poetry not to create a virtual environment
 
+## Known Issue
 
+The python module way of calling poetry: `python -m poetry add requests` will no longer work, this means
+UPM will need to be updated to call poetry via its binary. While we'd like this to work because there are
+existing users using this technique, I don't think it's feasible if we want to isolate poetry's dependencies
+away from the user project.
+
+To allow the above would mean allowing the user to be able to `import poetry` from python. That would mean
+adding poetry and its dependencies to `PYTHONPATH` or `sys.path`, which would in turn mean its resolver
+would access those dependencies and treat them as belonging to the user project.
