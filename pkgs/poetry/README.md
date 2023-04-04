@@ -28,7 +28,7 @@ we need to install it inside its own virtual environment the way their [official
 
 1. For pip (`pkgs/pip/default.nix`), we'll install it using the buildPythonPackage helper
 2. For poetry:
-  * because a Nix build as isolated away from internet access, we run `fetch-bundle.sh` script during dev time
+  * because a Nix build is isolated away from internet access, we run `fetch-bundle.sh` script during dev time
     to fetch poetry plus its
     dependencies and store it in tarball: `poetry.bundle.tar.gz`. This file is checked in, and needs to be
     regenerated whenever poetry is updated
@@ -45,8 +45,7 @@ to the system Python's site-packages directory.
 in user mode, and we'll point it to a directory in replspace `$HOME/$REPL_SLUG/.pythonlibs`.
   d. The site package directory
 within `PYTHONUSERBASE`: `$HOME/$REPL_SLUG/.pythonlibs/lib/python3.10/site-packages` is added to the `PYTHONPATH`
-variable so it gets into python's module search path. Using user install mode means we avoid the downsides of using
-virtual env.
+variable so it gets into python's module search path.
   e. The `POETRY_VIRTUALENVS_CREATE` is set to false to instruct poetry not to create a virtual environment
 
 ## Known Issue
