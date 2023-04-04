@@ -11,13 +11,13 @@
 , common-updater-scripts
 }:
 
-stdenvNoCC.mkDerivation rec {
-  version = "0.5.8";
+stdenvNoCC.mkDerivation {
+  version = "0.5.9";
   pname = "bun";
 
   src = fetchurl {
-    url = "https://github.com/oven-sh/bun/releases/download/bun-v0.5.8/bun-linux-x64.zip";
-    sha256 = "1khbhbks3vs6kj9rh8132gwmg1ps3grbanw54gnn610hqns9kn7q";
+    url = "https://github.com/oven-sh/bun/releases/download/bun-v0.5.9/bun-linux-x64.zip";
+    sha256 = "vwxkydYJdnb8MBUAfywpXdaahsuw5IvnXeoUmilzruE=";
   };
 
   strictDeps = true;
