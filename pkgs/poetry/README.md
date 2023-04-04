@@ -59,4 +59,5 @@ away from the user project.
 
 To allow the above would mean allowing the user to be able to `import poetry` from python. That would mean
 adding poetry and its dependencies to `PYTHONPATH` or `sys.path`, which would in turn mean its resolver
-would access those dependencies and treat them as belonging to the user project.
+would access those dependencies and treat them as belonging to the user project. Well, unless we add
+further customizations to poetry...
