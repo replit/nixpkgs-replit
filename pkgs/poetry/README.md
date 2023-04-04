@@ -19,7 +19,7 @@ Things that make this difficult are:
 * in order to prevent poetry from including its own dependencies (requests, in particular) during its operation
 we need to install it inside its own virtual environment the way their [official installer](https://python-poetry.org/docs/#installing-with-the-official-installer) does. Using this workaround: https://github.com/replit/poetry/blob/replit-1.1/poetry/utils/env.py#L885 poetry can use the environment of the project for its operations, ignoring its own environment
 * creating a virtual environment in replspace has a few downsides:
-  1. somewhat slow ~2 second
+  1. somewhat slow to initialize the env ~2 second
   2. the generated environment contains a config file `pyvenv.cfg` that has a reference to the path of the
     python executable, which in our case would be coming from the `/nix/store` directory. It breaks if we use
     a different version of python with it
