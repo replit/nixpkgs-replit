@@ -5,7 +5,7 @@
 }:
 let
   overlay = (import ./overlay.nix) {
-    inherit sources;
+    inherit sources channelName;
   };
 in
 import channel { inherit system; overlays = [ overlay ]; }

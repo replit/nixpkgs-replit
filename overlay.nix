@@ -1,6 +1,5 @@
-{ sources }:
+{ channelName, sources }:
 self: super:
-with super.lib;
 let
   privateNodePackages = self.callPackage ./pkgs/node-packages {
     nodejs = super."nodejs-14_x";
@@ -92,6 +91,10 @@ rec {
         python = mkModule ./modules/python.nix;
       };
 
+    bun =
+      if channelName != "nixpkgs-legacy"
+      then self.callPackage ./pkgs/bun { }
+      else null;
   };
 }
 
