@@ -86,7 +86,10 @@ rec {
         swift = mkModule ./modules/swift.nix;
       };
 
-    bun = self.lib.mkIf (channelName != "nixpkgs-legacy") (self.callPackage ./pkgs/bun { });
+    bun =
+      if channelName != "nixpkgs-legacy"
+      then self.callPackage ./pkgs/bun { }
+      else null;
   };
 }
 
