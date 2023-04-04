@@ -28,7 +28,8 @@ we need to install it inside its own virtual environment the way their [official
 
 1. For pip (`pkgs/pip/default.nix`), we'll install it using the buildPythonPackage helper
 2. For poetry:
-  * because a Nix build is isolated away from internet access, we run `fetch-bundle.sh` script during dev time
+  * because a Nix build is isolated away from internet access, we use an [offline install
+   technique](https://stackoverflow.com/a/36730026). `fetch-bundle.sh` is run during dev time
     to fetch poetry plus its
     dependencies and store it in tarball: `poetry.bundle.tar.gz`. This file is checked in, and needs to be
     regenerated whenever poetry is updated
