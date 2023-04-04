@@ -1,62 +1,64 @@
 { pkgs, ... }:
-let pip = pkgs.callPackage ../pkgs/pip { };
+let
+  pip = pkgs.callPackage ../pkgs/pip { };
 
-poetry = pkgs.callPackage ../pkgs/poetry { };
+  poetry = pkgs.callPackage ../pkgs/poetry { };
 
-python = pkgs.python310Full;
+  python = pkgs.python310Full;
 
-stderred = pkgs.replitPackages.stderred;
+  stderred = pkgs.replitPackages.stderred;
 
-prybar = pkgs.replitPackages.prybar-python310;
+  prybar = pkgs.replitPackages.prybar-python310;
 
-pypkgs = pkgs.python310Packages;
+  pypkgs = pkgs.python310Packages;
 
-debugpy = pypkgs.debugpy;
+  debugpy = pypkgs.debugpy;
 
-dapPython = pkgs.replitPackages.dapPython;
+  dapPython = pkgs.replitPackages.dapPython;
 
-python-lsp-server = pkgs.callPackage ../pkgs/python-lsp-server { };
+  python-lsp-server = pkgs.callPackage ../pkgs/python-lsp-server { };
 
-replit-py = pkgs.callPackage ../pkgs/replit-py { };
+  replit-py = pkgs.callPackage ../pkgs/replit-py { };
 
-python-ld-library-path = pkgs.lib.makeLibraryPath [
-  # Needed for pandas / numpy
-  pkgs.stdenv.cc.cc.lib
-  pkgs.zlib
-  # Needed for pygame
-  pkgs.glib
-  # Needed for matplotlib
-  pkgs.xorg.libX11
-];
+  python-ld-library-path = pkgs.lib.makeLibraryPath [
+    # Needed for pandas / numpy
+    pkgs.stdenv.cc.cc.lib
+    pkgs.zlib
+    # Needed for pygame
+    pkgs.glib
+    # Needed for matplotlib
+    pkgs.xorg.libX11
+  ];
 
-python3-wrapper = pkgs.stdenv.mkDerivation {
-  name = "python3-wrapper";
-  buildInputs = [pkgs.makeWrapper];
-  src = ./.;
+  python3-wrapper = pkgs.stdenv.mkDerivation {
+    name = "python3-wrapper";
+    buildInputs = [ pkgs.makeWrapper ];
+    src = ./.;
 
-  installPhase = ''
-    mkdir -p $out/bin
-    makeWrapper ${python}/bin/python3 $out/bin/python3 \
-      --set LD_LIBRARY_PATH "${python-ld-library-path}"
+    installPhase = ''
+      mkdir -p $out/bin
+      makeWrapper ${python}/bin/python3 $out/bin/python3 \
+        --set LD_LIBRARY_PATH "${python-ld-library-path}"
     
-    ln -s $out/bin/python3 $out/bin/python
-    ln -s $out/bin/python3 $out/bin/python3.10
-  '';
-};
+      ln -s $out/bin/python3 $out/bin/python
+      ln -s $out/bin/python3 $out/bin/python3.10
+    '';
+  };
 
-prybar-wrapper = pkgs.stdenv.mkDerivation {
-  name = "prybar-python310-wrapper";
-  buildInputs = [pkgs.makeWrapper];
-  src = ./.;
+  prybar-wrapper = pkgs.stdenv.mkDerivation {
+    name = "prybar-python310-wrapper";
+    buildInputs = [ pkgs.makeWrapper ];
+    src = ./.;
 
-  installPhase = ''
-    mkdir -p $out/bin
-    makeWrapper ${prybar}/bin/prybar-python310 $out/bin/prybar-python310 \
-      --set LD_LIBRARY_PATH "${python-ld-library-path}"
-  '';
-};
+    installPhase = ''
+      mkdir -p $out/bin
+      makeWrapper ${prybar}/bin/prybar-python310 $out/bin/prybar-python310 \
+        --set LD_LIBRARY_PATH "${python-ld-library-path}"
+    '';
+  };
 
-in {
+in
+{
   name = "Python Tools";
   version = "1.0";
 
@@ -114,7 +116,7 @@ in {
       command = "attach";
       type = "request";
       arguments = {
-        logging = {};
+        logging = { };
       };
     };
   };
@@ -128,7 +130,7 @@ in {
   replit.packagers.upmPython = {
     name = "Python";
     language = "python3";
-    ignoredPackages = ["unit_tests"];
+    ignoredPackages = [ "unit_tests" ];
     features = {
       packageSearch = true;
       guessImports = true;
@@ -136,12 +138,12 @@ in {
     };
   };
 
-  replit.env = 
-  let userbase = "$HOME/$REPL_SLUG/.pythonlibs";
-  in {
-    PYTHONPATH = "${userbase}/${python.sitePackages}";
-    PIP_USER = "1";
-    POETRY_VIRTUALENVS_CREATE = "0";
-    PYTHONUSERBASE = userbase;
-  };
+  replit.env =
+    let userbase = "$HOME/$REPL_SLUG/.pythonlibs";
+    in {
+      PYTHONPATH = "${userbase}/${python.sitePackages}";
+      PIP_USER = "1";
+      POETRY_VIRTUALENVS_CREATE = "0";
+      PYTHONUSERBASE = userbase;
+    };
 }
