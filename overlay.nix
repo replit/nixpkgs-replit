@@ -1,6 +1,5 @@
-{ sources }:
+{ channelName, sources }:
 self: super:
-with super.lib;
 let
   privateNodePackages = self.callPackage ./pkgs/node-packages {
     nodejs = super."nodejs-14_x";
@@ -35,8 +34,6 @@ rec {
   };
 
   jdt-language-server = self.callPackage ./pkgs/jdt-language-server { };
-
-  bun = self.callPackage ./pkgs/bun { };
 
   replitPackages = {
     # Version string set when building overlay
@@ -88,6 +85,11 @@ rec {
         go = mkModule ./modules/go.nix;
         swift = mkModule ./modules/swift.nix;
       };
+
+    bun =
+      if channelName != "nixpkgs-legacy"
+      then self.callPackage ./pkgs/bun { }
+      else null;
   };
 }
 
