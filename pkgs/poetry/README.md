@@ -9,8 +9,7 @@ resolving what packages to fetch (avoid downloading .tar.gz source distributions
 * [Pip](https://github.com/replit/pip) - for integration with our Python package cacache
 
 Previously/currently we had an inelegent way of pre-installing these packages in the virtual environment
-of the Repl in replspace. See https://replit.com/@util/Pythonify for details. Instead of this, we want to
-instead have one install path via Nix that gets these two custom programs into a Repl without
+of the Repl in replspace. See https://replit.com/@util/Pythonify for details. Instead of this, we want to have one install path via Nix that gets these two custom programs into a Repl without
 having to install them into replspace. The python Nix module will bring it all together.
 
 ## Problems
