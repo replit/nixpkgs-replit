@@ -24,6 +24,6 @@ pkgs.stdenvNoCC.mkDerivation rec {
   dontInstall = true;
 
   outputHashMode = "recursive";
-  outputHash = "sha256-9G6KhJWnaaYYniq3NgG1rUZHOWu7cyTXHc/LvZgawVI=";
+  outputHash = "sha256-dvQQcvjDg+bsKtM02II7UIkDJI4P96Lch4En773rkQk=";
   outputHashAlgo = "sha256";
 }
