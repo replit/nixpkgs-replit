@@ -20,13 +20,13 @@ let
   dap-node = pkgs.callPackage ../pkgs/dapNode { };
 
   run-prybar = pkgs.writeShellScriptBin "run-prybar" ''
-    ${stderred}/bin/stderred -- ${prybar}/bin/prybar-nodejs -q --ps1 "''$(printf '\u0001\u001b[33m\u0002\u0001\u001b[00m\u0002 ')" -i ''$1
+    ${prybar}/bin/prybar-nodejs -q --ps1 "''$(printf '\u0001\u001b[33m\u0002\u0001\u001b[00m\u0002 ')" -i ''$1
   '';
 
 in
 
 {
-  name = "nodejs";
+  name = "Node.js Tools";
   version = "1.0";
 
   packages = [
