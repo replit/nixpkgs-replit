@@ -42,13 +42,18 @@ let
     '';
   };
 
-  prybar-wrapper = pkgs.stdenvNoCC.mkDerivation {
+  stderr-prybar = pkgs.writeShellScriptBin "stderr-prybar" ''
+    ${stderred}/bin/stderred -- ${prybar}/bin/prybar-python310 -q --ps1 "''$(printf '\u0001\u001b[33m\u0002\u0001\u001b[00m\u0002 ')" -i ''$1
+  '';
+
+  run-prybar = pkgs.stdenvNoCC.mkDerivation {
     name = "prybar-python310-wrapper";
     buildInputs = [ pkgs.makeWrapper ];
 
     buildCommand = ''
       mkdir -p $out/bin
-      makeWrapper ${prybar}/bin/prybar-python310 $out/bin/prybar-python310 \
+
+      makeWrapper ${stderr-prybar}/bin/stderr-prybar $out/bin/run-prybar \
         --set LD_LIBRARY_PATH "${python-ld-library-path}"
     '';
   };
@@ -62,7 +67,7 @@ in
     python3-wrapper
     pip
     poetry
-    prybar-wrapper
+    run-prybar
     python-lsp-server
   ];
 
@@ -77,7 +82,7 @@ in
     name = "Prybar for Python 3.10";
     fileParam = true;
     language = "python3";
-    start = "${prybar-wrapper}/bin/prybar-python310 -q --ps1 \"\$(printf '\\u0001\\u001b[33m\\u0002\\u0001\\u001b[00m\\u0002 ')\" -i $file";
+    start = "${run-prybar}/bin/run-prybar $file";
     interpreter = true;
   };
 
