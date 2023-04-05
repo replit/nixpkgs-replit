@@ -74,10 +74,6 @@ rec {
 
     moduleit = super.callPackage ./pkgs/moduleit { };
 
-    poetry = super.callPackage ./pkgs/poetry { };
-
-    pip = super.callPackage ./pkgs/pip { };
-
     modules =
       let
         mkModule = path: self.callPackage ./pkgs/moduleit/entrypoint.nix {
