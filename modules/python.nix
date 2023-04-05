@@ -33,9 +33,8 @@ let
   python3-wrapper = pkgs.stdenv.mkDerivation {
     name = "python3-wrapper";
     buildInputs = [ pkgs.makeWrapper ];
-    src = ./.;
 
-    installPhase = ''
+    buildCommand = ''
       mkdir -p $out/bin
       makeWrapper ${python}/bin/python3 $out/bin/python3 \
         --set LD_LIBRARY_PATH "${python-ld-library-path}"
