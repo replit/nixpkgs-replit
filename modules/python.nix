@@ -18,8 +18,6 @@ let
 
   python-lsp-server = pkgs.callPackage ../pkgs/python-lsp-server { };
 
-  replit-py = pkgs.callPackage ../pkgs/replit-py { };
-
   python-ld-library-path = pkgs.lib.makeLibraryPath [
     # Needed for pandas / numpy
     pkgs.stdenv.cc.cc.lib
