@@ -18,19 +18,19 @@ Things that make this difficult are:
 
 * in order to prevent poetry from including its own dependencies (requests, in particular) during its operation
 we need to install it inside its own virtual environment the way their [official installer](https://python-poetry.org/docs/#installing-with-the-official-installer) does. Using this workaround: https://github.com/replit/poetry/blob/replit-1.1/poetry/utils/env.py#L885 poetry can use the environment of the project for its operations, ignoring its own environment
-* creating a virtual environment in replspace has a few downsides:
+* creating a virtual environment in replspace on behave of the user has a few downsides:
   1. somewhat slow to initialize the env ~2 second
-  2. when poetry creates a virtual environment for use in a project, it automatically installs a stock version
+  2. when poetry creates a virtual environment, it automatically installs a stock version
      of pip which is not our own. We'd have to add customization to poetry to override the pip version
   3. the generated environment contains a config file `pyvenv.cfg` that has a reference to the path of the
     python executable, which in our case would be coming from the `/nix/store` directory. It breaks if we use
-    a different version of python with it
+    a different version of python with this env
 
 ## How does it work?
 
 1. For pip (`pkgs/pip/default.nix`), we'll install it using the buildPythonPackage helper
 2. For poetry:
-  * `poetry-bundle.nix` is a fixed output derivation that uses pip to download poetry plus it's dependencies
+  * `poetry-bundle.nix` is a fixed output derivation generates poetry plus it's dependencies
   * during the Nix build `pkgs/poetry/default.nix`, we:
     a. create a virtual environment
     b. install the poetry bundle into it
@@ -45,7 +45,7 @@ in user mode, and we'll point it to a directory in replspace `$HOME/$REPL_SLUG/.
   d. The site package directory
 within `PYTHONUSERBASE`: `$HOME/$REPL_SLUG/.pythonlibs/lib/python3.10/site-packages` is added to the `PYTHONPATH`
 variable so it gets into python's module search path.
-  e. The `POETRY_VIRTUALENVS_CREATE` is set to false to instruct poetry not to create a virtual environment
+  e. `POETRY_VIRTUALENVS_CREATE` is set to false to instruct poetry not to create a virtual environment
 
 ## Known Issue
 
