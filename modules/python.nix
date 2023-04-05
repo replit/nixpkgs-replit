@@ -77,7 +77,7 @@ in
     name = "Prybar for Python 3.10";
     fileParam = true;
     language = "python3";
-    start = "${prybar-wrapper}/bin/prybar-python310 -q --ps1 \$(printf '\\u0001\\u001b[33m\\u0002\\u0001\\u001b[00m\\u0002 ') -i $file";
+    start = "${prybar-wrapper}/bin/prybar-python310 -q --ps1 \"\$(printf '\\u0001\\u001b[33m\\u0002\\u0001\\u001b[00m\\u0002 ')\" -i $file";
     interpreter = true;
   };
 
