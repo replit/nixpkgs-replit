@@ -42,21 +42,10 @@ let
     '';
   };
 
-  stderr-prybar = pkgs.writeShellScriptBin "stderr-prybar" ''
+  run-prybar = pkgs.writeShellScriptBin "run-prybar" ''
+    export LD_LIBRARY_PATH="${python-ld-library-path}"
     ${stderred}/bin/stderred -- ${prybar}/bin/prybar-python310 -q --ps1 "''$(printf '\u0001\u001b[33m\u0002\u0001\u001b[00m\u0002 ')" -i ''$1
   '';
-
-  run-prybar = pkgs.stdenvNoCC.mkDerivation {
-    name = "prybar-python310-wrapper";
-    buildInputs = [ pkgs.makeWrapper ];
-
-    buildCommand = ''
-      mkdir -p $out/bin
-
-      makeWrapper ${stderr-prybar}/bin/stderr-prybar $out/bin/run-prybar \
-        --set LD_LIBRARY_PATH "${python-ld-library-path}"
-    '';
-  };
 
 in
 {

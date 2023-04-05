@@ -2,14 +2,15 @@
 let
   python = pkgs.python310Full;
 
+  poetry-bundle = pkgs.callPackage ./poetry-bundle.nix { };
+
   myPoetry = pkgs.stdenv.mkDerivation {
     name = "poetry";
     version = "1.11.1";
-    src = ./.;
 
-    buildInputs = [ pkgs.makeWrapper ];
+    buildInputs = [ pkgs.makeWrapper pkgs.python310Packages.pip pkgs.git pkgs.cacert poetry-bundle ];
 
-    installPhase = ''
+    buildCommand = ''
       mkdir -p $out
       mkdir -p $out/bin
 
@@ -20,13 +21,7 @@ let
                                 # does not use its own venv for the project
                                 # env
 
-      mkdir -p $out/poetry.bundle
-      tar xvf poetry.bundle.tar.gz -C $out/poetry.bundle
-
-      $out/env/bin/pip install poetry --find-links $out/poetry.bundle --no-index
-
-      rm -fr $out/poetry.bundle
-
+      $out/env/bin/pip install poetry --find-links ${poetry-bundle}/packages --no-index
       ln -s $out/env/bin/poetry $out/bin/poetry
     '';
   };
