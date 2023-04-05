@@ -1,6 +1,7 @@
 { pkgs }:
-pkgs.stdenvNoCC.mkDerivation {
-  name = "poetry-bundle";
+pkgs.stdenvNoCC.mkDerivation rec {
+  pname = "poetry-bundle";
+  version = "replit-1.1";
   src = pkgs.fetchFromGitHub {
     owner = "replit";
     repo = "poetry";
