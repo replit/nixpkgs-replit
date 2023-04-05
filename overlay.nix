@@ -74,6 +74,11 @@ rec {
 
     moduleit = super.callPackage ./pkgs/moduleit { };
 
+    support = {
+      poetry = super.callPackage ./pkgs/poetry { };
+      poetry-bundle = super.callPackage ./pkgs/poetry/poetry-bundle.nix { };
+    };
+
     modules =
       let
         mkModule = path: self.callPackage ./pkgs/moduleit/entrypoint.nix {

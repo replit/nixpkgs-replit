@@ -15,7 +15,7 @@ pkgs.stdenvNoCC.mkDerivation rec {
     mkdir -p $out
     VERSION=$(toml2json pyproject.toml | jq '.tool.poetry.version' --raw-output)
     POETRY_TAR_FILE="$out/poetry-''${VERSION}.tar.gz"
-    tar czf "$POETRY_TAR_FILE" ./*
+    tar cz --sort=name --mtime='@1' --owner=0 --group=0 --numeric-owner -P -f "$POETRY_TAR_FILE" .
     pip download "$POETRY_TAR_FILE" -d $out/packages
     rm "$POETRY_TAR_FILE"
   '';
@@ -23,6 +23,6 @@ pkgs.stdenvNoCC.mkDerivation rec {
   dontInstall = true;
 
   outputHashMode = "recursive";
-  outputHash = "sha256-9G6KhJWnaaYYniq3NgG1rUZHOWu7cyTXHc/LvZgawVI=";
+  outputHash = "sha256-bSRDs4KlLbK7TQS8br+phr0N1sXrjYc55PEY/GmuYug=";
   outputHashAlgo = "sha256";
 }
