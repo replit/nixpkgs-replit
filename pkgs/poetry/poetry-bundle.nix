@@ -5,7 +5,7 @@ pkgs.stdenvNoCC.mkDerivation rec {
   src = pkgs.fetchFromGitHub {
     owner = "replit";
     repo = "poetry";
-    rev = "replit-1.1";
+    rev = version;
     sha256 = "sha256-KKm6+i8ilPRx19wNaeDjrypdLCqgYE1JKwt2USx7HHk=";
   };
 
