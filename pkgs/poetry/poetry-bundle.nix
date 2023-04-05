@@ -12,7 +12,6 @@ pkgs.stdenvNoCC.mkDerivation rec {
   buildInputs = [ pkgs.python310Packages.pip pkgs.toml2json pkgs.jq ];
 
   buildPhase = ''
-    ls -la
     mkdir -p $out
     VERSION=$(toml2json pyproject.toml | jq '.tool.poetry.version' --raw-output)
     POETRY_TAR_FILE="$out/poetry-''${VERSION}.tar.gz"
