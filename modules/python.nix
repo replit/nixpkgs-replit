@@ -47,9 +47,8 @@ let
   prybar-wrapper = pkgs.stdenv.mkDerivation {
     name = "prybar-python310-wrapper";
     buildInputs = [ pkgs.makeWrapper ];
-    src = ./.;
 
-    installPhase = ''
+    buildCommand = ''
       mkdir -p $out/bin
       makeWrapper ${prybar}/bin/prybar-python310 $out/bin/prybar-python310 \
         --set LD_LIBRARY_PATH "${python-ld-library-path}"
