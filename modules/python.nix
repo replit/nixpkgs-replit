@@ -30,7 +30,7 @@ let
     pkgs.xorg.libX11
   ];
 
-  python3-wrapper = pkgs.stdenv.mkDerivation {
+  python3-wrapper = pkgs.stdenvNoCC.mkDerivation {
     name = "python3-wrapper";
     buildInputs = [ pkgs.makeWrapper ];
 
@@ -44,7 +44,7 @@ let
     '';
   };
 
-  prybar-wrapper = pkgs.stdenv.mkDerivation {
+  prybar-wrapper = pkgs.stdenvNoCC.mkDerivation {
     name = "prybar-python310-wrapper";
     buildInputs = [ pkgs.makeWrapper ];
 
