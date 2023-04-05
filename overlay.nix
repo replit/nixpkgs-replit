@@ -1,6 +1,7 @@
 { channelName, sources }:
 self: super:
 let
+
   privateNodePackages = self.callPackage ./pkgs/node-packages {
     nodejs = super."nodejs-14_x";
   };
@@ -84,6 +85,7 @@ rec {
         rust = mkModule ./modules/rust.nix;
         go = mkModule ./modules/go.nix;
         swift = mkModule ./modules/swift.nix;
+        nodejs = mkModule ./modules/nodejs.nix;
       };
 
     bun =

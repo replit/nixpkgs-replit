@@ -1,0 +1,3 @@
+# Unfortunately, we do actually want to check in node_modules here.
+!node_modules
+

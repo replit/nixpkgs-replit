@@ -11,30 +11,26 @@ let
     '';
   };
 
-  stderr-prybar = pkgs.writeShellScriptBin "stderr-prybar" ''
-    ${stderred}/bin/stderred -- ${prybar}/bin/prybar-python310 -q --ps1 "''$(printf '\u0001\u001b[33m\u0002\u0001\u001b[00m\u0002 ')" -i ''$1
+  nodejs = pkgs.nodejs;
+
+  stderred = pkgs.replitPackages.stderred;
+
+  prybar = pkgs.replitPackages.prybar-nodejs;
+
+  dap-node = pkgs.callPackage ../pkgs/dapNode { };
+
+  run-prybar = pkgs.writeShellScriptBin "run-prybar" ''
+    ${stderred}/bin/stderred -- ${prybar}/bin/prybar-nodejs -q --ps1 "''$(printf '\u0001\u001b[33m\u0002\u0001\u001b[00m\u0002 ')" -i ''$1
   '';
-
-  run-prybar = pkgs.stdenvNoCC.mkDerivation {
-    name = "run-prybar";
-    buildInputs = [ pkgs.makeWrapper ];
-
-    buildCommand = ''
-      mkdir -p $out/bin
-
-      makeWrapper ${stderr-prybar}/bin/stderr-prybar $out/bin/run-prybar \
-        --set LD_LIBRARY_PATH "${python-ld-library-path}"
-    '';
-  };
 
 in
 
 {
   name = "nodejs";
-  version = "1.2";
+  version = "1.0";
 
   packages = [
-    pkgs.nodejs-14_x
+    nodejs
     typescript-language-server
   ];
 
@@ -43,14 +39,15 @@ in
     runners.nodeJS = {
       name = "Node.js";
       language = "javascript";
-      start = "${pkgs.nodejs-14_x}/bin/node $file";
+      start = "${nodejs}/bin/node $file";
       fileParam = true;
     };
 
     runners.nodeJS-prybar = {
       name = "Prybar for Node.js";
       language = "javascript";
-      start = "${pkgs.replitPackages.prybar-nodejs}/bin/prybar-nodejs -q --ps1 \"\$(printf '\\u0001\\u001b[33m\\u0002\\u0001\\u001b[00m\\u0002 ')\" -i";
+      start = "${run-prybar}/bin/run-prybar $file";
+      interpreter = true;
       fileParam = true;
     };
 
@@ -59,7 +56,7 @@ in
       language = "javascript";
       transport = "localhost:0";
       fileParam = true;
-      start = "dap-node";
+      start = "${dap-node}/bin/dap-node";
       initializeMessage = {
         command = "initialize";
         type = "request";
@@ -96,7 +93,7 @@ in
       };
     };
 
-    languageServers.tsServer = {
+    languageServers.ts-language-server = {
       name = "TypeScript Language Server";
       language = "javascript";
       start = "${typescript-language-server}/bin/typescript-language-server --stdio";
@@ -109,9 +106,6 @@ in
         packageSearch = true;
         guessImports = true;
         enabledForHosting = false;
-      };
-      afterInstall = {
-        args = [ "echo" "installed" ];
       };
     };
 
