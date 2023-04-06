@@ -1,4 +1,6 @@
 { pkgs }:
+let python = (pkgs.python310Full.withPackages (ps: [ps.pip]));
+in
 pkgs.stdenvNoCC.mkDerivation rec {
   pname = "poetry-bundle";
   version = "replit-1.1";
@@ -9,7 +11,7 @@ pkgs.stdenvNoCC.mkDerivation rec {
     sha256 = "sha256-KKm6+i8ilPRx19wNaeDjrypdLCqgYE1JKwt2USx7HHk=";
   };
 
-  buildInputs = [ pkgs.python310Packages.pip pkgs.toml2json pkgs.jq ];
+  buildInputs = [ python pkgs.toml2json pkgs.jq ];
 
   buildPhase = ''
     mkdir -p $out
