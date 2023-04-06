@@ -1,5 +1,5 @@
 { pkgs }:
-let python = (pkgs.python310Full.withPackages (ps: [ps.pip]));
+let python = (pkgs.python310Full.withPackages (ps: [ ps.pip ]));
 in
 pkgs.stdenvNoCC.mkDerivation rec {
   pname = "poetry-bundle";
