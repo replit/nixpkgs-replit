@@ -74,6 +74,10 @@ rec {
 
     moduleit = super.callPackage ./pkgs/moduleit { };
 
+    support = {
+      dapNode = super.callPackage ./pkgs/dapNode { };
+    };
+
     modules =
       let
         mkModule = path: super.callPackage ./pkgs/moduleit/entrypoint.nix {
@@ -84,6 +88,7 @@ rec {
         rust = mkModule ./modules/rust.nix;
         go = mkModule ./modules/go.nix;
         swift = mkModule ./modules/swift.nix;
+        nodejs = mkModule ./modules/nodejs.nix;
       };
 
     bun =
