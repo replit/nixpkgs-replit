@@ -2,9 +2,9 @@
 
 set -evxo pipefail
 
-cache restore "$SERVICE_NAME-last-successful-sha"
+cache restore "nixpkgs-last-successful-sha"
 
-LAST_SHA=$(cat "$SERVICE_NAME-last-successful-sha" || echo '$SEMAPHORE_GIT_SHA')
+LAST_SHA=$(cat "nixpkgs-last-successful-sha" || echo '$SEMAPHORE_GIT_SHA')
 SHA_SHORT=$(git rev-parse --short=8 "$SEMAPHORE_GIT_SHA")
 AUTHOR_EMAIL=$(git show -s --format='%ae' "$SEMAPHORE_GIT_SHA")
 ALL_AUTHORS=$(git log  --format="%ae" $LAST_SHA..$SEMAPHORE_GIT_SHA | sort | uniq | paste -sd "," -)
@@ -34,6 +34,6 @@ curl --fail -X POST \
   -d @payload.json \
     $WEBHOOK_URL
 
-git rev-parse --verify $SEMAPHORE_GIT_SHA >"$SERVICE_NAME-last-successful-sha"
-cache delete "$SERVICE_NAME-last-successful-sha"
-cache store "$SERVICE_NAME-last-successful-sha" "$SERVICE_NAME-last-successful-sha"
+git rev-parse --verify $SEMAPHORE_GIT_SHA >"nixpkgs-last-successful-sha"
+cache delete "nixpkgs-last-successful-sha"
+cache store "nixpkgs-last-successful-sha" "nixpkgs-last-successful-sha"
