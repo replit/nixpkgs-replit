@@ -29,7 +29,6 @@ in
 
   packages = [
     nodejs
-    typescript-language-server
   ];
 
   replit = {
