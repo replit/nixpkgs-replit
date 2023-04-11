@@ -91,6 +91,12 @@ rec {
         nodejs = mkModule ./modules/nodejs.nix;
       };
 
+    phpactor =
+      if channelName != "nixpkgs-legacy"
+      then self.callPackage ./pkgs/phpactor { inherit channelName; }
+      else null;
+
+
     bun =
       if channelName != "nixpkgs-legacy"
       then self.callPackage ./pkgs/bun { }
