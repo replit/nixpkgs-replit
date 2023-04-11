@@ -90,6 +90,14 @@ rec {
       if channelName != "nixpkgs-legacy"
       then self.callPackage ./pkgs/bun { }
       else null;
+
+    dart2_10 = self.callPackage "${super.path}/pkgs/development/interpreters/dart" (rec {
+      version = "2.10.5";
+      sources."2.10.5-x86_64-linux" = self.fetchurl {
+        url = "https://storage.googleapis.com/dart-archive/channels/stable/release/${version}/sdk/dartsdk-linux-x64-release.zip";
+        sha256 = "sha256-UDeiwP1jGvwed+jvhv4atgQg2BDKtnrIb0F52feoZtU=";
+      };
+    });
   };
 }
 
