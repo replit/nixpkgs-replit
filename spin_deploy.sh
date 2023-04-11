@@ -14,15 +14,7 @@ cat <<EOF >payload.json
   "url": "webhooks/webhook/nixpkgs-replit",
   "method": "POST",
   "body": {
-    "secret": "itsasecret",
-    "artifacts": [
-      {
-        "type": "docker/image",
-        "name": "$IMAGE_NAME",
-        "reference": "$IMAGE_NAME:$SEMAPHORE_GIT_SHA",
-        "version": "$SEMAPHORE_GIT_SHA"
-      }
-    ],
+    "secret": "$SPIN_SECRET",
     "parameters": {
       "sha": "$SEMAPHORE_GIT_SHA",
       "sha_range": "$LAST_SHA...$SEMAPHORE_GIT_SHA",
@@ -31,7 +23,6 @@ cat <<EOF >payload.json
       "all_authors": "$ALL_AUTHORS",
       "rollback_pipeline": "webhooks/webhook/nixpkgs-replit-rollback",
       "scratch": "false",
-      "secret": "$SPIN_SECRET",
     }
   }
 }
