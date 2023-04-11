@@ -1,7 +1,7 @@
 # js-debug Package
 
 This Nix package installs and builds the DAP server in
-https://github.com/microsoft/vscode-js-debug.
+https://github.com/replit/vscode-js-debug.
 
 The `.nix` files were generated using [node2nix](https://github.com/svanderburg/node2nix) by the command:
 
