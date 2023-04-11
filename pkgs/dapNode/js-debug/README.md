@@ -9,6 +9,6 @@ The `.nix` files were generated using [node2nix](https://github.com/svanderburg/
 node2nix -d
 ```
 
-which uses the `package.json` file as input, which was grabbed from https://github.com/svanderburg/node2nix
-at rev 483425e50cf0fb313610d2346b51459c8db556e2, then removing the playwright package as I couldn't
+which uses the `package.json` file as input, which was grabbed from https://github.com/replit/vscode-js-debug
+at rev 5eac5f8255cd61b238547a7b383a00b971e223da, then removing the playwright package as I couldn't
 get that to build.
