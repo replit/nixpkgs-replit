@@ -34,9 +34,9 @@ let
 
         cp -r ./dist $out/dist
 
-        // Add shebang...
-        // Wrapping debugServerMain.js in a sh script doesn't work because it needs to read from
-        // a pipe directly from the parent (debugproxy)
+        # Add shebang...
+        # Wrapping debugServerMain.js in a sh script doesn't work because it needs to read from
+        # a pipe directly from the parent (debugproxy)
         printf "#!${nodeEscaped}\/bin\/node\n" | cat - $out/dist/src/debugServerMain.js > $out/dist/src/dap-node
 
         chmod u+x $out/dist/src/dap-node
