@@ -93,6 +93,7 @@ rec {
         nodejs = mkModule ./modules/nodejs.nix;
         php = mkModule ./modules/php.nix;
         ruby = mkModule ./modules/ruby.nix;
+        web = mkModule ./modules/web.nix;
       };
 
     phpactor =
