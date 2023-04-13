@@ -13,7 +13,7 @@ let swiftc-wrapper = pkgs.stdenv.mkDerivation {
 };
 in
  {
-  name = "SwiftTools";
+  name = "Swift Tools";
   version = "1.0";
 
   packages = with pkgs; [
