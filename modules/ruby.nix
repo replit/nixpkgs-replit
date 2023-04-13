@@ -5,12 +5,12 @@ in {
   name = "Ruby Tools";
   version = "1.0";
 
-  packages = with pkgs; [
+  packages = [
     ruby
   ];
 
   replit.runners.bundle = {
-    name = "Bundle";
+    name = "bundle exec ruby";
     language = "ruby";
 
     compile = "${ruby}/bin/bundle install";
