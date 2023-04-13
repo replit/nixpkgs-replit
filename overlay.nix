@@ -76,6 +76,7 @@ rec {
 
     support = {
       dapNode = super.callPackage ./pkgs/dapNode { };
+      dap-cpp = super.callPackage ./pkgs/dap-cpp { };
     };
 
     modules =
