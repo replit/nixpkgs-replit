@@ -1,6 +1,9 @@
 { pkgs, ... }:
 let
   clang = pkgs.clang_14;
+  run-extensions = [ ".cpp" ".cc" ".cxx" ]; # use this for file param runners/debuggers
+  # because we don't want header files to be
+  # runnable
   compile = pkgs.writeShellScriptBin "compile" ''
     CFLAGS="$CFLAGS -g -Wno-everything -pthread -lm"
     FILE="$1"     # a .cpp file
@@ -77,7 +80,7 @@ let
   };
 in
 {
-  name = "C Tools";
+  name = "C++ Tools";
   version = "1.0";
 
   packages = [
@@ -85,43 +88,45 @@ in
   ];
 
   replit.runners.clang-project = {
-    name = "Clang: Project";
-    compile = "${compile}/bin/compile main.c all";
+    name = "Clang++: Project";
+    compile = "${compile}/bin/compile main.cpp all";
     fileParam = false;
-    language = "C++";
-    start = "./main.c.bin";
+    language = "cpp";
+    start = "./main.cpp.bin";
   };
 
   replit.runners.clang-single = {
-    name = "Clang: Single File";
+    name = "Clang++: Single File";
     compile = "${compile}/bin/compile $file single";
     fileParam = true;
-    language = "C++";
+    language = "cpp";
+    extensions = run-extensions;
     start = "./\${file}.bin";
   };
 
   replit.languageServers.ccls = {
     name = "ccls";
-    language = "C++";
+    language = "cpp";
     start = "${pkgs.ccls}/bin/ccls";
   };
 
   replit.debuggers.gdb-project = {
-    name = "GDB: Project";
-    language = "C++";
+    name = "GDB C++: Project";
+    language = "cpp";
     start = "${dap-cpp}/bin/dap-cpp";
     fileParam = false;
-    compile = "${compile}/bin/compile main.c all debug";
+    compile = "${compile}/bin/compile main.cpp all debug";
     transport = "stdio";
     initializeMessage = dapInitializeMessage;
-    launchMessage = dapLaunchMessage "./main.c.bin";
+    launchMessage = dapLaunchMessage "./main.cpp.bin";
   };
 
   replit.debuggers.gdb-single = {
-    name = "GDB: Single";
-    language = "C++";
+    name = "GDB C++: Single";
+    language = "cpp";
     start = "${dap-cpp}/bin/dap-cpp";
     fileParam = true;
+    extensions = run-extensions;
     compile = "${compile}/bin/compile $file single debug";
     transport = "stdio";
     initializeMessage = dapInitializeMessage;
