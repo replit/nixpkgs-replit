@@ -127,5 +127,5 @@ in
     initializeMessage = dapInitializeMessage;
     launchMessage = dapLaunchMessage "./$file.bin";
   };
-
 }
+
