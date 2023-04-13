@@ -85,11 +85,13 @@ rec {
         };
       in
       {
+        dotnet-7 = mkModule ./modules/dotnet-7.nix;
         rust = mkModule ./modules/rust.nix;
         go = mkModule ./modules/go.nix;
         java = mkModule ./modules/java.nix;
         swift = mkModule ./modules/swift.nix;
         nodejs = mkModule ./modules/nodejs.nix;
+        php = mkModule ./modules/php.nix;
         web = mkModule ./modules/web.nix;
       };
 
