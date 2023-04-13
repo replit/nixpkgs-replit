@@ -7,7 +7,9 @@ let
     MODE="$2"     # mode can be:
                   #   single - compile just one .c file, or
                   #   all - compile all .c files
-    DEBUG="$3"
+    DEBUG="$3"    # debug can be:
+                  #   debug - compile with no optimization
+                  #   (empty) - compile regularly
 
     if [[ ! -f "$FILE" ]]; then
       echo "$FILE not found"
