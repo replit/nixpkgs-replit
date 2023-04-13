@@ -1,6 +1,6 @@
 { pkgs, clang }:
 pkgs.writeShellScriptBin "clang-compile" ''
-  FILE="$1"     # a .c file
+  FILE="$1"     # a .c or .cpp file
   LANG="$2"     # lang can be:
                 #   c - C
                 #   cpp - C++
