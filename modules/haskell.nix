@@ -6,13 +6,23 @@
     ghc
   ];
 
-  replit.runners.interpreted = {
+  replit.runners.runghc = {
     name = "GHC app";
     language = "haskell";
 
     start = "${pkgs.ghc}/bin/runghc $file";
     fileParam = true;
   };
+
+  # TODO: allow users to select runners
+  # replit.runners.ghci = {
+  #   name = "ghci";
+  #   language = "haskell";
+
+  #   start = "${pkgs.ghc}/bin/ghci $file";
+  #   fileParam = true;
+  #   interpreter = true;
+  # };
 
   replit.languageServers.haskell-language-server = {
     name = "Haskell Language Server";
