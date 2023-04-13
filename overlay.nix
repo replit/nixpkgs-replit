@@ -93,6 +93,7 @@ rec {
         php = mkModule ./modules/php.nix;
         rust = mkModule ./modules/rust.nix;
         swift = mkModule ./modules/swift.nix;
+        web = mkModule ./modules/web.nix;
       };
 
     phpactor =
