@@ -1,8 +1,8 @@
 { pkgs, ... }:
 let
   clang = pkgs.clang_14;
-  run-extensions = [".c"];  # use this list for file-param runners because
-                            # we don't want .h files to be runnable
+  run-extensions = [ ".c" ]; # use this list for file-param runners because
+  # we don't want .h files to be runnable
   compile = pkgs.writeShellScriptBin "compile" ''
     CFLAGS="$CFLAGS -g -Wno-everything -pthread -lm"
     FILE="$1"     # a .c file
@@ -94,14 +94,18 @@ in
     start = "./main.c.bin";
   };
 
-  replit.runners.clang-single = {
-    name = "Clang: Single File";
-    compile = "${compile}/bin/compile $file single";
-    fileParam = true;
-    language = "c";
-    extensions = run-extensions;
-    start = "./\${file}.bin";
-  };
+  # TODO: add back single runners/debuggers when we have priority for runners
+  # we want to avoid an unstable first runner for users
+  # that do not have multiple runners turned on
+
+  # replit.runners.clang-single = {
+  #   name = "Clang: Single File";
+  #   compile = "${compile}/bin/compile $file single";
+  #   fileParam = true;
+  #   language = "c";
+  #   extensions = run-extensions;
+  #   start = "./\${file}.bin";
+  # };
 
   replit.languageServers.ccls = {
     name = "ccls";
@@ -120,15 +124,15 @@ in
     launchMessage = dapLaunchMessage "./main.c.bin";
   };
 
-  replit.debuggers.gdb-single = {
-    name = "GDB: Single";
-    language = "c";
-    extensions = run-extensions;
-    start = "${dap-cpp}/bin/dap-cpp";
-    fileParam = true;
-    compile = "${compile}/bin/compile $file single debug";
-    transport = "stdio";
-    initializeMessage = dapInitializeMessage;
-    launchMessage = dapLaunchMessage "./$file.bin";
-  };
+  # replit.debuggers.gdb-single = {
+  #   name = "GDB: Single";
+  #   language = "c";
+  #   extensions = run-extensions;
+  #   start = "${dap-cpp}/bin/dap-cpp";
+  #   fileParam = true;
+  #   compile = "${compile}/bin/compile $file single debug";
+  #   transport = "stdio";
+  #   initializeMessage = dapInitializeMessage;
+  #   launchMessage = dapLaunchMessage "./$file.bin";
+  # };
 }
