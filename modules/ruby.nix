@@ -18,6 +18,15 @@ in {
     fileParam = true;
   };
 
+  # TODO: enable this once we have a runner selector
+  # replit.runners.ruby-script = {
+  #   name = "ruby";
+  #   language = "ruby";
+
+  #   start = "${ruby}/bin/ruby $file";
+  #   fileParam = true;
+  # };
+
   replit.languageServers.solargraph = {
     name = "Solargraph: A Ruby Language Server";
     language = "ruby";
