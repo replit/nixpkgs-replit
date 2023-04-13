@@ -3,7 +3,7 @@ let
   clang = pkgs.clang_12;
   compile = pkgs.writeShellScriptBin "compile" ''
     CFLAGS="$CFLAGS -g -Wno-everything -pthread -lm"
-    FILE="$1"
+    FILE="$1"     # a .c file
     MODE="$2"     # mode can be:
                   #   single - compile just one .c file, or
                   #   all - compile all .c files
