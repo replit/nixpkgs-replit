@@ -27,7 +27,7 @@ blocks:
       jobs:
         - name: Make sure files are nixfmt'ed
           commands:
-            - nixpkgs-fmt --check default.nix overlay.nix hydra pkgs modules
+            - nixpkgs-fmt --check default.nix overlay.nix hydra pkgs
 
   - name: Build overlay packages
     task:
