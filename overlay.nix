@@ -85,6 +85,7 @@ rec {
         };
       in
       {
+        dotnet-7 = mkModule ./modules/dotnet-7.nix;
         rust = mkModule ./modules/rust.nix;
         go = mkModule ./modules/go.nix;
         java = mkModule ./modules/java.nix;
