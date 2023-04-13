@@ -38,4 +38,4 @@ blocks:
       jobs:
         - name: Notify spinnaker
           commands:
-            - 'curl --fail -X POST -H "$WEBHOOK_AUTH" -H "content-type: application/json" -d @webhook.json $WEBHOOK_URL'
+            - ./spin_deploy.sh
