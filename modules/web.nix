@@ -30,7 +30,7 @@
         unformatted = "wbr";
         contentUnformatted = "pre,code,textarea";
         indentInnerHtml = false;
-        preserveNewLInes = true;
+        preserveNewLines = true;
         indentHandlebars = false;
         endWithNewline = false;
         extraLiners = "head, body, /html";
