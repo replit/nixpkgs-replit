@@ -77,6 +77,7 @@ rec {
     support = {
       poetry = super.callPackage ./pkgs/poetry { };
       poetry-bundle = super.callPackage ./pkgs/poetry/poetry-bundle.nix { };
+      dapNode = super.callPackage ./pkgs/dapNode { };
     };
 
     modules =
@@ -86,11 +87,23 @@ rec {
         };
       in
       {
-        rust = mkModule ./modules/rust.nix;
+        c = mkModule ./modules/c.nix;
+        dotnet-7 = mkModule ./modules/dotnet-7.nix;
         go = mkModule ./modules/go.nix;
-        swift = mkModule ./modules/swift.nix;
+        java = mkModule ./modules/java.nix;
+        nodejs = mkModule ./modules/nodejs.nix;
+        php = mkModule ./modules/php.nix;
         python = mkModule ./modules/python.nix;
+        rust = mkModule ./modules/rust.nix;
+        swift = mkModule ./modules/swift.nix;
+        web = mkModule ./modules/web.nix;
       };
+
+    phpactor =
+      if channelName != "nixpkgs-legacy"
+      then self.callPackage ./pkgs/phpactor { inherit channelName; }
+      else null;
+
 
     bun =
       if channelName != "nixpkgs-legacy"

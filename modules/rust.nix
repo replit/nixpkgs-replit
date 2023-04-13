@@ -10,7 +10,7 @@ let
   '';
 in
 {
-  name = "RustTools";
+  name = "Rust Tools";
   version = "1.0";
 
   packages = with pkgs; [
