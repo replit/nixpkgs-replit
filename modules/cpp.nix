@@ -122,7 +122,7 @@ in
   };
 
   replit.debuggers.gdb-single = {
-    name = "GDB C++: Single";
+    name = "GDB C++: Single File";
     language = "cpp";
     start = "${dap-cpp}/bin/dap-cpp";
     fileParam = true;
