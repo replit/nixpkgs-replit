@@ -101,7 +101,7 @@ in
     fileParam = true;
     language = "cpp";
     extensions = run-extensions;
-    start = "./\${file}.bin";
+    start = "./$file.bin";
   };
 
   replit.languageServers.ccls = {
