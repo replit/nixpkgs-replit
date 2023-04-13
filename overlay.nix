@@ -87,10 +87,10 @@ rec {
       {
         rust = mkModule ./modules/rust.nix;
         go = mkModule ./modules/go.nix;
-        html-css-js = mkModule ./modules/html-css-js.nix;
         java = mkModule ./modules/java.nix;
         swift = mkModule ./modules/swift.nix;
         nodejs = mkModule ./modules/nodejs.nix;
+        web = mkModule ./modules/web.nix;
       };
 
     phpactor =

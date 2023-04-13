@@ -1,5 +1,5 @@
 { pkgs, ... }: {
-  name = "HTML, CSS, and JS Tools";
+  name = "Web Tools";
   version = "1.0";
 
   packages = [ ];
