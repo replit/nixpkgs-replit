@@ -24,7 +24,7 @@ let
       CFLAGS="$CFLAGS -O0"
     fi
 
-    rm ''$FILE.bin || true
+    rm -f ''$FILE.bin
 
     set -o xtrace
     ${clang}/bin/clang $CFLAGS $SRCS -o "''$FILE.bin"
