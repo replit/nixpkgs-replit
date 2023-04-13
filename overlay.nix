@@ -92,6 +92,7 @@ rec {
         nodejs = mkModule ./modules/nodejs.nix;
         php = mkModule ./modules/php.nix;
         qbasic = mkModule ./modules/qbasic.nix;
+        ruby = mkModule ./modules/ruby.nix;
         rust = mkModule ./modules/rust.nix;
         swift = mkModule ./modules/swift.nix;
         web = mkModule ./modules/web.nix;
