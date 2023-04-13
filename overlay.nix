@@ -91,6 +91,7 @@ rec {
         java = mkModule ./modules/java.nix;
         nodejs = mkModule ./modules/nodejs.nix;
         php = mkModule ./modules/php.nix;
+        ruby = mkModule ./modules/ruby.nix;
         rust = mkModule ./modules/rust.nix;
         swift = mkModule ./modules/swift.nix;
         web = mkModule ./modules/web.nix;
