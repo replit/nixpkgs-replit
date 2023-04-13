@@ -106,7 +106,8 @@ rec {
     dart2_10 =
       let
         dart-development-path = if channelName == "nixpkgs-unstable" then "compilers" else "interpreters";
-      in self.callPackage "${super.path}/pkgs/development/${dart-development-path}/dart" (rec {
+      in
+      self.callPackage "${super.path}/pkgs/development/${dart-development-path}/dart" (rec {
         version = "2.10.5";
         sources."2.10.5-x86_64-linux" = self.fetchurl {
           url = "https://storage.googleapis.com/dart-archive/channels/stable/release/${version}/sdk/dartsdk-linux-x64-release.zip";
