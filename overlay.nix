@@ -85,12 +85,12 @@ rec {
         };
       in
       {
-        rust = mkModule ./modules/rust.nix;
+        c = mkModule ./modules/c.nix;
         go = mkModule ./modules/go.nix;
         java = mkModule ./modules/java.nix;
-        swift = mkModule ./modules/swift.nix;
         nodejs = mkModule ./modules/nodejs.nix;
-        c = mkModule ./modules/c.nix;
+        rust = mkModule ./modules/rust.nix;
+        swift = mkModule ./modules/swift.nix;
       };
 
     phpactor =
