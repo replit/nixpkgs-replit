@@ -89,6 +89,7 @@ rec {
         rust = mkModule ./modules/rust.nix;
         go = mkModule ./modules/go.nix;
         java = mkModule ./modules/java.nix;
+        lua = mkModule ./modules/lua.nix;
         swift = mkModule ./modules/swift.nix;
         nodejs = mkModule ./modules/nodejs.nix;
         php = mkModule ./modules/php.nix;
