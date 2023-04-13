@@ -125,7 +125,7 @@ in
   };
 
   # replit.debuggers.gdb-single = {
-  #   name = "GDB: Single";
+  #   name = "GDB: Single File";
   #   language = "c";
   #   extensions = run-extensions;
   #   start = "${dap-cpp}/bin/dap-cpp";
