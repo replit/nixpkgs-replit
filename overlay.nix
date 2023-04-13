@@ -74,6 +74,10 @@ rec {
 
     moduleit = super.callPackage ./pkgs/moduleit { };
 
+    support = {
+      dapNode = super.callPackage ./pkgs/dapNode { };
+    };
+
     modules =
       let
         mkModule = path: super.callPackage ./pkgs/moduleit/entrypoint.nix {
@@ -83,8 +87,16 @@ rec {
       {
         rust = mkModule ./modules/rust.nix;
         go = mkModule ./modules/go.nix;
+        java = mkModule ./modules/java.nix;
         swift = mkModule ./modules/swift.nix;
+        nodejs = mkModule ./modules/nodejs.nix;
       };
+
+    phpactor =
+      if channelName != "nixpkgs-legacy"
+      then self.callPackage ./pkgs/phpactor { inherit channelName; }
+      else null;
+
 
     bun =
       if channelName != "nixpkgs-legacy"

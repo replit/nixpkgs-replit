@@ -9,7 +9,7 @@ let cargoRun = pkgs.writeScriptBin "cargo_run" ''
   '';
 in
 {
-  name = "RustTools";
+  name = "Rust Tools";
   version = "1.0";
 
   packages = with pkgs; [
