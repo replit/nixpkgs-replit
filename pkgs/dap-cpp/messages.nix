@@ -17,7 +17,7 @@
       supportsVariableType = true;
     };
   };
-  
+
   dapLaunchMessage = program: {
     command = "launch";
     type = "request";
