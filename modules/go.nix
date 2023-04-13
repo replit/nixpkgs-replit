@@ -1,6 +1,6 @@
 { pkgs, ... }:
 {
-  name = "GoTools";
+  name = "Go Tools";
   version = "1.0";
 
   packages = with pkgs; [
