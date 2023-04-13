@@ -90,6 +90,7 @@ rec {
         java = mkModule ./modules/java.nix;
         swift = mkModule ./modules/swift.nix;
         nodejs = mkModule ./modules/nodejs.nix;
+        php = mkModule ./modules/php.nix;
       };
 
     phpactor =
