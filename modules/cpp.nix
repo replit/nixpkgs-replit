@@ -1,9 +1,6 @@
 { pkgs, ... }:
 let
   clang = pkgs.clang_14;
-  run-extensions = [ ".cpp" ]; # use this for file param runners/debuggers
-  # because we don't want header files to be
-  # runnable
   clang-compile = import ../pkgs/clang-compile {
     inherit pkgs;
     inherit clang;
