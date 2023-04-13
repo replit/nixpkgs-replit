@@ -1,6 +1,6 @@
 { pkgs, ... }:
 let
-  clang = pkgs.clang_12;
+  clang = pkgs.clang_14;
   compile = pkgs.writeShellScriptBin "compile" ''
     CFLAGS="$CFLAGS -g -Wno-everything -pthread -lm"
     FILE="$1"     # a .c file
