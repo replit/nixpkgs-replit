@@ -89,6 +89,7 @@ rec {
         go = mkModule ./modules/go.nix;
         swift = mkModule ./modules/swift.nix;
         nodejs = mkModule ./modules/nodejs.nix;
+        c = mkModule ./modules/c.nix;
       };
 
     phpactor =
