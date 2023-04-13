@@ -9,6 +9,11 @@ let
                   #   all - compile all .c files
     DEBUG="$3"
 
+    if [[ ! -f "$FILE" ]]; then
+      echo "$FILE not found"
+      exit 1
+    fi
+
     if [[ "$MODE" == "all" ]]; then
       SRCS=$(find . -name '.ccls-cache' -type d -prune -o -type f -name '*.c' -print)
     else
@@ -18,6 +23,8 @@ let
     if [[ "$DEBUG" == "debug" ]]; then
       CFLAGS="$CFLAGS -O0"
     fi
+
+    rm ''$FILE.bin || true
 
     set -o xtrace
     ${clang}/bin/clang $CFLAGS $SRCS -o "''$FILE.bin"
@@ -80,7 +87,7 @@ in
     compile = "${compile}/bin/compile main.c all";
     fileParam = false;
     language = "c";
-    start = "./main.bin";
+    start = "./main.c.bin";
   };
 
   replit.runners.clang-single = {
@@ -105,7 +112,7 @@ in
     compile = "${compile}/bin/compile main.c all debug";
     transport = "stdio";
     initializeMessage = dapInitializeMessage;
-    launchMessage = dapLaunchMessage "./main.bin";
+    launchMessage = dapLaunchMessage "./main.c.bin";
   };
 
   replit.debuggers.gdb-single = {
