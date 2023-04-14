@@ -86,6 +86,7 @@ rec {
       in
       {
         c = mkModule ./modules/c.nix;
+        clojure = mkModule ./modules/clojure.nix;
         dotnet-7 = mkModule ./modules/dotnet-7.nix;
         go = mkModule ./modules/go.nix;
         haskell = mkModule ./modules/haskell.nix;
