@@ -95,7 +95,7 @@ rec {
       };
 
     phpactor =
-      if channelName != "nixpkgs-legacy"
+      if channelName == "nixpkgs-unstable" || channelName == "nixpkgs-22.11"
       then self.callPackage ./pkgs/phpactor { inherit channelName; }
       else null;
 
