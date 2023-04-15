@@ -87,6 +87,7 @@ rec {
       {
         c = mkModule ./modules/c.nix;
         clojure = mkModule ./modules/clojure.nix;
+        dart = mkModule ./modules/dart.nix;
         dotnet-7 = mkModule ./modules/dotnet-7.nix;
         go = mkModule ./modules/go.nix;
         haskell = mkModule ./modules/haskell.nix;
@@ -94,6 +95,7 @@ rec {
         nodejs = mkModule ./modules/nodejs.nix;
         php = mkModule ./modules/php.nix;
         R = mkModule ./modules/R.nix;
+        qbasic = mkModule ./modules/qbasic.nix;
         ruby = mkModule ./modules/ruby.nix;
         rust = mkModule ./modules/rust.nix;
         swift = mkModule ./modules/swift.nix;
@@ -101,7 +103,7 @@ rec {
       };
 
     phpactor =
-      if channelName != "nixpkgs-legacy"
+      if channelName == "nixpkgs-unstable" || channelName == "nixpkgs-22.11"
       then self.callPackage ./pkgs/phpactor { inherit channelName; }
       else null;
 
