@@ -92,6 +92,7 @@ rec {
         go = mkModule ./modules/go.nix;
         haskell = mkModule ./modules/haskell.nix;
         java = mkModule ./modules/java.nix;
+        lua = mkModule ./modules/lua.nix;
         nodejs = mkModule ./modules/nodejs.nix;
         php = mkModule ./modules/php.nix;
         qbasic = mkModule ./modules/qbasic.nix;
