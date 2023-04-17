@@ -86,6 +86,7 @@ rec {
         };
       in
       {
+        bun = mkModule ./modules/bun.nix;
         c = mkModule ./modules/c.nix;
         clojure = mkModule ./modules/clojure.nix;
         cpp = mkModule ./modules/cpp.nix;
