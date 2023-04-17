@@ -3,7 +3,7 @@
 let
   bun = pkgs.replitPackages.bun;
 
-  extensions = [".js" ".ts"];
+  extensions = [ ".js" ".ts" ];
 in
 
 {
