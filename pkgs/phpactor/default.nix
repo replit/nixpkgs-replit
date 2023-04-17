@@ -48,8 +48,6 @@ let
     outputHashAlgo = "sha256";
     # different channels have different versions of php/composer
     outputHash = {
-      "nixpkgs-21.11" = "sha256-nNFIJKKZxFcaNjD/HUTiTq10iitOCuvR2+aoDoUf8Nw=";
-      "nixpkgs-22.05" = "sha256-GLcsWUy2rF9kzZEB225dQGkawnLFs1w2m3ItwaK1Yqw=";
       "nixpkgs-22.11" = "sha256-/MszCRJq1VUl2STGQZOrBlanKg7KHsdlVslWjTtsotA=";
       "nixpkgs-unstable" = "sha256-7R6nadWFv7A5Hv14D9egsTD/zcKK5uK9LQlHmwtbKdE=";
     }.${toString channelName} or "";
