@@ -1,11 +1,12 @@
 { pkgs, ... }:
-let cargoRun = pkgs.writeScriptBin "cargo_run" ''
-  if [ ! -f "$HOME/$REPL_SLUG/Cargo.toml" ]; then
-    NAME=$(echo $REPL_SLUG | sed -r 's/([a-z0-9])([A-Z])/\1_\2/g'| tr '[:upper:]' '[:lower:]')
-    ${pkgs.cargo}/bin/cargo init --name=$NAME
-  fi
+let
+  cargoRun = pkgs.writeScriptBin "cargo_run" ''
+    if [ ! -f "$HOME/$REPL_SLUG/Cargo.toml" ]; then
+      NAME=$(echo $REPL_SLUG | sed -r 's/([a-z0-9])([A-Z])/\1_\2/g'| tr '[:upper:]' '[:lower:]')
+      ${pkgs.cargo}/bin/cargo init --name=$NAME
+    fi
 
-  ${pkgs.cargo}/bin/cargo run
+    ${pkgs.cargo}/bin/cargo run
   '';
 in
 {
@@ -23,7 +24,7 @@ in
   replit.runners.cargo = {
     name = "cargo run";
     language = "rust";
-    
+
     start = "${cargoRun}/bin/cargo_run";
     fileParam = false;
   };
@@ -31,7 +32,7 @@ in
   replit.languageServers.rust-analyzer = {
     name = "rust-analyzer";
     language = "rust";
-    
+
     start = "${pkgs.rust-analyzer}/bin/rust-analyzer";
   };
 

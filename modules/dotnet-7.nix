@@ -1,18 +1,18 @@
 { pkgs, ... }:
 
 let
-	dotnet = pkgs.dotnet-sdk_7;
+  dotnet = pkgs.dotnet-sdk_7;
 
-  extensions = [".cs" ".csproj" ".fs" ".fsproj"];
+  extensions = [ ".cs" ".csproj" ".fs" ".fsproj" ];
 in
 
 {
   name = ".NET 7 Tools";
   version = "1.0";
 
-	packages = [
-		dotnet
-	];
+  packages = [
+    dotnet
+  ];
 
   replit.runners.dotnet = {
     inherit extensions;

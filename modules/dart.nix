@@ -2,9 +2,9 @@
   name = "Dart Tools";
   version = "1.0";
 
-	packages = [
-		pkgs.dart
-	];
+  packages = [
+    pkgs.dart
+  ];
 
   replit.runners.dart = {
     name = "dart";
