@@ -10,9 +10,9 @@ in
   name = "Bun Tools";
   version = "1.0";
 
-	packages = [
-		bun
-	];
+  packages = [
+    bun
+  ];
 
   replit.runners.bun = {
     name = "bun";
