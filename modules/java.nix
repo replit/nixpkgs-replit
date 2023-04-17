@@ -1,11 +1,18 @@
-{ pkgs, ... }: let 
+{ pkgs, ... }:
+
+let
+	graalvm = pkgs.graalvm17-ce;
+
   graal-compile-command = "${pkgs.graalvm17-ce}/bin/javac -classpath .:target/dependency/* -d . $(find . -type f -name '*.java')";
-in {
+in
+
+{
   name = "Java Tools";
   version = "1.0";
 
-  packages = with pkgs; [
-    maven
+  packages = [
+		graalvm
+    pkgs.maven
   ];
 
   replit.runners.graal = {
@@ -13,7 +20,7 @@ in {
     language = "java";
 
     compile = graal-compile-command;
-    start = "${pkgs.graalvm17-ce}/bin/java -classpath .:target/dependency/* Main";
+    start = "${graalvm}/bin/java -classpath .:target/dependency/* Main";
   };
 
   replit.packagers.maven = {
