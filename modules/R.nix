@@ -1,5 +1,5 @@
 { pkgs, ... }: {
-  name =  "R Tools";
+  name = "R Tools";
   version = "1.0";
 
   replit.runners.r = {

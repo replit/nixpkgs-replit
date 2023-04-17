@@ -1,18 +1,19 @@
 { pkgs, ... }:
-let swiftc-wrapper = pkgs.stdenv.mkDerivation {
-  name = "swiftc-wrapper";
-  buildInputs = [pkgs.makeWrapper];
-  src = ./.;
+let
+  swiftc-wrapper = pkgs.stdenv.mkDerivation {
+    name = "swiftc-wrapper";
+    buildInputs = [ pkgs.makeWrapper ];
+    src = ./.;
 
-  
-  installPhase = ''
-    mkdir -p $out/bin
-    makeWrapper ${pkgs.swift}/bin/swiftc $out/bin/swiftc \
-      --set PATH ""
-  '';
-};
+
+    installPhase = ''
+      mkdir -p $out/bin
+      makeWrapper ${pkgs.swift}/bin/swiftc $out/bin/swiftc \
+        --set PATH ""
+    '';
+  };
 in
- {
+{
   name = "Swift Tools";
   version = "1.0";
 
@@ -37,7 +38,7 @@ in
   replit.languageServers.sourcekit = {
     name = "SourceKit";
     language = "swift";
-    
+
     start = "${pkgs.swift}/bin/sourcekit-lsp";
   };
 

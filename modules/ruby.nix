@@ -1,7 +1,11 @@
-{ pkgs, ... }: let
+{ pkgs, ... }:
+
+let
   ruby = pkgs.ruby_3_1;
   rubyPackages = pkgs.rubyPackages_3_1;
-in {
+in
+
+{
   name = "Ruby Tools";
   version = "1.0";
 

@@ -27,7 +27,7 @@
   replit.languageServers.gopls = {
     name = "gopls";
     language = "go";
-    
+
     start = "${pkgs.gopls}/bin/gopls";
   };
 }
