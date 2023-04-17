@@ -76,6 +76,7 @@ rec {
 
     support = {
       dapNode = super.callPackage ./pkgs/dapNode { };
+      dap-cpp = super.callPackage ./pkgs/dap-cpp { };
     };
 
     modules =
@@ -87,6 +88,7 @@ rec {
       {
         c = mkModule ./modules/c.nix;
         clojure = mkModule ./modules/clojure.nix;
+        cpp = mkModule ./modules/cpp.nix;
         dart = mkModule ./modules/dart.nix;
         dotnet-7 = mkModule ./modules/dotnet-7.nix;
         go = mkModule ./modules/go.nix;
