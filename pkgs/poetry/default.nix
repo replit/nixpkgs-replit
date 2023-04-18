@@ -7,6 +7,8 @@ let
     version = "1.0.1";
     buildInputs = [ pkgs.makeWrapper pkgs.poetry python ];
 
+    dontPatchShebangs = true;
+
     buildCommand = ''
       mkdir -p $out
       ${pkgs.poetry}/bin/poetry new --name poetry-in-venv $out/
