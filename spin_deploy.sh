@@ -4,7 +4,7 @@ set -evxo pipefail
 
 cache restore "nixpkgs-last-successful-sha"
 
-LAST_SHA=$(cat "nixpkgs-last-successful-sha" || echo '$SEMAPHORE_GIT_SHA')
+LAST_SHA=$(cat "nixpkgs-last-successful-sha" || echo "$SEMAPHORE_GIT_SHA")
 SHA_SHORT=$(git rev-parse --short=8 "$SEMAPHORE_GIT_SHA")
 AUTHOR_EMAIL=$(git show -s --format='%ae' "$SEMAPHORE_GIT_SHA")
 ALL_AUTHORS=$(git log  --format="%ae" $LAST_SHA..$SEMAPHORE_GIT_SHA | sort | uniq | paste -sd "," -)
