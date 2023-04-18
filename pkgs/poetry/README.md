@@ -30,11 +30,8 @@ we need to install it inside its own virtual environment the way their [official
 
 1. For pip (`pkgs/pip/default.nix`), we'll install it using the buildPythonPackage helper
 2. For poetry:
-  * `poetry-bundle.nix` is a fixed output derivation generates poetry plus it's dependencies
-  * during the Nix build `pkgs/poetry/default.nix`, we:
-    a. create a virtual environment
-    b. install the poetry bundle into it
-    c. make a symlink to the poetry within that environment for easy access
+  * we use nixpkgs' poetry to install our custom poetry into Nix. The `.pyc` files are removed and then
+    recompiled to guarantee reproducibility via PEP 552.
 3. Inside a repl
   a. the custom pip and poetry will be made available to the user via the `PATH` variable.
   b. pip will be instructed to install packages via 
