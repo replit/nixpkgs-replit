@@ -29,7 +29,7 @@ cat <<EOF >payload.json
 EOF
 
 curl --fail -X POST \
-  -H "WEBHOOK_AUTH" \
+  -H "$WEBHOOK_AUTH" \
   -H "content-type: application/json" \
   -d @payload.json \
     "$WEBHOOK_URL"
