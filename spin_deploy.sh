@@ -22,7 +22,7 @@ cat <<EOF >payload.json
       "last_author": "$AUTHOR_EMAIL",
       "all_authors": "$ALL_AUTHORS",
       "rollback_pipeline": "webhooks/webhook/nixpkgs-replit-rollback",
-      "scratch": "false",
+      "scratch": "false"
     }
   }
 }
