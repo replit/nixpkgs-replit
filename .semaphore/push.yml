@@ -38,4 +38,5 @@ blocks:
       jobs:
         - name: Notify spinnaker
           commands:
+            - checkout
             - ./spin_deploy.sh
