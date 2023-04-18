@@ -1,15 +1,25 @@
-{ pkgs, ... }: let
-  extensions = [".cs" ".csproj" ".fs" ".fsproj"];
-in {
+{ pkgs, ... }:
+
+let
+  dotnet = pkgs.dotnet-sdk_7;
+
+  extensions = [ ".cs" ".csproj" ".fs" ".fsproj" ];
+in
+
+{
   name = ".NET 7 Tools";
   version = "1.0";
+
+  packages = [
+    dotnet
+  ];
 
   replit.runners.dotnet = {
     inherit extensions;
     name = ".NET";
     language = "dotnet";
 
-    start = "${pkgs.dotnet-sdk_7}/bin/dotnet run";
+    start = "${dotnet}/bin/dotnet run";
   };
 
   replit.languageServers.omni-sharp = {

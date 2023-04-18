@@ -1,17 +1,19 @@
 { pkgs, ... }:
 let
-  swiftc-wrapper = pkgs.stdenvNoCC.mkDerivation {
+  swiftc-wrapper = pkgs.stdenv.mkDerivation {
     name = "swiftc-wrapper";
     buildInputs = [ pkgs.makeWrapper ];
+    src = ./.;
 
-    buildCommand = ''
+
+    installPhase = ''
       mkdir -p $out/bin
       makeWrapper ${pkgs.swift}/bin/swiftc $out/bin/swiftc \
         --set PATH ""
     '';
   };
 in
- {
+{
   name = "Swift Tools";
   version = "1.0";
 

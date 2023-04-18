@@ -78,6 +78,7 @@ rec {
       poetry = super.callPackage ./pkgs/poetry { };
       poetry-bundle = super.callPackage ./pkgs/poetry/poetry-bundle.nix { };
       dapNode = super.callPackage ./pkgs/dapNode { };
+      dap-cpp = super.callPackage ./pkgs/dap-cpp { };
     };
 
     modules =
@@ -87,20 +88,29 @@ rec {
         };
       in
       {
+        bun = mkModule ./modules/bun.nix;
         c = mkModule ./modules/c.nix;
+        clojure = mkModule ./modules/clojure.nix;
+        cpp = mkModule ./modules/cpp.nix;
+        dart = mkModule ./modules/dart.nix;
         dotnet-7 = mkModule ./modules/dotnet-7.nix;
         go = mkModule ./modules/go.nix;
+        haskell = mkModule ./modules/haskell.nix;
         java = mkModule ./modules/java.nix;
+        lua = mkModule ./modules/lua.nix;
         nodejs = mkModule ./modules/nodejs.nix;
         php = mkModule ./modules/php.nix;
         python = mkModule ./modules/python.nix;
+        R = mkModule ./modules/R.nix;
+        qbasic = mkModule ./modules/qbasic.nix;
+        ruby = mkModule ./modules/ruby.nix;
         rust = mkModule ./modules/rust.nix;
         swift = mkModule ./modules/swift.nix;
         web = mkModule ./modules/web.nix;
       };
 
     phpactor =
-      if channelName != "nixpkgs-legacy"
+      if channelName == "nixpkgs-unstable" || channelName == "nixpkgs-22.11"
       then self.callPackage ./pkgs/phpactor { inherit channelName; }
       else null;
 
@@ -109,6 +119,18 @@ rec {
       if channelName != "nixpkgs-legacy"
       then self.callPackage ./pkgs/bun { }
       else null;
+
+    dart2_10 =
+      let
+        dart-development-path = if channelName == "nixpkgs-unstable" then "compilers" else "interpreters";
+      in
+      self.callPackage "${super.path}/pkgs/development/${dart-development-path}/dart" (rec {
+        version = "2.10.5";
+        sources."2.10.5-x86_64-linux" = self.fetchurl {
+          url = "https://storage.googleapis.com/dart-archive/channels/stable/release/${version}/sdk/dartsdk-linux-x64-release.zip";
+          sha256 = "sha256-UDeiwP1jGvwed+jvhv4atgQg2BDKtnrIb0F52feoZtU=";
+        };
+      });
   };
 }
 

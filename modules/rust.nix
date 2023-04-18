@@ -1,4 +1,5 @@
 { pkgs, ... }:
+
 let
   cargoRun = pkgs.writeScriptBin "cargo_run" ''
     if [ ! -f "$HOME/$REPL_SLUG/Cargo.toml" ]; then
@@ -9,6 +10,7 @@ let
     ${pkgs.cargo}/bin/cargo run
   '';
 in
+
 {
   name = "Rust Tools";
   version = "1.0";

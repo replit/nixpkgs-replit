@@ -20,9 +20,6 @@
     language = "php";
 
     start = "${pkgs.replitPackages.phpactor}/bin/phpactor language-server";
-    configuration = {
-
-    };
   };
 
   replit.packagers.php = {
