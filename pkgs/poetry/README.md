@@ -31,7 +31,7 @@ we need to install it inside its own virtual environment the way their [official
 1. For pip (`pkgs/pip/default.nix`), we'll install it using the buildPythonPackage helper
 2. For poetry:
   * we download a poetry bundle tarball from gcs which contains our version of poetry + its dependencies and then
-    use pip's offline install scheme to install it into a virtual env: this is how we isolate its deps away
+    use pip's [offline install scheme](https://stackoverflow.com/questions/36725843/installing-python-packages-without-internet-and-using-source-code-as-tar-gz-and) to install it into a virtual env: this is how we isolate its deps away
     from the user's project deps, and how the official poetry installer does it.
     The tarball is built in the https://github.com/replit/poetry repo. See https://github.com/replit/poetry/pull/4
     for details of how it is built.
