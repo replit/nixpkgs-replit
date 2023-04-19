@@ -14,8 +14,6 @@ let
     buildInputs = [ pkgs.python310Packages.pip ];
 
     installPhase = ''
-
-      ls -la
       mkdir -p $out/bin
       ${python}/bin/python3 -m venv $out/env
       touch $out/env/poetry_env # This allows poetry to recognize it
