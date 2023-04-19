@@ -75,13 +75,15 @@ rec {
     moduleit = super.callPackage ./pkgs/moduleit { };
 
     support = {
+      poetry = super.callPackage ./pkgs/poetry { };
+      poetry-bundle = super.callPackage ./pkgs/poetry/poetry-bundle.nix { };
       dapNode = super.callPackage ./pkgs/dapNode { };
       dap-cpp = super.callPackage ./pkgs/dap-cpp { };
     };
 
     modules =
       let
-        mkModule = path: super.callPackage ./pkgs/moduleit/entrypoint.nix {
+        mkModule = path: self.callPackage ./pkgs/moduleit/entrypoint.nix {
           configPath = path;
         };
       in
@@ -98,6 +100,7 @@ rec {
         lua = mkModule ./modules/lua.nix;
         nodejs = mkModule ./modules/nodejs.nix;
         php = mkModule ./modules/php.nix;
+        python = mkModule ./modules/python.nix;
         R = mkModule ./modules/R.nix;
         qbasic = mkModule ./modules/qbasic.nix;
         ruby = mkModule ./modules/ruby.nix;
