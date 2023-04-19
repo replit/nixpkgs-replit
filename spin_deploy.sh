@@ -22,14 +22,14 @@ cat <<EOF >payload.json
       "last_author": "$AUTHOR_EMAIL",
       "all_authors": "$ALL_AUTHORS",
       "rollback_pipeline": "webhooks/webhook/nixpkgs-replit-rollback",
-      "scratch": "false",
+      "scratch": "false"
     }
   }
 }
 EOF
 
 curl --fail -X POST \
-  -H "WEBHOOK_AUTH" \
+  -H "$WEBHOOK_AUTH" \
   -H "content-type: application/json" \
   -d @payload.json \
     "$WEBHOOK_URL"
