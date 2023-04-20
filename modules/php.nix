@@ -1,7 +1,10 @@
 { pkgs, ... }:
+
+assert pkgs.php.version == "8.1.13";
+
 {
   name = "PHP Tools";
-  version = "1.0";
+  version = "8.0";
 
   packages = with pkgs; [
     php

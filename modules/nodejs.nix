@@ -23,9 +23,11 @@ let
 
 in
 
+assert nodejs.version == "18.12.1";
+
 {
   name = "Node.js Tools";
-  version = "1.0";
+  version = "18.0";
 
   packages = [
     nodejs

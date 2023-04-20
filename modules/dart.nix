@@ -1,6 +1,10 @@
-{ pkgs, ... }: {
+{ pkgs, ... }: 
+
+assert pkgs.dart.version == "2.18.0";
+
+{
   name = "Dart Tools";
-  version = "1.0";
+  version = "2.0";
 
   packages = [
     pkgs.dart

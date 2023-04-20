@@ -6,6 +6,8 @@ let
   extensions = [ ".js" ".ts" ];
 in
 
+assert bun.version == "0.5.9";
+
 {
   name = "Bun Tools";
   version = "1.0";

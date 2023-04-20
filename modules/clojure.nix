@@ -1,4 +1,8 @@
-{ pkgs, ... }: {
+{ pkgs, ... }: 
+
+assert pkgs.clojure.version == "1.11.1.1200";
+
+{
   name = "Clojure Tools";
   version = "1.0";
 

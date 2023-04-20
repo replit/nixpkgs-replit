@@ -1,6 +1,10 @@
-{ pkgs, ... }: {
+{ pkgs, ... }: 
+
+assert pkgs.ghc.version == "9.0.2";
+
+{
   name = "Haskell Tools";
-  version = "1.0";
+  version = "9.0";
 
   packages = with pkgs; [
     ghc

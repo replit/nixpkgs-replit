@@ -1,4 +1,7 @@
 { pkgs, ... }:
+
+assert pkgs.go.version == "1.19.3";
+
 {
   name = "Go Tools";
   version = "1.0";

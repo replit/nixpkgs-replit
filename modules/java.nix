@@ -6,9 +6,11 @@ let
   graal-compile-command = "${pkgs.graalvm17-ce}/bin/javac -classpath .:target/dependency/* -d . $(find . -type f -name '*.java')";
 in
 
+assert graalvm.version == "22.3.0";
+
 {
   name = "Java Tools";
-  version = "1.0";
+  version = "17.0";
 
   packages = [
     graalvm

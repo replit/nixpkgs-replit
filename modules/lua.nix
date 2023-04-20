@@ -1,6 +1,10 @@
-{ pkgs, ... }: {
+{ pkgs, ... }: 
+
+assert pkgs.lua.version == "5.2.4";
+
+{
   name = "Lua Tools";
-  version = "1.0";
+  version = "5.0";
 
   packages = with pkgs; [
     lua
@@ -10,7 +14,7 @@
     name = "Lua script";
     language = "lua";
 
-    start = "lua $file";
+    start = "${pkgs.lua}/bin/lua $file";
     fileParam = true;
   };
 

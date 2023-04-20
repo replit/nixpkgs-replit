@@ -87,19 +87,43 @@ rec {
           configPath = path;
         };
       in
-      {
-        bun = mkModule ./modules/bun.nix;
-        c = mkModule ./modules/c.nix;
-        clojure = mkModule ./modules/clojure.nix;
-        cpp = mkModule ./modules/cpp.nix;
-        dart = mkModule ./modules/dart.nix;
+      rec {
+        bun_0 = mkModule ./modules/bun.nix;
+        bun = bun_0;
+
+        c-14 = mkModule ./modules/c.nix;
+        c = c-14;
+
+        clojure-1 = mkModule ./modules/clojure.nix;
+        clojure = clojure-1;
+
+        cpp-14 = mkModule ./modules/cpp.nix;
+        cpp = cpp-14;
+
+        dart-2 = mkModule ./modules/dart.nix;
+        dart = dart-2;
+
         dotnet-7 = mkModule ./modules/dotnet-7.nix;
-        go = mkModule ./modules/go.nix;
-        haskell = mkModule ./modules/haskell.nix;
-        java = mkModule ./modules/java.nix;
-        lua = mkModule ./modules/lua.nix;
-        nodejs = mkModule ./modules/nodejs.nix;
-        php = mkModule ./modules/php.nix;
+        dotnet = dotnet-7;
+
+        go-1 = mkModule ./modules/go.nix;
+        go = go-1;
+
+        haskell-9 = mkModule ./modules/haskell.nix;
+        haskell = haskell-9;
+
+        java-17 = mkModule ./modules/java.nix;
+        java = java-17;
+
+        lua-5 = mkModule ./modules/lua.nix;
+        lua = lua-5;
+
+        nodejs-18 = mkModule ./modules/nodejs.nix;
+        nodejs = nodejs-18;
+
+        php-8 = mkModule ./modules/php.nix;
+        php = php-8;
+
         python = mkModule ./modules/python.nix;
         R = mkModule ./modules/R.nix;
         qbasic = mkModule ./modules/qbasic.nix;

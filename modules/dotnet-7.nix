@@ -6,9 +6,11 @@ let
   extensions = [ ".cs" ".csproj" ".fs" ".fsproj" ];
 in
 
+assert dotnet.version == "7.0.100";
+
 {
   name = ".NET 7 Tools";
-  version = "1.0";
+  version = "7.0";
 
   packages = [
     dotnet

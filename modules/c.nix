@@ -10,9 +10,12 @@ let
   dap-cpp = pkgs.callPackage ../pkgs/dap-cpp { };
   dap-cpp-messages = import ../pkgs/dap-cpp/messages.nix;
 in
+
+assert clang.version == "14.0.6";
+
 {
   name = "C Tools";
-  version = "1.0";
+  version = "14.0";
 
   packages = [
     clang
