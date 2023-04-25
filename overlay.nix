@@ -131,6 +131,8 @@ rec {
           sha256 = "sha256-UDeiwP1jGvwed+jvhv4atgQg2BDKtnrIb0F52feoZtU=";
         };
       });
+
+		processing4 = self.callPackage ./pkgs/processing4 { };
   };
 }
 
