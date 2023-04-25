@@ -6,8 +6,7 @@ let
   jna = fetchurl {
     name = "jna-5.12.1.zip";
     url = "https://github.com/java-native-access/jna/archive/5.12.1.zip";
-    sha256 = "0000000000000000000000000000000000000000000=";
-    # sha256 = "B5CakOQ8225xNsk2TMV8CbK3RcsLlb+pHzjaY5JNwg0=";
+    sha256 = "/Bi21OGF095u2zSAQLhPjH2eiqBiXJJwoPGeONVEbHA=";
   };
 
   flatlaf = fetchurl {
@@ -43,8 +42,7 @@ stdenv.mkDerivation rec {
     owner = "processing";
     repo = "processing4";
     rev = "processing-${buildNumber}-${version}";
-    sha256 = "sha256-0000000000000000000000000000000000000000000=";
-    # sha256 = "sha256-OjTqANxzcW/RrAdqmVYAegrlLPu6w2pjzSyZyvUYIt4=";
+    sha256 = "sha256-wdluhrtliLN4T2dcmwvUWZhOARC3Lst7+hWWwZjafmU=";
   };
 
   nativeBuildInputs = [ ant unzip makeWrapper wrapGAppsHook ];
@@ -63,8 +61,8 @@ stdenv.mkDerivation rec {
     ln -s ${lsp4j-jsonrpc} java/mode/org.eclipse.lsp4j.jsonrpc.jar
     ln -s ${gson} java/mode/gson.jar
     unzip -qo ${jna} -d app/lib/
-    mv app/lib/{jna-5.10.0/dist/jna.jar,}
-    mv app/lib/{jna-5.10.0/dist/jna-platform.jar,}
+    mv app/lib/{jna-5.12.1/dist/jna.jar,}
+    mv app/lib/{jna-5.12.1/dist/jna-platform.jar,}
     ln -sf ${batik}/* java/libraries/svg/library/
     cp java/libraries/svg/library/lib/batik-all-${batik.version}.jar java/libraries/svg/library/batik.jar
     echo "tarring ffmpeg"
