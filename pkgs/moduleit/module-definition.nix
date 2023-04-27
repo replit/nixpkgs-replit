@@ -209,7 +209,7 @@ let
       };
 
       configuration = mkOption {
-        type = types.anything;
+        type = types.nullOr (types.attrsOf types.anything);
         default = null;
         description = lib.mdDoc ''
           Some configuration options that the client can send to the server
@@ -218,7 +218,7 @@ let
       };
 
       initializationOptions = mkOption {
-        type = types.anything;
+        type = types.nullOr (types.attrsOf types.anything);
         default = null;
         description = lib.mdDoc ''
           InitializationOptions is sent to the LSP server with the initialize request.
@@ -351,7 +351,7 @@ let
         };
 
         arguments = mkOption {
-          type = types.anything;
+          type = types.attrsOf types.anything;
           description = lib.mdDoc ''
             This object should be based on InitializeRequestArguments of the DAP spec:
             https://microsoft.github.io/debug-adapter-protocol/specification
@@ -378,7 +378,7 @@ let
         arguments = mkOption {
           # The doc is very underspecified wrt this. I think this is specific to the DAP adapter you use.
           # LaunchRequestArguments in https://microsoft.github.io/debug-adapter-protocol/specification
-          type = types.anything;
+          type = types.attrsOf types.anything;
           description = lib.mdDoc ''
             A set of attributes to send as the arguments of the launch request.
           '';
