@@ -146,7 +146,7 @@ in
     name = "Python";
     language = "python3";
     ignoredPackages = [ "unit_tests" ];
-    ignoredPaths = [".pythonlibs"]; 
+    ignoredPaths = [ ".pythonlibs" ];
     features = {
       packageSearch = true;
       guessImports = true;
