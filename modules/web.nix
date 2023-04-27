@@ -70,6 +70,10 @@
 
     start = "${pkgs.nodePackages.vscode-langservers-extracted}/bin/vscode-css-language-server --stdio";
 
+    initializationOptions = {
+      provideFormatter = true;
+    };
+
     configuration =
       let
         config = {
