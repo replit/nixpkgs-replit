@@ -23,12 +23,8 @@ in
     fileParam = true;
   };
 
-  replit.languageServers.ts-language-server = {
-    name = "TypeScript Language Server";
-    language = "bun";
-    inherit extensions;
-
-    start = "${pkgs.nodePackages.typescript-language-server}/bin/typescript-language-server --stdio";
+  replit.languageServers.ts-language-server = import ../pkgs/typescript-language-server {
+    inherit pkgs;
   };
 
   replit.packagers.bun = {

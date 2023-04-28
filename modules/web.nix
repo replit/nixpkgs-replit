@@ -55,12 +55,8 @@
     };
   };
 
-  replit.languageServers.typescript = {
-    name = "TypeScript Language Server";
-    language = "typescript";
-    extensions = [ ".js" ".jsx" ".ts" ".tsx" ".mjs" ".mts" ".cjs" ".cts" ".es6" ];
-
-    start = "${pkgs.nodePackages.typescript-language-server}/bin/typescript-language-server --stdio";
+  replit.languageServers.typescript = import ../pkgs/typescript-language-server {
+    inherit pkgs;
   };
 
   replit.languageServers.css = {

@@ -90,10 +90,8 @@ in
       };
     };
 
-    languageServers.ts-language-server = {
-      name = "TypeScript Language Server";
-      language = "javascript";
-      start = "${typescript-language-server}/bin/typescript-language-server --stdio";
+    languageServers.ts-language-server = import ../pkgs/typescript-language-server {
+      inherit pkgs;
     };
 
     packagers.upmNodejs = {
