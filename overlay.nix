@@ -106,6 +106,7 @@ rec {
         ruby = mkModule ./modules/ruby.nix;
         rust = mkModule ./modules/rust.nix;
         swift = mkModule ./modules/swift.nix;
+        typescript-language-server = mkModule ./modules/typescript-language-server.nix;
         web = mkModule ./modules/web.nix;
       };
 

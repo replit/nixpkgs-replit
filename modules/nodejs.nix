@@ -2,15 +2,6 @@
 
 let
 
-  typescript-language-server = pkgs.nodePackages.typescript-language-server.override {
-    nativeBuildInputs = [ pkgs.makeWrapper ];
-    postInstall = ''
-      wrapProgram "$out/bin/typescript-language-server" \
-        --suffix PATH : ${pkgs.lib.makeBinPath [ pkgs.nodePackages.typescript ]} \
-        --add-flags "--tsserver-path ${pkgs.nodePackages.typescript}/lib/node_modules/typescript/lib/"
-    '';
-  };
-
   nodejs = pkgs.nodejs;
 
   prybar = pkgs.replitPackages.prybar-nodejs;
@@ -26,6 +17,7 @@ in
 {
   name = "Node.js Tools";
   version = "1.0";
+  imports = [ ./typescript-language-server.nix ];
 
   packages = [
     nodejs
@@ -88,12 +80,6 @@ in
           type = "pwa-node";
         };
       };
-    };
-
-    languageServers.ts-language-server = {
-      name = "TypeScript Language Server";
-      language = "javascript";
-      start = "${typescript-language-server}/bin/typescript-language-server --stdio";
     };
 
     packagers.upmNodejs = {
