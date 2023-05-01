@@ -6,8 +6,6 @@ let
 
   prybar = pkgs.replitPackages.prybar-nodejs;
 
-  dap-node = pkgs.callPackage ../pkgs/dapNode { };
-
   run-prybar = pkgs.writeShellScriptBin "run-prybar" ''
     ${prybar}/bin/prybar-nodejs -q --ps1 "''$(printf '\u0001\u001b[33m\u0002\u0001\u001b[00m\u0002 ')" -i ''$1
   '';
@@ -45,7 +43,9 @@ in
       language = "javascript";
       transport = "localhost:0";
       fileParam = true;
-      start = "${dap-node}/bin/dap-node";
+      start = {
+        args = ["dap-node"];
+      };
       initializeMessage = {
         command = "initialize";
         type = "request";
