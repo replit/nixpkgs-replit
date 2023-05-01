@@ -16,9 +16,11 @@ in
     bun
   ];
 
+  replit.languageServers.typescript-language-server.extensions = extensions;
+
   replit.runners.bun = {
     name = "bun";
-    language = "bun";
+    language = "javascript";
     inherit extensions;
 
     start = "${bun}/bin/bun run $file";

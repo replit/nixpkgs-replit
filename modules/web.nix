@@ -6,6 +6,8 @@
 
   packages = [ ];
 
+  replit.languageServers.typescript-language-server.extensions = [ ".js" ".jsx" ".ts" ".tsx" ".mjs" ".mts" ".cjs" ".cts" ".es6" ];
+
   replit.languageServers.html = {
     name = "HTML Language Server";
     language = "html";
