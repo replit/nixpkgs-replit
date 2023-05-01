@@ -1,12 +1,17 @@
 # via https://github.com/NixOS/nixpkgs/blob/a7b0ff0a0de9d5576fe15fa9083c933cfd430902/pkgs/applications/graphics/processing/default.nix
-{ stdenv, fetchFromGitHub, fetchurl, ant, unzip, makeWrapper, jdk, javaPackages, rsync, ffmpeg, batik, wrapGAppsHook }:
+{ lib, stdenv, fetchFromGitHub, fetchurl, ant, unzip, makeWrapper, jdk, javaPackages, rsync, ffmpeg, batik, gsettings-desktop-schemas, xorg, wrapGAppsHook }:
 let
-  buildNumber = "1292";
+  buildNumber = "1289";
+  vaqua = fetchurl {
+    name = "VAqua9.jar";
+    url = "https://violetlib.org/release/vaqua/9/VAqua9.jar";
+    sha256 = "cd0b82df8e7434c902ec873364bf3e9a3e6bef8b59cbf42433130d71bf1a779c";
+  };
 
   jna = fetchurl {
-    name = "jna-5.12.1.zip";
-    url = "https://github.com/java-native-access/jna/archive/5.12.1.zip";
-    sha256 = "/Bi21OGF095u2zSAQLhPjH2eiqBiXJJwoPGeONVEbHA=";
+    name = "jna-5.10.0.zip";
+    url = "https://github.com/java-native-access/jna/archive/5.10.0.zip";
+    sha256 = "B5CakOQ8225xNsk2TMV8CbK3RcsLlb+pHzjaY5JNwg0=";
   };
 
   flatlaf = fetchurl {
@@ -36,13 +41,13 @@ let
 in
 stdenv.mkDerivation rec {
   pname = "processing";
-  version = "4.2";
+  version = "4.1.1";
 
   src = fetchFromGitHub {
     owner = "processing";
     repo = "processing4";
     rev = "processing-${buildNumber}-${version}";
-    sha256 = "sha256-wdluhrtliLN4T2dcmwvUWZhOARC3Lst7+hWWwZjafmU=";
+    sha256 = "sha256-OjTqANxzcW/RrAdqmVYAegrlLPu6w2pjzSyZyvUYIt4=";
   };
 
   nativeBuildInputs = [ ant unzip makeWrapper wrapGAppsHook ];
@@ -56,13 +61,14 @@ stdenv.mkDerivation rec {
     cp ${ant}/lib/ant/lib/{ant.jar,ant-launcher.jar} app/lib/
     mkdir -p core/library
     ln -s ${javaPackages.jogl_2_3_2}/share/java/* core/library/
+    ln -s ${vaqua} app/lib/VAqua9.jar
     ln -s ${flatlaf} app/lib/flatlaf.jar
     ln -s ${lsp4j} java/mode/org.eclipse.lsp4j.jar
     ln -s ${lsp4j-jsonrpc} java/mode/org.eclipse.lsp4j.jsonrpc.jar
     ln -s ${gson} java/mode/gson.jar
     unzip -qo ${jna} -d app/lib/
-    mv app/lib/{jna-5.12.1/dist/jna.jar,}
-    mv app/lib/{jna-5.12.1/dist/jna-platform.jar,}
+    mv app/lib/{jna-5.10.0/dist/jna.jar,}
+    mv app/lib/{jna-5.10.0/dist/jna-platform.jar,}
     ln -sf ${batik}/* java/libraries/svg/library/
     cp java/libraries/svg/library/lib/batik-all-${batik.version}.jar java/libraries/svg/library/batik.jar
     echo "tarring ffmpeg"
@@ -84,4 +90,12 @@ stdenv.mkDerivation rec {
       ''${gappsWrapperArgs[@]} \
       --prefix _JAVA_OPTIONS " " -Dawt.useSystemAAFontSettings=lcd
   '';
+
+  meta = with lib; {
+    description = "A language and IDE for electronic arts";
+    homepage = "https://processing.org";
+    license = with licenses; [ gpl2Only lgpl21Only ];
+    platforms = platforms.linux;
+    maintainers = with maintainers; [ evan-goode ];
+  };
 }
