@@ -10,25 +10,21 @@ in
   name = "Bun Tools";
   version = "1.0";
 
+  imports = [ ./typescript-language-server.nix ];
+
   packages = [
     bun
   ];
 
+  replit.languageServers.typescript-language-server.extensions = extensions;
+
   replit.runners.bun = {
     name = "bun";
-    language = "bun";
+    language = "javascript";
     inherit extensions;
 
     start = "${bun}/bin/bun run $file";
     fileParam = true;
-  };
-
-  replit.languageServers.ts-language-server = {
-    name = "TypeScript Language Server";
-    language = "bun";
-    inherit extensions;
-
-    start = "${pkgs.nodePackages.typescript-language-server}/bin/typescript-language-server --stdio";
   };
 
   replit.packagers.bun = {
