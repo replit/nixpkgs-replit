@@ -44,7 +44,7 @@ in
       transport = "localhost:0";
       fileParam = true;
       start = {
-        args = ["dap-node"];
+        args = [ "dap-node" ];
       };
       initializeMessage = {
         command = "initialize";
