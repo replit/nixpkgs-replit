@@ -165,6 +165,14 @@ let
           '';
         };
 
+        priority = mkOption {
+          type = types.nullOr types.int;
+          default = null;
+          description = lib.mdDoc ''
+            The priority of this runner - lowest wins. If unspecified, the runner will have a priority of infinity.
+          '';
+        };
+
         productionOverride = mkOption {
           type = types.nullOr (types.submodule runnerProductionOverrides);
           default = null;
