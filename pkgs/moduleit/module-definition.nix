@@ -598,9 +598,7 @@ in
           languageServers = config.replit.languageServers;
         };
 
-        hasInvalidPriority = (
-          runner: runner.priority != null && runner.priority < 1
-        );
+        hasInvalidPriority = runner: runner.priority != null && runner.priority < 1;
 
       in
       assert length (builtins.filter hasInvalidPriority (attrValues moduleJSON.runners)) == 0;
