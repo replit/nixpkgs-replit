@@ -170,6 +170,7 @@ let
           default = null;
           description = lib.mdDoc ''
             The priority of this runner - lowest wins. Set this number to 2 or higher.
+            0 is reserved for .replit/interp and 1 is reserved for .replit/run.
             If unspecified, the runner will have a priority of infinity.
           '';
         };
