@@ -169,7 +169,7 @@ let
           type = types.nullOr types.int;
           default = null;
           description = lib.mdDoc ''
-            The priority of this runner - lowest wins. Set this number to 1 or higher.
+            The priority of this runner - lowest wins. Set this number to 2 or higher.
             If unspecified, the runner will have a priority of infinity.
           '';
         };
@@ -598,7 +598,7 @@ in
           languageServers = config.replit.languageServers;
         };
 
-        hasInvalidPriority = runner: runner.priority != null && runner.priority < 1;
+        hasInvalidPriority = runner: runner.priority != null && runner.priority < 2;
 
       in
       assert length (builtins.filter hasInvalidPriority (attrValues moduleJSON.runners)) == 0;
