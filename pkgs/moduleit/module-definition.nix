@@ -169,7 +169,8 @@ let
           type = types.nullOr types.int;
           default = null;
           description = lib.mdDoc ''
-            The priority of this runner - lowest wins. If unspecified, the runner will have a priority of infinity.
+            The priority of this runner - lowest wins. Set this number to 1 or higher.
+            If unspecified, the runner will have a priority of infinity.
           '';
         };
 
