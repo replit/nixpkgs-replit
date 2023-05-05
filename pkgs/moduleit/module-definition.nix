@@ -165,6 +165,16 @@ let
           '';
         };
 
+        priority = mkOption {
+          type = types.nullOr types.int;
+          default = null;
+          description = lib.mdDoc ''
+            The priority of this runner - lowest wins. Set this number to 2 or higher.
+            0 is reserved for .replit/interp and 1 is reserved for .replit/run.
+            If unspecified, the runner will have a priority of infinity.
+          '';
+        };
+
         productionOverride = mkOption {
           type = types.nullOr (types.submodule runnerProductionOverrides);
           default = null;
@@ -589,7 +599,10 @@ in
           languageServers = config.replit.languageServers;
         };
 
+        hasInvalidPriority = runner: runner.priority != null && runner.priority < 2;
+
       in
+      assert length (builtins.filter hasInvalidPriority (attrValues moduleJSON.runners)) == 0;
       pkgs.writeText "replit-module-${config.name}-${config.version}" (builtins.toJSON moduleJSON);
   };
 }

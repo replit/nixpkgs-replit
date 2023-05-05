@@ -34,6 +34,7 @@ in
       language = "javascript";
       extensions = [ ".js" ".ts" ".jsx" ".tsx" ];
       start = "${pkgs.nodejs-14_x}/bin/node $file";
+      priority = 1;
       compile = {
         args = [ "tsc" "$file" ];
         env = {
