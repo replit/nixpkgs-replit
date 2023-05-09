@@ -165,6 +165,16 @@ let
           '';
         };
 
+        priority = mkOption {
+          type = types.nullOr types.int;
+          default = null;
+          description = lib.mdDoc ''
+            The priority of this runner - lowest wins. Set this number to 2 or higher.
+            0 is reserved for .replit/interp and 1 is reserved for .replit/run.
+            If unspecified, the runner will have a priority of infinity.
+          '';
+        };
+
         productionOverride = mkOption {
           type = types.nullOr (types.submodule runnerProductionOverrides);
           default = null;
@@ -209,7 +219,7 @@ let
       };
 
       configuration = mkOption {
-        type = types.anything;
+        type = types.nullOr (types.attrsOf types.anything);
         default = null;
         description = lib.mdDoc ''
           Some configuration options that the client can send to the server
@@ -218,7 +228,7 @@ let
       };
 
       initializationOptions = mkOption {
-        type = types.anything;
+        type = types.nullOr (types.attrsOf types.anything);
         default = null;
         description = lib.mdDoc ''
           InitializationOptions is sent to the LSP server with the initialize request.
@@ -351,7 +361,7 @@ let
         };
 
         arguments = mkOption {
-          type = types.anything;
+          type = types.attrsOf types.anything;
           description = lib.mdDoc ''
             This object should be based on InitializeRequestArguments of the DAP spec:
             https://microsoft.github.io/debug-adapter-protocol/specification
@@ -378,7 +388,7 @@ let
         arguments = mkOption {
           # The doc is very underspecified wrt this. I think this is specific to the DAP adapter you use.
           # LaunchRequestArguments in https://microsoft.github.io/debug-adapter-protocol/specification
-          type = types.anything;
+          type = types.attrsOf types.anything;
           description = lib.mdDoc ''
             A set of attributes to send as the arguments of the launch request.
           '';
@@ -589,7 +599,10 @@ in
           languageServers = config.replit.languageServers;
         };
 
+        hasInvalidPriority = runner: runner.priority != null && runner.priority < 2;
+
       in
+      assert length (builtins.filter hasInvalidPriority (attrValues moduleJSON.runners)) == 0;
       pkgs.writeText "replit-module-${config.name}-${config.version}" (builtins.toJSON moduleJSON);
   };
 }

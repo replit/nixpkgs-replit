@@ -2,20 +2,9 @@
 
 let
 
-  typescript-language-server = pkgs.nodePackages.typescript-language-server.override {
-    nativeBuildInputs = [ pkgs.makeWrapper ];
-    postInstall = ''
-      wrapProgram "$out/bin/typescript-language-server" \
-        --suffix PATH : ${pkgs.lib.makeBinPath [ pkgs.nodePackages.typescript ]} \
-        --add-flags "--tsserver-path ${pkgs.nodePackages.typescript}/lib/node_modules/typescript/lib/"
-    '';
-  };
-
   nodejs = pkgs.nodejs;
 
   prybar = pkgs.replitPackages.prybar-nodejs;
-
-  dap-node = pkgs.callPackage ../pkgs/dapNode { };
 
   run-prybar = pkgs.writeShellScriptBin "run-prybar" ''
     ${prybar}/bin/prybar-nodejs -q --ps1 "''$(printf '\u0001\u001b[33m\u0002\u0001\u001b[00m\u0002 ')" -i ''$1
@@ -26,6 +15,7 @@ in
 {
   name = "Node.js Tools";
   version = "1.0";
+  imports = [ ./typescript-language-server.nix ];
 
   packages = [
     nodejs
@@ -53,7 +43,9 @@ in
       language = "javascript";
       transport = "localhost:0";
       fileParam = true;
-      start = "${dap-node}/bin/dap-node";
+      start = {
+        args = [ "dap-node" ];
+      };
       initializeMessage = {
         command = "initialize";
         type = "request";
@@ -88,12 +80,6 @@ in
           type = "pwa-node";
         };
       };
-    };
-
-    languageServers.ts-language-server = {
-      name = "TypeScript Language Server";
-      language = "javascript";
-      start = "${typescript-language-server}/bin/typescript-language-server --stdio";
     };
 
     packagers.upmNodejs = {

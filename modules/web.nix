@@ -2,7 +2,11 @@
   name = "Web Tools";
   version = "1.0";
 
+  imports = [ ./typescript-language-server.nix ];
+
   packages = [ ];
+
+  replit.languageServers.typescript-language-server.extensions = [ ".js" ".jsx" ".ts" ".tsx" ".mjs" ".mts" ".cjs" ".cts" ".es6" ];
 
   replit.languageServers.html = {
     name = "HTML Language Server";
@@ -55,20 +59,16 @@
     };
   };
 
-  replit.languageServers.typescript = {
-    name = "TypeScript Language Server";
-    language = "typescript";
-    extensions = [ ".js" ".jsx" ".ts" ".tsx" ".mjs" ".mts" ".cjs" ".cts" ".es6" ];
-
-    start = "${pkgs.nodePackages.typescript-language-server}/bin/typescript-language-server --stdio";
-  };
-
   replit.languageServers.css = {
     name = "CSS Language Server";
     language = "css";
     extensions = [ ".css" ".less" ".scss" ];
 
     start = "${pkgs.nodePackages.vscode-langservers-extracted}/bin/vscode-css-language-server --stdio";
+
+    initializationOptions = {
+      provideFormatter = true;
+    };
 
     configuration =
       let

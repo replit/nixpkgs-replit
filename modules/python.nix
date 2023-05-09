@@ -2,7 +2,32 @@
 let
   pip = pkgs.callPackage ../pkgs/pip { };
 
+  pip-config = pkgs.writeTextFile {
+    name = "pip.conf";
+    text = ''
+      [global]
+      user = yes
+      disable-pip-version-check = yes
+      index-url = https://package-proxy.replit.com/pypi/simple/
+      
+      [install]
+      use-feature = content-addressable-pool
+      content-addressable-pool-symlink = yes
+    '';
+  };
+
   poetry = pkgs.callPackage ../pkgs/poetry { };
+
+  poetry-config = pkgs.writeTextFile {
+    name = "poetry-config";
+    text = ''
+      [[tool.poetry.source]]
+      name = "replit"
+      url = "https://package-proxy.replit.com/pypi/simple/"
+      default = true
+    '';
+    destination = "/conf.toml";
+  };
 
   python = pkgs.python310Full;
 
@@ -121,6 +146,7 @@ in
     name = "Python";
     language = "python3";
     ignoredPackages = [ "unit_tests" ];
+    ignoredPaths = [ ".pythonlibs" ];
     features = {
       packageSearch = true;
       guessImports = true;
@@ -132,7 +158,8 @@ in
     let userbase = "$HOME/$REPL_SLUG/.pythonlibs";
     in {
       PYTHONPATH = "${userbase}/${python.sitePackages}";
-      PIP_USER = "1";
+      PIP_CONFIG_FILE = pip-config.outPath;
+      POETRY_CONFIG_DIR = poetry-config.outPath;
       POETRY_VIRTUALENVS_CREATE = "0";
       PYTHONUSERBASE = userbase;
     };
