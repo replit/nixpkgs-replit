@@ -132,7 +132,7 @@ rec {
         };
       });
 
-    processing4 = self.callPackage ./pkgs/processing4 { };
+    processing4 = if channelName != "nixpkgs-legacy" then self.callPackage ./pkgs/processing4 { } else null;
   };
 }
 
