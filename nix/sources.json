@@ -11,6 +11,18 @@
         "url": "https://github.com/nmattia/niv/archive/5830a4dd348d77e39a0f3c4c762ff2663b602d4c.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
+    "nixpkgs-23.05": {
+        "branch": "nixos-23.05",
+        "description": "Nix Packages collection & NixOS",
+        "homepage": "",
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "f0ba8235153dd2e25cf06cbf70d43efdd4443592",
+        "sha256": "0lxsmbahc566zhvmxhnlw9cq0dnrzb9jb36brx5xfh1bkad8n3w9",
+        "type": "tarball",
+        "url": "https://github.com/nixos/nixpkgs/archive/f0ba8235153dd2e25cf06cbf70d43efdd4443592.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+    },
     "nixpkgs-21.11": {
         "branch": "release-21.11",
         "description": "Nix Packages collection",
@@ -64,10 +76,10 @@
         "homepage": "",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "b01f185e4866de7c5b5a82f833ca9ea3c3f72fc4",
-        "sha256": "02sdwkxa3gw582lykfvvki2gk501kda7vqy4q3mcrk8k5ppbk1b3",
+        "rev": "52e3e80afff4b16ccb7c52e9f0f5220552f03d04",
+        "sha256": "0x0pc4qm0adsdbr8n20ghl7byq9n0bvj9fjiiqzp9839cippp9hn",
         "type": "tarball",
-        "url": "https://github.com/nixos/nixpkgs/archive/b01f185e4866de7c5b5a82f833ca9ea3c3f72fc4.tar.gz",
+        "url": "https://github.com/nixos/nixpkgs/archive/52e3e80afff4b16ccb7c52e9f0f5220552f03d04.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "prybar": {
