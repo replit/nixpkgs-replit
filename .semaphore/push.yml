@@ -25,6 +25,7 @@ blocks:
                 - nixpkgs-21.11
                 - nixpkgs-22.05
                 - nixpkgs-22.11
+                - nixpkgs-23.05
                 - nixpkgs-unstable
           commands:
             - sh build.sh $NIXPKGS_CHANNEL
