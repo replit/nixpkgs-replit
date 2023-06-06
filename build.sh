@@ -1,7 +1,12 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
-default=nixpkgs-22.11
+default=nixpkgs-23.05
 channel=$default
+
+function error() {
+    echo $1
+    exit 1
+}
 
 ignore=`cat .gitignore | xargs printf -- '--exclude=%s\n'`
 
@@ -13,6 +18,7 @@ echo "Building tarball for $channel"
 
 # Update default.nix to use the specified nix package
 sed -i s/\"$default\"/\"$channel\"/g default.nix
+grep $channel default.nix || error "${channel} not properly subsituted into default.nix"
 
 # Update default.nix to use the specified nix package
 sha=`git rev-parse --verify HEAD`
