@@ -1,5 +1,8 @@
 { channelName, sources }:
 self: super:
+
+if channelName == "nixpkgs-23.05" then { replitPackages = { }; } else
+
 let
   privateNodePackages = self.callPackage ./pkgs/node-packages {
     nodejs = super."nodejs-14_x";
