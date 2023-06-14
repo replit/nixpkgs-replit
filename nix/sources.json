@@ -11,18 +11,6 @@
         "url": "https://github.com/nmattia/niv/archive/5830a4dd348d77e39a0f3c4c762ff2663b602d4c.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
-    "nixpkgs-23.05": {
-        "branch": "nixos-23.05",
-        "description": "Nix Packages collection & NixOS",
-        "homepage": "",
-        "owner": "nixos",
-        "repo": "nixpkgs",
-        "rev": "f0ba8235153dd2e25cf06cbf70d43efdd4443592",
-        "sha256": "0lxsmbahc566zhvmxhnlw9cq0dnrzb9jb36brx5xfh1bkad8n3w9",
-        "type": "tarball",
-        "url": "https://github.com/nixos/nixpkgs/archive/f0ba8235153dd2e25cf06cbf70d43efdd4443592.tar.gz",
-        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
-    },
     "nixpkgs-21.11": {
         "branch": "release-21.11",
         "description": "Nix Packages collection",
@@ -59,6 +47,18 @@
         "url": "https://github.com/nixos/nixpkgs/archive/52e3e80afff4b16ccb7c52e9f0f5220552f03d04.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
+    "nixpkgs-23.05": {
+        "branch": "nixos-23.05",
+        "description": "Nix Packages collection & NixOS",
+        "homepage": "",
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "bb8b5735d6f7e06b9ddd27de115b0600c1ffbdb4",
+        "sha256": "0ml0d8vribld3jq4kplzz5k0by1niqc9az5pwqqj64nk7sm4swhz",
+        "type": "tarball",
+        "url": "https://github.com/nixos/nixpkgs/archive/bb8b5735d6f7e06b9ddd27de115b0600c1ffbdb4.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+    },
     "nixpkgs-legacy": {
         "description": "Nix Packages collection",
         "homepage": "",
@@ -76,10 +76,10 @@
         "homepage": "",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "52e3e80afff4b16ccb7c52e9f0f5220552f03d04",
-        "sha256": "0x0pc4qm0adsdbr8n20ghl7byq9n0bvj9fjiiqzp9839cippp9hn",
+        "rev": "7e63eed145566cca98158613f3700515b4009ce3",
+        "sha256": "0xqxx0dn43cllzimpgma72i1rvlrbgdhrcfv45yd27m4yaqybmxy",
         "type": "tarball",
-        "url": "https://github.com/nixos/nixpkgs/archive/52e3e80afff4b16ccb7c52e9f0f5220552f03d04.tar.gz",
+        "url": "https://github.com/nixos/nixpkgs/archive/7e63eed145566cca98158613f3700515b4009ce3.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "prybar": {
