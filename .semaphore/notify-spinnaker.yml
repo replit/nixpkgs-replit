@@ -1,0 +1,19 @@
+version: v1.0
+name: deploy
+agent:
+  machine:
+    type: e1-standard-2
+    os_image: ubuntu2004
+auto_cancel:
+  running:
+    when: branch != 'master'
+blocks:
+  - name: Notify spinnaker
+    task:
+      secrets:
+        - name: replit-nixpkgs-semaphore
+      jobs:
+        - name: Notify spinnaker
+          commands:
+            - checkout
+            - ./spin_deploy.sh

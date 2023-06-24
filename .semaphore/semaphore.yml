@@ -59,7 +59,59 @@ blocks:
             - nix-build /tmp/$NIXPKGS_CHANNEL/nixpkgs/default.nix -A replitPackages
 
 promotions:
-  - name: Push overlays to GCS
+  - name: Notify Spinnaker
+    pipeline_file: notify-spinnaker.yml
+
+  - name: Push nixpkgs-unstable to GCS
     pipeline_file: push.yml
-    auto_promote:
-      when: "result = 'passed' and branch = 'main'"
+    parameters:
+      env_vars:
+        - required: true
+          default_value: nixpkgs-unstable
+          description: Which channel to update?
+          name: NIXPKGS_CHANNEL
+
+  - name: Push nixpkgs-legacy to GCS
+    pipeline_file: push.yml
+    parameters:
+      env_vars:
+        - required: true
+          default_value: nixpkgs-legacy
+          description: Which channel to update?
+          name: NIXPKGS_CHANNEL
+
+  - name: Push nixpkgs-21.11 to GCS
+    pipeline_file: push.yml
+    parameters:
+      env_vars:
+        - required: true
+          default_value: nixpkgs-21.11
+          description: Which channel to update?
+          name: NIXPKGS_CHANNEL
+
+  - name: Push nixpkgs-22.05 to GCS
+    pipeline_file: push.yml
+    parameters:
+      env_vars:
+        - required: true
+          default_value: nixpkgs-22.05
+          description: Which channel to update?
+          name: NIXPKGS_CHANNEL
+
+  - name: Push nixpkgs-22.11 to GCS
+    pipeline_file: push.yml
+    parameters:
+      env_vars:
+        - required: true
+          default_value: nixpkgs-22.11
+          description: Which channel to update?
+          name: NIXPKGS_CHANNEL
+
+  - name: Push nixpkgs-23.05 to GCS
+    pipeline_file: push.yml
+    parameters:
+      env_vars:
+        - required: true
+          default_value: nixpkgs-23.05
+          description: Which channel to update?
+          name: NIXPKGS_CHANNEL
