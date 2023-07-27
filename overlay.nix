@@ -47,10 +47,14 @@ rec {
 
     inherit (self) jdt-language-server;
 
-    java-debug = self.callPackage ./pkgs/java-debug {
-      inherit jdt-language-server;
-      jdk = self.graalvm11-ce;
-    };
+    java-debug =
+      if channelName == "nixpkgs-unstable"
+      then { }
+      else
+        self.callPackage ./pkgs/java-debug {
+          inherit jdt-language-server;
+          jdk = self.graalvm11-ce;
+        };
 
     rescript-language-server = self.callPackage ./pkgs/rescript-language-server { };
     nbcode = self.callPackage ./pkgs/nbcode { };
