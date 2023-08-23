@@ -45,13 +45,6 @@ stdenv.mkDerivation rec {
       # Get latest version of launcher jar
       # e.g. org.eclipse.equinox.launcher_1.5.800.v20200727-1323.jar
       launcher="$(ls $out/share/java/plugins/org.eclipse.equinox.launcher_* | sort -V | tail -n1)"
-
-      memory_limit_bytes=$(
-        /nix/store/njsp9a4bq3m6l3dzx4hfgbrfn1yzvm2p-jq-1.6-bin/bin/jq
-        ".memoryHardLimitBytes"
-        /repl/stats/resources.json
-      )
-
       # The wrapper script will create a directory in the user's cache, copy in the config
       # files since this dir can't be read-only, and by default use this as the runtime dir.
       #
@@ -83,7 +76,7 @@ stdenv.mkDerivation rec {
       makeWrapper ${jdk}/bin/java $out/bin/jdt-language-server \
         --run "mkdir -p ${runtimePath}" \
         --run "install -Dm 1777 -t ${runtimePath}/config $out/share/config/*" \
-        --run "MEMORY_LIMIT_BYTES=$memory_limit_bytes" \
+        --run 'MEMORY_LIMIT_BYTES=$(jq ".memoryHardLimitBytes" /repl/stats/resources.json)' \
         --run 'MEMORY_LIMIT_MB=$(expr $MEMORY_LIMIT_BYTES / 1048576)' \
         --run 'LSP_MAX_HEAP=$(expr $MEMORY_LIMIT_MB / 4)' \
         --run 'LSP_MAX_HEAP=$(( $LSP_MAX_HEAP > 512 ? $LSP_MAX_HEAP : 512 ))' \
