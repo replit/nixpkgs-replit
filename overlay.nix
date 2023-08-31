@@ -105,7 +105,7 @@ rec {
       };
     });
 
-    processing4 = if channelName == "nixpkgs-legacy" then null else
+    processing4 = if channelName == "nixpkgs-legacy" || channelName == "nixpkgs-unstable" then null else
     self.callPackage ./pkgs/processing4
       {
         jdk = self.jdk17;
