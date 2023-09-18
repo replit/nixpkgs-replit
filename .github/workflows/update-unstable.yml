@@ -16,3 +16,8 @@ jobs:
 
       - name: niv update
         run: nix run nixpkgs#niv -- update nixpkgs-unstable
+
+      - name: open PR
+        run: |
+          git commit -am "update nixpkgs-unstable"
+          git push
