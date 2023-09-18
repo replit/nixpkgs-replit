@@ -1,0 +1,18 @@
+name: update unstable
+
+on:
+  schedule:
+    - cron: "0 8 1 * *"
+
+jobs:
+  update-unstable:
+    runs-on: "ubuntu-latest"
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install Nix
+        uses: DeterminateSystems/nix-installer-action@main
+
+      - name: niv update
+        run: nix run nixpkgs#niv -- update nixpkgs-unstable
