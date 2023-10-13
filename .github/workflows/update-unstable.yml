@@ -18,6 +18,4 @@ jobs:
         run: nix run nixpkgs#niv -- update nixpkgs-unstable
 
       - name: open PR
-        run: |
-          git commit -am "update nixpkgs-unstable"
-          git push
+        uses: peter-evans/create-pull-request@v5
