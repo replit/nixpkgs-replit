@@ -2,7 +2,7 @@ name: update unstable
 
 on:
   schedule:
-    - cron: "0 17 20 * *"
+    - cron: "0 8 1 * *"
 
 jobs:
   update-unstable:
@@ -19,3 +19,27 @@ jobs:
 
       - name: open PR
         uses: peter-evans/create-pull-request@v5
+        env:
+          commit-message: update nixpkgs-unstable
+          branch: actions/update-nixpkgs-unstable
+          title: Update nixpkgs-unstable
+          body: >-
+            # Why
+
+            Users should have the latest and greatest nixpkgs-unstable
+            available to them for use on Replit.
+
+            # What Changed
+
+            Updated the unstable channel by running
+            `nix run nixpkgs#niv -- update nixpkgs-unstable`.
+
+            # Notes
+
+            See https://github.com/replit/goval/blob/main/docs/nix-cache.md
+            for more information on updating the Nix cache.
+
+            This PR is created via a GitHub Actions Workflow. Please
+            take care to ensure its contents are correct. This Workflow
+            runs every month to ensure the Replit nix cache is regularly
+            updated.
