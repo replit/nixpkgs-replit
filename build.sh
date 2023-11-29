@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-default=nixpkgs-23.05
+default=nixpkgs-23.11
 channel=$default
 
 function error() {
@@ -18,7 +18,7 @@ echo "Building tarball for $channel"
 
 # Update default.nix to use the specified nix package
 sed -i s/\"$default\"/\"$channel\"/g default.nix
-grep $channel default.nix || error "${channel} not properly subsituted into default.nix"
+grep $channel default.nix || error "${channel} not properly substituted into default.nix"
 
 # Update default.nix to use the specified nix package
 sha=`git rev-parse --verify HEAD`
