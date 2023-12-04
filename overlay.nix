@@ -1,7 +1,11 @@
 { channelName, sources }:
 self: super:
 
-if channelName == "nixpkgs-23.05" then { replitPackages = { }; } else
+let
+  noOverlay = channelName == "nixpkgs-23.05" || channelName == "nixpkgs-23.11" || channelName == "nixpkgs-unstable";
+in
+
+if noOverlay then { replitPackages = { }; } else
 
 let
   privateNodePackages = self.callPackage ./pkgs/node-packages {
