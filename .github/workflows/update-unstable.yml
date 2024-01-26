@@ -2,7 +2,7 @@ name: update unstable
 
 on:
   schedule:
-    - cron: "0 8 1 * *"
+    - cron: "0 8 * * 1"
 
 jobs:
   update-unstable:
@@ -19,7 +19,7 @@ jobs:
 
       - name: open PR
         uses: peter-evans/create-pull-request@v5
-        env:
+        with:
           commit-message: update nixpkgs-unstable
           branch: actions/update-nixpkgs-unstable
           title: Update nixpkgs-unstable
