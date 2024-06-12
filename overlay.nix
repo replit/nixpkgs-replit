@@ -2,7 +2,7 @@
 self: super:
 
 let
-  noOverlay = channelName == "nixpkgs-23.05" || channelName == "nixpkgs-23.11" || channelName == "nixpkgs-unstable";
+  noOverlay = channelName == "nixpkgs-23.05" || channelName == "nixpkgs-23.11" || channelName == "nixpkgs-24.05" || channelName == "nixpkgs-unstable";
 in
 
 if noOverlay then { replitPackages = { }; } else
@@ -116,4 +116,3 @@ rec {
       };
   };
 }
-
