@@ -2,7 +2,7 @@
 self: super:
 
 let
-  noOverlay = channelName == "nixpkgs-23.05" || channelName == "nixpkgs-23.11" || channelName == "nixpkgs-24.05" || channelName == "nixpkgs-unstable";
+  noOverlay = channelName != "nixpkgs-legacy" && channelName != "nixpkgs-21.11" && channelName != "nixpkgs-22.05" && channelName != "nixpkgs-22.11";
 in
 
 if noOverlay then { replitPackages = { }; } else
