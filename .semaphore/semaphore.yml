@@ -54,6 +54,7 @@ blocks:
                 - nixpkgs-23.11
                 - nixpkgs-24.05
                 - nixpkgs-24.11
+                - nixpkgs-25.05
                 - nixpkgs-unstable
           commands:
             - mkdir /tmp/$NIXPKGS_CHANNEL
@@ -143,5 +144,14 @@ promotions:
       env_vars:
         - required: true
           default_value: nixpkgs-24.11
+          description: Which channel to update?
+          name: NIXPKGS_CHANNEL
+
+  - name: Push nixpkgs-25.05 to GCS
+    pipeline_file: push.yml
+    parameters:
+      env_vars:
+        - required: true
+          default_value: nixpkgs-25.05
           description: Which channel to update?
           name: NIXPKGS_CHANNEL

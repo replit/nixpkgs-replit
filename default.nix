@@ -1,5 +1,5 @@
 { sources ? import nix/sources.nix
-, channelName ? "nixpkgs-24.11"
+, channelName ? "nixpkgs-25.05"
 , channel ? sources.${channelName}
 , system ? "x86_64-linux"
 , config ? { }
