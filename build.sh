@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-default=nixpkgs-25.05
+default=nixpkgs-25.11
 channel=$default
 
 function error() {
