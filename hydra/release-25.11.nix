@@ -1,5 +1,5 @@
 # Build the current stable package overlay.
-{}:
+{   }:
 
 let
   sources = import ../nix/sources.nix;
