@@ -1,4 +1,4 @@
-# Build the current stable overlay.
+# Build the current stable package overlay.
 {}:
 
 let
