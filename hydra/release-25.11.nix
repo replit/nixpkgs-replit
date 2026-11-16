@@ -1,3 +1,4 @@
+# Build the stable overlay.
 {}:
 
 let
