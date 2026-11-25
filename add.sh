@@ -11,13 +11,7 @@ echo "nix-shell -p niv --run 'niv update nixpkgs-$channel -b nixos-$channel'" >>
 cp hydra/release-21.11.nix hydra/release-$channel.nix
 sed -i "s/21\.11/$channel/g" hydra/release-$channel.nix
 
-# Add the channel to semaphore
-sed -i "s/^\(.*\)nixpkgs-unstable/\1nixpkgs-$channel\n&/" .semaphore/semaphore.yml
-sed -i "s/^\(.*\)nixpkgs-unstable/\1nixpkgs-$channel\n&/" .semaphore/push.yml
-
 git add \
   nix/sources.json \
   update.sh \
-  hydra/release-$channel.nix \
-  .semaphore/semaphore.yml \
-  .semaphore/push.yml
+  hydra/release-$channel.nix

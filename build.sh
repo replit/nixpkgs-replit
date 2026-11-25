@@ -29,7 +29,6 @@ tar -czvf $channel.tar.gz \
   --transform 's,^\.,nixpkgs,' \
   --exclude='./.git' \
   --exclude='./.github' \
-  --exclude='./.semaphore' \
   --exclude='./.gitignore' \
   --exclude='./build.sh' \
   $ignore \
